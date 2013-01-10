@@ -4,3 +4,9 @@
 *.jar
 *.war
 *.ear
+target/
+.gwt/
+.project
+.classpath
+.settings/
+.springBeans
