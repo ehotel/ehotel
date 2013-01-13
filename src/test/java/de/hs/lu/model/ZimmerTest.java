@@ -6,7 +6,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,7 +20,8 @@ public class ZimmerTest {
 	
     @PersistenceContext
     EntityManager entityManager;
-
+    
+   
 	@Before
 	public void setUp() throws Exception {
 	}
@@ -38,13 +38,22 @@ public class ZimmerTest {
 		Zimmer z = new Zimmer();
 		z.setZimmerNr(123);
 		
+		Zimmerkategorie zk = new Zimmerkategorie();
+		
+		zk.setZimmertyp("einzelzimmer");
+		zk.setPreis(55);
+		
 		entityManager.persist(z);
+		entityManager.persist(zk);
 		
-		Assert.assertTrue(true);
+		z.setZimmerNr(124);
+		z.setZimmerkategorie(zk);
+		entityManager.merge(z);
+		entityManager.flush();
 		
+		assertEquals(z.getZimmerkategorie().getPreis(), 55f, 0);		
 		
-		
+		entityManager.remove(zk);		
+		entityManager.remove(z);		
 	}
-
-
 }

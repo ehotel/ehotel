@@ -5,40 +5,43 @@ import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * An item in an order
- */
 @Entity
 public class Zimmer {
-	
-
-	
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
-	private int ZimmerNr;
+	private int zimmerNr;
 	
-
-	
+	@ManyToOne
+	@JoinColumn(name="zimmerkategorie_id")
+	private Zimmerkategorie zimmerkategorie;	
 	
 
 	public int getZimmerNr() {
-		return ZimmerNr;
+		return zimmerNr;
 	}
 
 	public void setZimmerNr(int zimmerNr) {
-		ZimmerNr = zimmerNr;
+		this.zimmerNr = zimmerNr;
 	}
 
 	public Long getId() {
 		return id;
 	}
-	
-	
+
+	public Zimmerkategorie getZimmerkategorie() {
+		return zimmerkategorie;
+	}
+
+	public void setZimmerkategorie(Zimmerkategorie zimmerkategorie) {
+		this.zimmerkategorie = zimmerkategorie;
+	}	
 }
