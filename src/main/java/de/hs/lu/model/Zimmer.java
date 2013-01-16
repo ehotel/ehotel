@@ -1,15 +1,12 @@
 package de.hs.lu.model;
 
 import javax.persistence.Entity;
-import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.PersistenceContext;
 
-import org.springframework.transaction.annotation.Transactional;
 
 @Entity
 public class Zimmer {
@@ -22,9 +19,8 @@ public class Zimmer {
 	
 	@ManyToOne
 	@JoinColumn(name="zimmerkategorie_id")
-	private Zimmerkategorie zimmerkategorie;	
+	private Zimmerkategorie zimmerkategorie;
 	
-
 	public int getZimmerNr() {
 		return zimmerNr;
 	}

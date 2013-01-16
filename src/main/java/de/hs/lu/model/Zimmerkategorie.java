@@ -9,8 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import de.hs.lu.orm.AbstractDao;
+
 @Entity
-public class Zimmerkategorie {
+public class Zimmerkategorie extends AbstractDao<Zimmerkategorie>{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -23,9 +25,6 @@ public class Zimmerkategorie {
 	@OneToMany(mappedBy="zimmerkategorie")
 	private Set<Zimmer> zimmer = new HashSet<Zimmer>();
 	
-	
-	
-
 	public String getZimmertyp() {
 		return zimmertyp;
 	}
