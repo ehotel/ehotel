@@ -14,13 +14,14 @@ public abstract class AbstractDao<T> {
     @PersistenceContext
     protected EntityManager entityManager;
     
-//    private Class<T> type;
+    private Class<T> type;
     
-    public AbstractDao(){
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	public AbstractDao(){
     	
-//        Type t = getClass().getGenericSuperclass();
-//        ParameterizedType pt = (ParameterizedType) t;
-//        this.type = (Class) pt.getActualTypeArguments()[0];
+        Type t = getClass().getGenericSuperclass();
+        ParameterizedType pt = (ParameterizedType) t;
+        this.type = (Class) pt.getActualTypeArguments()[0];
     	
     }
     
@@ -32,9 +33,18 @@ public abstract class AbstractDao<T> {
         entityManager.remove(t);
     }
 
-	public void merge(T t) {
-        entityManager.merge(t);
+	public T merge(T t) {
+        return entityManager.merge(t);
     }
+	
+	public T findById(Long id){
+		return entityManager.find(type, id);
+	}
+	
+	public void flush(){
+		entityManager.flush();
+		entityManager.clear();
+	}
 
 
 }

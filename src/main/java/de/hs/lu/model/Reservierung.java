@@ -1,9 +1,15 @@
 package de.hs.lu.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Reservierung {
@@ -17,6 +23,18 @@ public class Reservierung {
 	private long Enddatum;
 	
 	private Status status;
+	
+	@ManyToOne
+	@JoinColumn(name="gast_id")
+	private Gast gast;
+	
+	@ManyToOne
+	@JoinColumn(name="zimmer_id")
+	private Zimmer zimmer;
+	
+	@OneToMany(mappedBy="reservierung")
+	private Set<ReservierungsService> reservierungsServices = new HashSet<ReservierungsService>(); 
+	
 
 	public long getStartdatum() {
 		return Startdatum;
@@ -44,6 +62,30 @@ public class Reservierung {
 
 	public Long getId() {
 		return id;
+	}
+
+	public Gast getGast() {
+		return gast;
+	}
+
+	public void setGast(Gast gast) {
+		this.gast = gast;
+	}
+
+	public Zimmer getZimmer() {
+		return zimmer;
+	}
+
+	public void setZimmer(Zimmer zimmer) {
+		this.zimmer = zimmer;
+	}
+
+	public Set<ReservierungsService> getReservierungsServices() {
+		return reservierungsServices;
+	}
+
+	public void setReservierungsServices(Set<ReservierungsService> reservierungsServices) {
+		this.reservierungsServices = reservierungsServices;
 	}
 
 }

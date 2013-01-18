@@ -10,7 +10,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,18 +41,15 @@ public class ZimmerTest {
 
 	@Transactional
 	@Test
-	@Rollback(false)
 	public void test() {
-	
-		Zimmer z = new Zimmer();
-		z.setZimmerNr(124);
 		
 		Zimmerkategorie zk = new Zimmerkategorie();		
 		zk.setZimmertyp("einzelzimmer");
 		zk.setPreis(55);
 		zimmerkategorieDao.persist(zk);
 		
-
+		Zimmer z = new Zimmer();
+		z.setZimmerNr(124);
 		z.setZimmerkategorie(zk);
 		assertEquals(z.getZimmerkategorie().getPreis(), 55f, 0);
 		

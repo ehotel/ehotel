@@ -1,9 +1,13 @@
 package de.hs.lu.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class ZusatzService {
@@ -17,6 +21,9 @@ public class ZusatzService {
 	private float preis;
 	
 	private int anzahl;
+	
+	@OneToMany(mappedBy="zusatzService")
+	private Set<ReservierungsService> reservierungsServices = new HashSet<ReservierungsService>();
 	
 	public Long getId() {
 		return id;
@@ -44,6 +51,14 @@ public class ZusatzService {
 
 	public void setAnzahl(int anzahl) {
 		this.anzahl = anzahl;
+	}
+
+	public Set<ReservierungsService> getReservierungsServices() {
+		return reservierungsServices;
+	}
+
+	public void setReservierungsServices(Set<ReservierungsService> reservierungsServices) {
+		this.reservierungsServices = reservierungsServices;
 	}
 
 }

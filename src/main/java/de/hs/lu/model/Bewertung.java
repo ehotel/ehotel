@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Bewertung {
@@ -17,6 +19,14 @@ public class Bewertung {
 	private String text;
 	
 	private long datum;
+	
+	@ManyToOne
+	@JoinColumn(name="zimmerkategorie_id")
+	private Zimmerkategorie zimmerkategorie;
+	
+	@ManyToOne
+	@JoinColumn(name="gast_id")
+	private Gast gast;
 
 	public int getBewertungspunkte() {
 		return bewertungspunkte;
@@ -44,6 +54,22 @@ public class Bewertung {
 
 	public Long getId() {
 		return id;
+	}
+
+	public Zimmerkategorie getZimmerkategorie() {
+		return zimmerkategorie;
+	}
+
+	public void setZimmerkategorie(Zimmerkategorie zimmerkategorie) {
+		this.zimmerkategorie = zimmerkategorie;
+	}
+
+	public Gast getGast() {
+		return gast;
+	}
+
+	public void setGast(Gast gast) {
+		this.gast = gast;
 	}
 
 }
