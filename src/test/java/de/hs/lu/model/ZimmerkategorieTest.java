@@ -64,17 +64,11 @@ public class ZimmerkategorieTest {
 	@Test
 	public void test() {
 		
-
-		
 		Zimmerkategorie zk2 = zimmerkategorieDao.findById(zk.getId());
 		
 		assertNotNull(zk2);
 		assertEquals(b.getId(), zk2.getBewertungen().iterator().next().getId());
-		assertEquals(z.getId(), zk2.getZimmer().iterator().next().getId());
-		
-		
-		
-		
+		assertEquals(z.getId(), zk2.getZimmer().iterator().next().getId());		
 	
 	}
 
