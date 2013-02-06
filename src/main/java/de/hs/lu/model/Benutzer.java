@@ -1,5 +1,7 @@
 package de.hs.lu.model;
 
+import java.security.MessageDigest;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -54,8 +56,8 @@ public abstract class Benutzer {
 		return password;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPassword(String password) {		
+		this.password = Benutzer.md5Hash(password);	
 	}
 
 	public String getEmail() {
@@ -64,6 +66,29 @@ public abstract class Benutzer {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public static String md5Hash(String text)
+	{
+		try{
+			
+	        MessageDigest md = MessageDigest.getInstance("MD5");
+	        md.update(text.getBytes());
+	 
+	        byte byteArray[] = md.digest();
+	 
+	        StringBuffer buffer = new StringBuffer();
+	        for (int i = 0; i < byteArray.length; i++) {
+	        	buffer.append(Integer.toString((byteArray[i] & 0xff) + 0x100, 16).substring(1));
+	        }
+			return buffer.toString();
+			
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+		
+		return "";		
 	}
 	
 
