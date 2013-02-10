@@ -14,7 +14,11 @@ import de.hs.lu.orm.AbstractDao;
 @Component("zimmerkategorieDao")
 public class ZimmerkategorieDao extends AbstractDao<Zimmerkategorie>{
 	
-	private final Log logger = LogFactory.getLog(getClass());	
+	private final Log logger = LogFactory.getLog(ZimmerkategorieDao.class);
+	
+	public ZimmerkategorieDao(){
+    	super(Zimmerkategorie.class);
+    }	
 	
 	@SuppressWarnings("unchecked")
 	public Zimmerkategorie findZimmerkategorieByZimmertyp(String zimmertyp)

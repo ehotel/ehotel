@@ -9,10 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import de.hs.lu.orm.AbstractDao;
-
 @Entity
-public class Zimmerkategorie extends AbstractDao<Zimmerkategorie>{
+public class Zimmerkategorie {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)

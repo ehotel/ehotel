@@ -7,5 +7,9 @@ import de.hs.lu.orm.AbstractDao;
 
 @Component("reservierungDao")
 public class ReservierungDao extends AbstractDao<Reservierung>{
+	
+	public ReservierungDao(){
+    	super(Reservierung.class);
+    }
 
 }

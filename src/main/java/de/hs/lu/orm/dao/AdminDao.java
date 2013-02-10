@@ -7,5 +7,9 @@ import de.hs.lu.orm.AbstractDao;
 
 @Component("adminDao")
 public class AdminDao extends AbstractDao<Admin>{
+	
+	public AdminDao(){
+    	super(Admin.class);
+    }
 
 }

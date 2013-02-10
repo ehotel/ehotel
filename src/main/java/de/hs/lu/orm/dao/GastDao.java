@@ -2,15 +2,37 @@ package de.hs.lu.orm.dao;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import de.hs.lu.model.Gast;
 import de.hs.lu.orm.AbstractDao;
 
 @Component("gastDao")
 public class GastDao extends AbstractDao<Gast>{
+	
+    @PersistenceContext
+    protected EntityManager entityManager;
+	
+	public GastDao(){
+    	super(Gast.class);
+	}
+	
+//	@Transactional
+//	public void persist(Gast g)
+//	{
+//		entityManager.persist(g);
+//	}
+//	
+//	@Transactional
+//	public void flush()
+//	{
+//		entityManager.flush();
+//	}
 	
 	
 	@SuppressWarnings("unchecked")
@@ -22,8 +44,7 @@ public class GastDao extends AbstractDao<Gast>{
 		if(gast != null && gast.size() == 1)
 		{
 			return gast.get(0);
-		}
-		
+		}		
 		return null;
 	}
 

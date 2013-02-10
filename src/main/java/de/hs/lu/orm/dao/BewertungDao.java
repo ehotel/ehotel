@@ -7,5 +7,8 @@ import de.hs.lu.orm.AbstractDao;
 
 @Component("bewertungDao")
 public class BewertungDao extends AbstractDao<Bewertung>{
-
+	
+	public BewertungDao(){
+    	super(Bewertung.class);
+    }
 }
