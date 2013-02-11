@@ -10,9 +10,9 @@ import org.slf4j.LoggerFactory;
 import de.hs.lu.controller.HomeController;
 
 public class MailSender {
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	private static final Logger logger = LoggerFactory.getLogger(MailSender.class);
 
-	public static void sendMail(String to, String from)
+	public static void sendMail(String to, String from, String text)
    {    
       String host = "localhost";
       Properties properties = System.getProperties();
@@ -24,7 +24,7 @@ public class MailSender {
          message.setFrom(new InternetAddress(from));
          message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
          message.setSubject("eHotel Nachricht");
-         message.setText("Hier steht der Text");
+         message.setText(text);
          Transport.send(message);
          logger.info("Message erfolgreich verschickt");
       }catch (MessagingException mex) {

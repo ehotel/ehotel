@@ -2,7 +2,7 @@
 <%@ page session="false" %>
 <html>
 <head>
-	<title>Home</title>
+	<title>Login</title>
 </head>
 <body>
 <h1>
@@ -12,16 +12,12 @@
 <form method="POST" action="erzeugeGast">
  <table>
   <tr>
-   <td>Vorname:</td>
+   <td>Benutzername:</td>
    <td><input type="text" name="vorname"/></td>
   </tr>
   <tr>
-   <td>Nachname:</td>
+   <td>Password:</td>
    <td><input type="text" name="nachname"/></td>
-  </tr>
-  <tr>
-   <td>Benutzername:</td>
-   <td><input type="text" name="benutzername"/></td>
   </tr>
  </table>
  <input type="submit"/>

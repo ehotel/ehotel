@@ -7,7 +7,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import de.hs.lu.model.Gast;
 import de.hs.lu.orm.AbstractDao;
@@ -22,19 +21,6 @@ public class GastDao extends AbstractDao<Gast>{
     	super(Gast.class);
 	}
 	
-//	@Transactional
-//	public void persist(Gast g)
-//	{
-//		entityManager.persist(g);
-//	}
-//	
-//	@Transactional
-//	public void flush()
-//	{
-//		entityManager.flush();
-//	}
-	
-	
 	@SuppressWarnings("unchecked")
 	public Gast findGastByBenutzername(String userName)
 	{
@@ -46,6 +32,32 @@ public class GastDao extends AbstractDao<Gast>{
 			return gast.get(0);
 		}		
 		return null;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Gast findGastByEMAil(String email)
+	{
+		Query query = entityManager.createQuery("select g FROM Gast g where g.email= :email");
+		query.setParameter("email", email);
+		List<Gast> gast = query.getResultList();
+		if(gast != null && gast.size() == 1)
+		{
+			return gast.get(0);
+		}		
+		return null;		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Gast findGastByAktivierungsHash(String hash)
+	{
+		Query query = entityManager.createQuery("select g FROM Gast g where g.aktivierungsHash= :aktivierungs_hash");
+		query.setParameter("aktivierungs_hash", hash);
+		List<Gast> gast = query.getResultList();
+		if(gast != null && gast.size() == 1)
+		{
+			return gast.get(0);
+		}		
+		return null;		
 	}
 
 }
