@@ -1,9 +1,5 @@
 package de.hs.lu.controller;
 
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Locale;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -89,15 +85,16 @@ public class GastController {
         	return "registrieren";
         }
         
-        gast.setIstAktviert(false);
+        gast.setIstAktiviert(false);
         gast.setAktivierungsHash(Gast.md5Hash(gast.getEmail()));
+        gast.setRechte("ROLE_USER");
         
         gastDao.persist(gast);
         gastDao.flush();
         
         String bestaetigung = "Bitte hier klicken localhost:8080/ehotel-spring-mvc/aktivierung/" + gast.getAktivierungsHash();
         
-        MailSender.sendMail(gast.getEmail(), "no-reply@ehotel-arno.com", bestaetigung);
+        //MailSender.sendMail(gast.getEmail(), "no-reply@ehotel-arno.com", bestaetigung);
         
         uiModel.addAttribute("meldung" , "Ihr Benutzer wurde erfolgreich registriert, checken sie ihre E-Mails");
         return "meldung";
@@ -118,7 +115,7 @@ public class GastController {
 		Gast g = gastDao.findGastByAktivierungsHash(hash);
 		if(g != null)
 		{
-			g.setIstAktviert(true);
+			g.setIstAktiviert(true);
 			gastDao.merge(g);
 			uiModel.addAttribute("meldung", "Ihr Benutzer wurde aktiviert");
 		}
@@ -128,5 +125,44 @@ public class GastController {
 		}
 		
 		return "meldung";
-	}	
+	}
+	
+//	@RequestMapping(value = "/login", method = RequestMethod.GET)
+//    public String login() {
+//        return "login";
+//	}
+	
+	@RequestMapping(value = "/einloggen", method = RequestMethod.POST)
+    public String checklogin(Model model, HttpServletRequest request) {
+		
+		Gast g = gastDao.findGastByBenutzername(request.getParameter("benutzername"));
+		if(g == null)
+		{
+			model.addAttribute("loginError", "Benutzername oder Password falsch");
+			logger.debug("benutzer nicht gefunden");
+			return "login";
+		}
+		
+		Gast gastLogin = new Gast();
+		gastLogin.setPassword(request.getParameter("password"));
+		
+		if(!g.getPassword().contentEquals(gastLogin.getPassword()))
+		{
+			model.addAttribute("loginError", "Benutzername oder Password falsch");
+			logger.debug("pwd stimmt nicht überein");
+			return "login";			
+		}
+		
+		model.addAttribute("meldung", "Sie haben sich erfolgreich eingelogt");
+		
+		return "meldung";
+	}
+	
+	@RequestMapping(value = "/gast/test", method = RequestMethod.GET)
+	public String test(Model model) {
+		
+		model.addAttribute("meldung", "Das hier sehen nur angemeldete benutzer");
+		
+      return "meldung";
+	}
 }

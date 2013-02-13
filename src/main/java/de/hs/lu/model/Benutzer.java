@@ -24,9 +24,11 @@ public abstract class Benutzer {
 	
 	private String email;
 	
-	private boolean istAktviert;
+	private boolean istAktiviert;
 	
 	private String aktivierungsHash;
+	
+	private String rechte;
 	
 	public Long getId() {
 		return id;
@@ -72,12 +74,12 @@ public abstract class Benutzer {
 		this.email = email;
 	}
 	
-	public boolean isIstAktviert() {
-		return istAktviert;
+	public boolean isIstAktiviert() {
+		return istAktiviert;
 	}
 
-	public void setIstAktviert(boolean istAktviert) {
-		this.istAktviert = istAktviert;
+	public void setIstAktiviert(boolean istAktiviert) {
+		this.istAktiviert = istAktiviert;
 	}
 
 	public String getAktivierungsHash() {
@@ -86,6 +88,14 @@ public abstract class Benutzer {
 
 	public void setAktivierungsHash(String aktvierungsHash) {
 		this.aktivierungsHash = aktvierungsHash;
+	}
+
+	public String getRechte() {
+		return rechte;
+	}
+
+	public void setRechte(String rechte) {
+		this.rechte = rechte;
 	}
 
 	public static String md5Hash(String text)

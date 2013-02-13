@@ -55,5 +55,11 @@ public class BenutzerTest {
 		assertEquals(gastDao.findById(g.getId()).getPassword(), Benutzer.md5Hash(password));
 				
 	}
+	
+	@Test
+	public void hash()
+	{
+		System.out.println(Benutzer.md5Hash("1234"));
+	}
 
 }
