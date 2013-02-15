@@ -9,7 +9,7 @@
         <intercept-url pattern="/login*" access="permitAll" />
         <intercept-url pattern="/logout*" access="permitAll" />
         <intercept-url pattern="/gast/test" access="hasRole('ROLE_USER')" />
-        <form-login login-page="/login" default-target-url="/home"
+        <form-login login-page="/login" default-target-url="/test"
 			authentication-failure-url="/loginfailed" />
 		<logout logout-success-url="/logout" />
     </http>
@@ -21,12 +21,20 @@
 			<jdbc-user-service data-source-ref="dataSource"
 				
 				users-by-username-query="
-					select benutzername, password, ist_aktiviert 
-					from gast where benutzername=?" 
+					select benutzername, password, ist_aktiviert from
+					(select benutzername, password, ist_aktiviert
+					from admin 
+					union
+					select benutzername, password, ist_aktiviert
+					from gast) as X
+					where benutzername =?"
 				
 				authorities-by-username-query="
-					select benutzername, rechte from gast
-					where benutzername =?"					
+					select benutzername, rechte from
+					(select benutzername, rechte from admin
+					union
+					select benutzername, rechte from gast) as X
+					where benutzername =?"
 			/>
         </authentication-provider>
     </authentication-manager>

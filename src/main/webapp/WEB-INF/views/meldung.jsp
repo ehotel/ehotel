@@ -10,5 +10,6 @@
 </h1>
 
 <P>${meldung}</P>
+<p>hier klicken für 	<a href="<c:url value="/j_spring_security_logout" />" > Logout</a> <p>
 </body>
 </html>

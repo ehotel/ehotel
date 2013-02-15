@@ -43,9 +43,17 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/loginfailed", method = RequestMethod.GET)
-	public String neueMethode(Model model) {
+	public String loginfailed(Model model) {
 				
 		model.addAttribute("meldung", "Login fehlgeschlagen");
+		
+		return "meldung";
+	}
+	
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout(Model model) {
+				
+		model.addAttribute("meldung", "Sie haben sich erfolgreich ausgeloggt");
 		
 		return "meldung";
 	}
