@@ -36,5 +36,10 @@ public class ZimmerkategorieDao extends AbstractDao<Zimmerkategorie>{
 		}		
 		return null;
 	}
+	
+	
+    public List<Zimmerkategorie> findAll(){
+        return entityManager.createQuery("SELECT o FROM Zimmerkategorie o", Zimmerkategorie.class).getResultList();
+    }
 
 }

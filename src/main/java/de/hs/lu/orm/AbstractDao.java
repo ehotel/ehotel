@@ -32,8 +32,7 @@ public abstract class AbstractDao<T> {
 	public T merge(T t) {
         return entityManager.merge(t);
     }
-	
-	
+    	
 	public T findById(Long id){
 		return entityManager.find(type, id);
 	}
