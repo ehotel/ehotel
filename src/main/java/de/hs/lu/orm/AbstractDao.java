@@ -32,6 +32,12 @@ public abstract class AbstractDao<T> {
 	public T merge(T t) {
         return entityManager.merge(t);
     }
+    
+    public T getReference(Long id) {
+    	return entityManager.getReference(type, id);
+    }
+    
+    
     	
 	public T findById(Long id){
 		return entityManager.find(type, id);

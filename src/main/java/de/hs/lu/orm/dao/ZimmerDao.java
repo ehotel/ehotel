@@ -37,4 +37,8 @@ public class ZimmerDao extends AbstractDao<Zimmer> {
 		return null;
 	}
 	
+    public List<Zimmer> findAll(){
+        return entityManager.createQuery("SELECT o FROM Zimmer o", Zimmer.class).getResultList();
+    }
+	
 }

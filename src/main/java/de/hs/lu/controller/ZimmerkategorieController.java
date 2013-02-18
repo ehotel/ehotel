@@ -39,5 +39,14 @@ public class ZimmerkategorieController {
 		
 		return "meldung";
 	}
+	
+	@RequestMapping(value = "/zimmerkategorie_liste", method = RequestMethod.GET)
+	public String listen(Model model) {
+		
+		model.asMap().clear();
+		model.addAttribute("zimmerkategorieliste", zkDao.findAll());
+				
+		return "zimmerkategorie_auflisten";
+	}
 
 }

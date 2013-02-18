@@ -1,13 +1,11 @@
 package de.hs.lu.service;
 
 import java.util.*;
-//import javax.mail.*;
-//import javax.mail.internet.*;
+import javax.mail.*;
+import javax.mail.internet.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import de.hs.lu.controller.HomeController;
 
 public class MailSender {
 	private static final Logger logger = LoggerFactory.getLogger(MailSender.class);
