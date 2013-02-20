@@ -13,11 +13,15 @@
    <tr>
    <td>ZimmerTyp</td>
    <td>ZimmerPreis</td>
+   <td>Edit</td>
+   <td>Delete</td>
   </tr>
 	<c:forEach var="zk" items="${zimmerkategorieliste}">
 	  	<tr>
 			<td>${zk.zimmertyp}</td>
 			<td>${zk.preis}</td>
+			<td><a href="./zimmerkategorie_editieren/${zk.id}">edit</a></td>
+			<td><a href="./zimmerkategorie_loeschen/${zk.id}">delete</a></td>			
 		</tr>        
 	</c:forEach>  
   </table>

@@ -9,6 +9,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
 
 import de.hs.lu.model.Zimmer;
+import de.hs.lu.model.Zimmerkategorie;
 import de.hs.lu.orm.AbstractDao;
 
 @Component("zimmerDao")
@@ -39,6 +40,15 @@ public class ZimmerDao extends AbstractDao<Zimmer> {
 	
     public List<Zimmer> findAll(){
         return entityManager.createQuery("SELECT o FROM Zimmer o", Zimmer.class).getResultList();
+    }
+    
+	@SuppressWarnings("unchecked")
+    public List<Zimmer> findZimmerByZimmerkategorie(Zimmerkategorie zimmerkategorie)
+    {   
+		Query query = entityManager.createQuery("select z FROM Zimmer z where z.zimmerkategorie= :zk");
+		query.setParameter("zk", zimmerkategorie);
+		List<Zimmer> zimmer = query.getResultList();		
+		return zimmer;    	
     }
 	
 }

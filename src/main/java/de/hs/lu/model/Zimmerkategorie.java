@@ -46,6 +46,10 @@ public class Zimmerkategorie {
 		return id;
 	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public Set<Zimmer> getZimmer() {
 		return zimmer;
 	}

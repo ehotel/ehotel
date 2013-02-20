@@ -26,8 +26,8 @@
 	<!-- <context:component-scan base-package="de.hs.lu" /> -->
 	
 	<view-controller path="/login" view-name="login"/>
-	<view-controller path="/zimmerkategorie_anlegen" view-name="zimmerkategorie_anlegen"/>
-	<view-controller path="/datepicker" view-name="datepicker"/>
+<!-- 	<view-controller path="/zimmerkategorie_anlegen" view-name="zimmerkategorie_anlegen"/>
+ -->	<view-controller path="/datepicker" view-name="datepicker"/>
 	
 	
 </beans:beans>
