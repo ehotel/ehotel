@@ -7,7 +7,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,7 +26,6 @@ public class GastTest {
 	public void tearDown() throws Exception {
 	}
 
-	@Rollback(false)
 	@Transactional
 	@Test
 	public void test() {

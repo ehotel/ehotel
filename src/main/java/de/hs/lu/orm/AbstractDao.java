@@ -35,9 +35,7 @@ public abstract class AbstractDao<T> {
     
     public T getReference(Long id) {
     	return entityManager.getReference(type, id);
-    }
-    
-    
+    }    
     	
 	public T findById(Long id){
 		return entityManager.find(type, id);

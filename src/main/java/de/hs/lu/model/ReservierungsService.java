@@ -14,9 +14,9 @@ public class ReservierungsService {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
-	private long Startdatum;
+	private long startdatum;
 	
-	private long Enddatum;
+	private long enddatum;
 	
 	@ManyToOne
 	@JoinColumn(name="reservierung_id")
@@ -27,19 +27,19 @@ public class ReservierungsService {
 	private ZusatzService zusatzService;
 
 	public long getStartdatum() {
-		return Startdatum;
+		return startdatum;
 	}
 
 	public void setStartdatum(long startdatum) {
-		Startdatum = startdatum;
+		this.startdatum = startdatum;
 	}
 
 	public long getEnddatum() {
-		return Enddatum;
+		return enddatum;
 	}
 
 	public void setEnddatum(long enddatum) {
-		Enddatum = enddatum;
+		this.enddatum = enddatum;
 	}
 
 	public Long getId() {

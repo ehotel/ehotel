@@ -11,14 +11,11 @@
 </h1>
 <p><font color="#FF0000">${felderError}</font></p>
 <form method="POST" action=
-
 <c:choose>
       <c:when test="${modus=='create'}">"zimmerkategorie_erstellen"</c:when>
       <c:when test="${modus=='edit'}">"../zimmerkategorie_aendern"</c:when>
 </c:choose>
-
 >
-
 
 <input type="hidden" name="id" value="${zk.id}"/>
  <table>
