@@ -32,7 +32,7 @@ public class ZimmerController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(ZimmerController.class);
 
-	@RequestMapping(value = "/zimmererstellen", method = RequestMethod.POST)
+	@RequestMapping(value = "/zimmer_erstellen", method = RequestMethod.POST)
 	public String home(@Valid Zimmer zimmer, BindingResult bindingResult, Model model, HttpServletRequest request) {
 		
         if (bindingResult.hasErrors()) {

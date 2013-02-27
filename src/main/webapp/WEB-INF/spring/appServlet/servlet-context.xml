@@ -28,6 +28,7 @@
 	<view-controller path="/login" view-name="login"/>
 <!-- 	<view-controller path="/zimmerkategorie_anlegen" view-name="zimmerkategorie_anlegen"/>
  -->	<view-controller path="/datepicker" view-name="datepicker"/>
+ <view-controller path="/login_user" view-name="login_user"/>
 	
 	
 </beans:beans>
