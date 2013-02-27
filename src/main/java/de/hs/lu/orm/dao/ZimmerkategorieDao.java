@@ -32,7 +32,7 @@ public class ZimmerkategorieDao extends AbstractDao<Zimmerkategorie>{
 			{
 				return zimmerkategorie.get(0);
 			}
-			logger.info("Mehr als eine Zimmerkategorie gefunden die den selben Typ hat");			
+			logger.info("Mehr als eine Zimmerkategorie gefunden die den Typ " + zimmertyp + " hat");			
 		}		
 		return null;
 	}

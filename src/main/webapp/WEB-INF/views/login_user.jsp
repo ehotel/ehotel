@@ -8,7 +8,7 @@
 					<div class="h31"> </div>
 					<div class="line-hor-lang"></div>
 						
-<!-- HIER KOMMEN DIE JSP VERKNÜPFUNGEN -->		
+<!-- HIER KOMMEN DIE JSP VERKNUEPFUNGEN -->		
 					<form action="beispielJSP.jsp" id="login-form" method="get">			
 						<fieldset>
 							<div class="field">UserID<br/><br/>

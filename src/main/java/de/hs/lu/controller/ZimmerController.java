@@ -22,6 +22,7 @@ import de.hs.lu.orm.dao.ZimmerkategorieDao;
  * Handles requests for the application home page.
  */
 @Controller
+@RequestMapping("/zimmer")
 public class ZimmerController {
 	
 	@Autowired
@@ -32,7 +33,7 @@ public class ZimmerController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(ZimmerController.class);
 
-	@RequestMapping(value = "/zimmer_erstellen", method = RequestMethod.POST)
+	@RequestMapping(value = "/erstellen", method = RequestMethod.POST)
 	public String home(@Valid Zimmer zimmer, BindingResult bindingResult, Model model, HttpServletRequest request) {
 		
         if (bindingResult.hasErrors()) {
@@ -51,7 +52,7 @@ public class ZimmerController {
 		return "meldung";
 	}
 	
-	@RequestMapping(value = "/zimmer_anlegen", method = RequestMethod.GET)
+	@RequestMapping(value = "/anlegen", method = RequestMethod.GET)
 	public String anlegen(Model model) {
 		
 		model.addAttribute("modus", "create");
@@ -60,7 +61,7 @@ public class ZimmerController {
 		return "zimmer_anlegen";
 	}
 	
-	@RequestMapping(value = "/zimmer_liste", method = RequestMethod.GET)
+	@RequestMapping(value = "/liste", method = RequestMethod.GET)
 	public String listen(Model model) {
 		
 		model.asMap().clear();
@@ -69,7 +70,7 @@ public class ZimmerController {
 		return "zimmer_auflisten";
 	}
 	
-	@RequestMapping(value = "/zimmer_editieren/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/editieren/{id}", method = RequestMethod.GET)
     public String edit(@PathVariable("id") Long id, Model model) {
 		
 		model.asMap().clear();
@@ -80,7 +81,7 @@ public class ZimmerController {
 		return "zimmer_anlegen";
 	}
 	
-	@RequestMapping(value = "/zimmer_aendern", method = RequestMethod.POST)
+	@RequestMapping(value = "/aendern", method = RequestMethod.POST)
     public String aendern(@Valid Zimmer zimmer, BindingResult bindingResult, Model model, HttpServletRequest request) {
 		
         if (bindingResult.hasErrors()) {
@@ -101,7 +102,7 @@ public class ZimmerController {
 		return "meldung";
 	}
 	
-	@RequestMapping(value = "/zimmer_loeschen/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/loeschen/{id}", method = RequestMethod.GET)
     public String loeschen(@PathVariable("id") Long id, Model model) {
 				
 		Zimmer z = zimmerDao.getReference(id);

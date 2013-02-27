@@ -12,8 +12,8 @@
 <p><font color="#FF0000">${felderError}</font></p>
 <form method="POST" action=
 <c:choose>
-      <c:when test="${modus=='create'}">"zusatzservice_erstellen"</c:when>
-      <c:when test="${modus=='edit'}">"../zusatzservice_aendern"</c:when>
+      <c:when test="${modus=='create'}">"../zusatzservice/erstellen"</c:when>
+      <c:when test="${modus=='edit'}">"../../zusatzservice/aendern"</c:when>
 </c:choose>
 >
 

@@ -20,8 +20,8 @@
 	  	<tr>
 			<td>${zk.zimmertyp}</td>
 			<td>${zk.preis}</td>
-			<td><a href="./zimmerkategorie_editieren/${zk.id}">edit</a></td>
-			<td><a href="./zimmerkategorie_loeschen/${zk.id}">delete</a></td>			
+			<td><a href="./../zimmerkategorie/editieren/${zk.id}">edit</a></td>
+			<td><a href="./../zimmerkategorie/loeschen/${zk.id}">delete</a></td>			
 		</tr>        
 	</c:forEach>  
   </table>

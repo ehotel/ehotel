@@ -22,8 +22,8 @@
 			<td>${zs.name}</td>
 			<td>${zs.preis}</td>
 			<td>${zs.anzahl}</td>
-			<td><a href="./zusatzservice_editieren/${zs.id}">edit</a></td>
-			<td><a href="./zusatzservice_loeschen/${zs.id}">delete</a></td>			
+			<td><a href="./../zusatzservice/editieren/${zs.id}">edit</a></td>
+			<td><a href="./../zusatzservice/loeschen/${zs.id}">delete</a></td>			
 		</tr>        
 	</c:forEach>  
   </table>

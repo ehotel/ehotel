@@ -2,6 +2,7 @@ package de.hs.lu.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import de.hs.lu.model.Reservierung;
 import de.hs.lu.model.Zimmer;
@@ -15,6 +16,7 @@ public class Zimmerbelegung {
 	private ZimmerkategorieDao zimmerkategorieDao;
 	
 	
+	@Transactional
 	public Zimmer freieZimmerSuche(String zimmertyp, long start, long ende)
 	{
 			Zimmerkategorie zk = zimmerkategorieDao.findZimmerkategorieByZimmertyp(zimmertyp);
@@ -51,8 +53,8 @@ public class Zimmerbelegung {
 				return false;
 			}
 			
-			//unser wunschtermin ist fangt vor der reservierung an und endet nach der reservierung
-			if(start < r.getStartdatum() && ende > r.getEnddatum())
+			//unser wunschtermin startet vor der reservierung an und endet nach der reservierung
+			if(start <= r.getStartdatum() && ende >= r.getEnddatum())
 			{
 				return false;
 			}

@@ -12,8 +12,8 @@
 <p><font color="#FF0000">${felderError}</font></p>
 <form method="POST" action=
 <c:choose>
-      <c:when test="${modus=='create'}">"zimmerkategorie_erstellen"</c:when>
-      <c:when test="${modus=='edit'}">"../zimmerkategorie_aendern"</c:when>
+      <c:when test="${modus=='create'}">"../zimmerkategorie/erstellen"</c:when>
+      <c:when test="${modus=='edit'}">"../../zimmerkategorie/aendern"</c:when>
 </c:choose>
 >
 

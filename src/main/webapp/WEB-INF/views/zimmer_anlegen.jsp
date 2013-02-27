@@ -11,8 +11,8 @@
 <p><font color="#FF0000">${felderError}</font></p>
 <form method="POST" action=
 <c:choose>
-      <c:when test="${modus=='create'}">"zimmer_erstellen"</c:when>
-      <c:when test="${modus=='edit'}">"../zimmer_aendern"</c:when>
+      <c:when test="${modus=='create'}">"../zimmer/erstellen"</c:when>
+      <c:when test="${modus=='edit'}">"../../zimmer/aendern"</c:when>
 </c:choose>
 >
 <input type="hidden" name="id" value="${zimmer.id}"/>
