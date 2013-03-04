@@ -115,16 +115,7 @@ public class ServicebelegungTest {
 		List<ZusatzService> freie = servicebelegung.freieServiceSuche(100l, 200l);		
 		
 		assertEquals("bmw", freie.get(0).getName());
-		
-		ReservierungsService rs6 = new ReservierungsService();
-		rs6.setStartdatum(101l);
-		rs6.setEnddatum(199l);
-		rs6.setZusatzService(zs);
-		rsDao.persist(rs6);
-		
-		freie = servicebelegung.freieServiceSuche(100l, 200l);
-		
-		assertEquals(0, freie.size());		
+	
 	}
 	
 	@Transactional
