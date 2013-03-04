@@ -101,6 +101,8 @@ public class ZimmerbelegungTest {
 		assertNotNull(zimmerbelegung.freieZimmerSuche(zk.getZimmertyp(), 101l, 199l));
 		assertNotNull(zimmerbelegung.freieZimmerSuche(zk.getZimmertyp(), 101l, 201l));		
 		assertNotNull(zimmerbelegung.freieZimmerSuche(zk.getZimmertyp(), 99l, 201l));
+		
+		assertNotNull(zimmerbelegung.freieZimmerSuche("%", 99l, 201l));
 			
 	}
 

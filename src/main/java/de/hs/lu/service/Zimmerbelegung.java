@@ -19,19 +19,19 @@ public class Zimmerbelegung {
 	@Transactional
 	public Zimmer freieZimmerSuche(String zimmertyp, long start, long ende)
 	{
-			Zimmerkategorie zk = zimmerkategorieDao.findZimmerkategorieByZimmertyp(zimmertyp);
+		Zimmerkategorie zk = zimmerkategorieDao.findZimmerkategorieByZimmertyp(zimmertyp);
 			
-			if(zk != null)
-			{	
-				//wir schauen ob irgendein zimmer frei ist, das erste wird zurück gegeben
-				for(Zimmer z:zk.getZimmer())
+		if(zk != null)
+		{	
+			//wir schauen ob irgendein zimmer frei ist, das erste wird zurück gegeben
+			for(Zimmer z:zk.getZimmer())
+			{
+				if(zimmerIstFrei(z, start, ende))
 				{
-					if(zimmerIstFrei(z, start, ende))
-					{
-						return z;
-					}
+					return z;
 				}
 			}
+		}
 		
 		return null;
 	}

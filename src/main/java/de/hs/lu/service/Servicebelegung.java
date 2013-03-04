@@ -29,10 +29,12 @@ public class Servicebelegung {
 		{
 			for(ZusatzService zs: alleService)
 			{
-				if(row[0] == zs.getId())
+				ZusatzService temp = (ZusatzService) row[0];
+				
+				if(temp.getId() == zs.getId())
 				{
 					//falls schon ausgebucht, entfernen
-					if((Integer) row[1] >= zs.getAnzahl())
+					if((Long) row[1] >= zs.getAnzahl())
 					{
 						freieService.remove(zs);
 						break;

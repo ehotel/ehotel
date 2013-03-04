@@ -96,28 +96,71 @@ public class ServicebelegungTest {
 		rs6.setZusatzService(zs);
 		rsDao.persist(rs6);
 		
-		rsList = rsDao.findReservierungsServiceByStartAndEnd(100l, 200l);
-		
+		rsList = rsDao.findReservierungsServiceByStartAndEnd(100l, 200l);		
 		assertEquals(1, rsList.size());
 		
 		for(Object[] row: rsList)
 		{
-			// wir pruefen ob es nur vier reservierte zusatzservice gibt die in unser datum fallen
+			// wir pruefen ob es nur 5 reservierte zusatzservice gibt die in unser datum fallen
 			assertEquals(5l, row[1]);
-		}			
+		}				
+		
 	}
 	
 	@Transactional
 	@Test
 	public void BelegungTest()
-	{
-		
-	
+	{	
 		zb.freieZimmerSuche("blub", 1l, 2l);
 		List<ZusatzService> freie = servicebelegung.freieServiceSuche(100l, 200l);		
 		
 		assertEquals("bmw", freie.get(0).getName());
 		
+		ReservierungsService rs6 = new ReservierungsService();
+		rs6.setStartdatum(101l);
+		rs6.setEnddatum(199l);
+		rs6.setZusatzService(zs);
+		rsDao.persist(rs6);
+		
+		freie = servicebelegung.freieServiceSuche(100l, 200l);
+		
+		assertEquals(0, freie.size());		
+	}
+	
+	@Transactional
+//	@Test
+	//funktioniert nur bei leerer datenbank
+	public void BelegungTest2()
+	{	
+		zs.setAnzahl(0);
+		zsDao.merge(zs);
+		
+		ZusatzService beamer = new ZusatzService();
+		beamer.setAnzahl(1);
+		zsDao.persist(beamer);
+		
+		ReservierungsService rs_beamer = new ReservierungsService();
+		rs_beamer.setStartdatum(100l);
+		rs_beamer.setEnddatum(200l);
+		rs_beamer.setZusatzService(beamer);
+		rsDao.persist(rs_beamer);
+		
+		List<ZusatzService> freie = servicebelegung.freieServiceSuche(100l, 200l);
+		assertEquals(0, freie.size());
+		
+		freie = servicebelegung.freieServiceSuche(101l, 199l);
+		assertEquals(0, freie.size());
+		
+		
+		freie = servicebelegung.freieServiceSuche(80l, 150l);
+		assertEquals(0, freie.size());
+		
+		freie = servicebelegung.freieServiceSuche(150l, 250l);
+		assertEquals(0, freie.size());
+		
+		freie = servicebelegung.freieServiceSuche(200l, 250l);
+		assertEquals(0, freie.size());
+
 		
 	}
 	
