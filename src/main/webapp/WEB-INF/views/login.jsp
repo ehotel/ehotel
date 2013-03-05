@@ -50,7 +50,7 @@
 
 	</form>
     <sec:authorize ifAnyGranted="ROLE_USER">
-    	Sie sind eingeloggt
+    	Sie sind eingeloggt mit benutzernamen: <sec:authentication property="principal.username"/>
     </sec:authorize>
     <sec:authorize ifNotGranted="ROLE_USER">
         Sie sind ausgeloggt

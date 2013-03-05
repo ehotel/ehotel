@@ -9,6 +9,7 @@
         <intercept-url pattern="/login*" access="permitAll" />
         <intercept-url pattern="/logout*" access="permitAll" />
         <intercept-url pattern="/gast/test" access="hasRole('ROLE_USER')" />
+        <intercept-url pattern="/reservieren" access="hasRole('ROLE_USER')" />
         <form-login login-page="/login" default-target-url="/test"
 			authentication-failure-url="/loginfailed" />
 		<logout logout-success-url="/logout" />

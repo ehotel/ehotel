@@ -12,15 +12,20 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import de.hs.lu.model.Gast;
 import de.hs.lu.model.Reservierung;
 import de.hs.lu.model.ReservierungsService;
+import de.hs.lu.model.Status;
 import de.hs.lu.model.Zimmer;
+import de.hs.lu.orm.dao.GastDao;
 import de.hs.lu.orm.dao.ReservierungDao;
 import de.hs.lu.orm.dao.ReservierungsServiceDao;
 import de.hs.lu.orm.dao.ZimmerDao;
@@ -52,6 +57,9 @@ public class ReservierungController {
 	
 	@Autowired
 	private ZimmerDao zimmerDao;
+	
+	@Autowired
+	private GastDao gastDao;
 	
 	@Autowired
 	private Zimmerbelegung belegung;
@@ -94,7 +102,15 @@ public class ReservierungController {
 	
 	@RequestMapping(value = "/reservieren", method = RequestMethod.POST)
     public String reservieren(Model model, HttpServletRequest request) throws ParseException {
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 				
+		if(authentication == null || !authentication.isAuthenticated())
+		{
+			return "login";
+		}
+		
+		String username = authentication.getName();				
 		String id = (String) request.getParameter("zimmer_id");
 		String anreise_s = (String) request.getParameter("anreise");
 		String abreise_s = (String) request.getParameter("abreise");
@@ -112,6 +128,8 @@ public class ReservierungController {
 		r.setStartdatum(anreise.getTime());
 		r.setEnddatum(abreise.getTime());
 		r.setZimmer(z);
+		r.setGast(gastDao.findGastByBenutzername(username));
+		r.setStatus(Status.Aktiv);
 		
 		reservierungDao.persist(r);
 		r = reservierungDao.merge(r);
@@ -173,5 +191,17 @@ public class ReservierungController {
 				
 		return "meldung";
 	}
+	
+	@RequestMapping(value = "/reservierung/liste", method = RequestMethod.GET)
+	public String reservierung_liste(Model model) {
+		
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		Gast g = gastDao.findGastByBenutzername(username);
+		
+		model.addAttribute("reservierungsliste", rsDao.findReservierungenByGast(g));
+		
+		return "reservierung_auflisten";
+	}
+
 	
 }
