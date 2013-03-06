@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,6 +17,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -196,12 +198,32 @@ public class ReservierungController {
 	public String reservierung_liste(Model model) {
 		
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
-		Gast g = gastDao.findGastByBenutzername(username);
-		
-		model.addAttribute("reservierungsliste", rsDao.findReservierungenByGast(g));
+		Gast g = gastDao.findGastByBenutzername(username);		
+		model.addAttribute("reservierungsliste", reservierungDao.findReservierungenByGast(g));
 		
 		return "reservierung_auflisten";
 	}
+	
+	@RequestMapping(value = "/reservierung/stornieren/{id}", method = RequestMethod.POST)
+	public String reservierung_stornieren(@PathVariable("id") Long id, Model model) {
+		
+		Reservierung reservierung = reservierungDao.findById(id);
+		reservierung.setStatus(Status.StornierungErwuenscht);
+		reservierungDao.merge(reservierung);		
+		
+		return "redirect:/reservierung/liste";
+	}
+	
+	@RequestMapping(value = "/reservierung/details/{id}", method = RequestMethod.POST)
+	public String reservierung_details(@PathVariable("id") Long id, Model model) {
+		
+		Reservierung reservierung = reservierungDao.findById(id);
+		model.addAttribute(reservierung);
+		
+		List<ReservierungsService> serviceListe =  rsDao.findReservierungsServiceByReservierung(reservierung);		
+		model.addAttribute("reservierungserviceliste", serviceListe);
 
+		return "reservierung_details";
+	}
 	
 }

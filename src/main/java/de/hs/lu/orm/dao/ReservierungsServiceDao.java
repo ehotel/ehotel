@@ -6,7 +6,7 @@ import javax.persistence.Query;
 
 import org.springframework.stereotype.Component;
 
-import de.hs.lu.model.Gast;
+import de.hs.lu.model.Reservierung;
 import de.hs.lu.model.ReservierungsService;
 import de.hs.lu.orm.AbstractDao;
 
@@ -37,13 +37,11 @@ public class ReservierungsServiceDao extends AbstractDao<ReservierungsService>{
 	}
 	
 	@SuppressWarnings("unchecked")
-    public List<Gast> findReservierungenByGast(Gast gast)
-    {   
-		Query query = entityManager.createQuery("select r FROM Reservierung r where r.gast= :gast");
-		query.setParameter("gast", gast);
-		List<Gast> gaeste = query.getResultList();		
-		return gaeste;
-    }
-    
-
+	public List<ReservierungsService> findReservierungsServiceByReservierung(Reservierung reservierung){
+		
+		Query query = entityManager.createQuery("select r FROM ReservierungsService r where r.reservierung= :reservierung");
+		query.setParameter("reservierung", reservierung);
+		List<ReservierungsService> services = query.getResultList();		
+		return services;
+	}
 }

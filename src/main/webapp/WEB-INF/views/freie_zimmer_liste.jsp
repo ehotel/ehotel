@@ -19,15 +19,15 @@
   <c:if test="${empty zimmer}">
     <td colspan="3">Keine freien Zimmer gefunden</td>
   </c:if>
-  <c:if test="${not empty zimmer}">
-  	<form action="reservieren" method="POST">
+  <c:if test="${not empty zimmer}"> 	
 	  	<td>${zimmer.zimmerkategorie.zimmertyp}</td>
 		<td>${zimmer.zimmerkategorie.preis}</td>
-		<td><input type="submit" value="reservieren"/></td>
+		<td><form action="reservieren" method="POST">
+		<input type="submit" value="reservieren"/>
 		<input type="hidden" name="anreise" value="${anreise}"/>
 		<input type="hidden" name="abreise" value="${abreise}"/>
-		<input type="hidden" name="zimmer_id" value="${zimmer.id}"/>
-	</form>	    
+		<input type="hidden" name="zimmer_id" value="${zimmer.id}"/></form>
+		</td>
   </c:if>  
   </tr>
   </table>

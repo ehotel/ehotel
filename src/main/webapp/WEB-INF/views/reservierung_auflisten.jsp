@@ -2,9 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ page session="false" %>
 
-
-
-
 <html>
 <head>
 	<title>Reservierung auflisten</title>
@@ -22,6 +19,7 @@
    <td>Enddatum</td>
    <td>Status</td>
    <td>Stornieren</td>
+   <td>Details</td>
   </tr>
 	<c:forEach var="reservierung" items="${reservierungsliste}">
 		<jsp:useBean id="start" class="java.util.Date" />
@@ -34,7 +32,12 @@
 			<td><fmt:formatDate value="${start}" pattern="dd.MM.yyyy" /></td>
 			<td><fmt:formatDate value="${ende}" pattern="dd.MM.yyyy" /></td>
 			<td>${reservierung.status}</td>
-			<td><a href="../reservierung/stornieren/${reservierung.id}">stornieren</a></td>
+			<td><form action="../reservierung/stornieren/${reservierung.id}" method="POST">
+			<input type="submit" value="stornieren"/></form>
+			</td>
+			<td><form action="../reservierung/details/${reservierung.id}" method="POST">
+			<input type="submit" value="details"/></form>
+			</td>
 		</tr>
 	</c:forEach>  
   </table>
