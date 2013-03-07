@@ -32,7 +32,7 @@ public class GastTest {
 	
 		Gast gast = new Gast();		
 		gast.setBenutzername("testbenutzer");
-		gast.setNachname("Müller");
+		gast.setNachname("Mueller");
 		gast.setVorname("Mario");
 		
 		entityManager.persist(gast);
