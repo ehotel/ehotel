@@ -135,7 +135,7 @@ public class ReservierungController {
 		
 		reservierungDao.persist(r);
 		r = reservierungDao.merge(r);
-		model.addAttribute("meldung", "Reservierung wurde angelegt <br/> MÃ¶chten Sie einen ZusatzService <a href=\"freie_services_suche\">buchen</a>?");
+		model.addAttribute("meldung", "Reservierung wurde angelegt <br/> Moechten Sie einen ZusatzService <a href=\"freie_services_suche\">buchen</a>?");
 			
         Calendar calendar_anreise = Calendar.getInstance();
         calendar_anreise.setTime(anreise);
@@ -166,8 +166,8 @@ public class ReservierungController {
 		Date anreise = new Date(anreise_l);
 		Date abreise = new Date(abreise_l);
 		
-		logger.info("suche fÃ¼r anreise: " + anreise_l + " services");
-		logger.info("suche fÃ¼r abreise: " + abreise_l + " services");
+		logger.info("suche für anreise: " + anreise_l + " services");
+		logger.info("suche für abreise: " + abreise_l + " services");
 		
 		model.addAttribute("zusatzservices", servicebelegung.freieServiceSuche(anreise.getTime(), abreise.getTime()));		
 				
