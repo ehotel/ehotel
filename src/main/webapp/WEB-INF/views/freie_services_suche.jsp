@@ -13,8 +13,9 @@
     	  
 		var DateLimits = {min:null, max:null};
 
-   	    DateLimits.min = new Date(Date.parse("${min}"));
-   	    DateLimits.max = new Date(Date.parse("${max}"));
+		/*DateLimits.min = new Date(Date.parse("${min}")); 
+		DateLimits.max = new Date(Date.parse("${max}")); */  
+
    	        	  
     	$('#anreise').datepicker({ dateFormat: 'dd.mm.yy', minDate:  DateLimits.min});
         $('#abreise').datepicker({ dateFormat: 'dd.mm.yy', minDate:  new Date(2013,02,03)});

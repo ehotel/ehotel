@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import de.hs.lu.model.Reservierung;
+import de.hs.lu.model.Status;
 import de.hs.lu.model.Zimmer;
 import de.hs.lu.model.Zimmerkategorie;
 import de.hs.lu.orm.dao.ZimmerkategorieDao;
@@ -41,6 +42,11 @@ public class Zimmerbelegung {
 		//finden wir eine reservierung die überlappt?
 		for(Reservierung r: zimmer.getReservierungen())
 		{
+			if(r.getStatus() == Status.Storniert)
+			{
+				continue;
+			}
+			
 			//wir haben eine reservierung die mittem im Wunschtermin startet
 			if(start > r.getStartdatum() && start < r.getEnddatum())
 			{

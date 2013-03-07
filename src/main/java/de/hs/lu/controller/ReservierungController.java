@@ -174,6 +174,24 @@ public class ReservierungController {
 		return "freie_services_suche";
 	}
 	
+	@RequestMapping(value = "/freie_services_suche_extra", method = RequestMethod.POST)
+	public String services_suche_extra(Model model, HttpServletRequest request) {
+		
+		String id_s = (String) request.getParameter("reservierung_id");
+		Reservierung r = reservierungDao.findById(Long.parseLong(id_s));
+		model.asMap().clear();
+		
+		model.addAttribute("reservierung_id", r.getId());
+		model.addAttribute("anreise", r.getStartdatum());
+		model.addAttribute("abreise", r.getEnddatum());
+		
+		model.addAttribute("zusatzservices", servicebelegung.freieServiceSuche(r.getStartdatum(), r.getEnddatum()));
+				
+		return "freie_services_suche";
+	}
+	
+	
+	
 	@RequestMapping(value = "/service_reservieren", method = RequestMethod.POST)
     public String service_reservieren(Model model, HttpServletRequest request) throws ParseException {
 		
@@ -207,6 +225,8 @@ public class ReservierungController {
 	@RequestMapping(value = "/reservierung/stornieren/{id}", method = RequestMethod.POST)
 	public String reservierung_stornieren(@PathVariable("id") Long id, Model model) {
 		
+		model.asMap().clear();
+		
 		Reservierung reservierung = reservierungDao.findById(id);
 		reservierung.setStatus(Status.StornierungErwuenscht);
 		reservierungDao.merge(reservierung);		
@@ -218,6 +238,26 @@ public class ReservierungController {
 	public String reservierung_details(@PathVariable("id") Long id, Model model) {
 		
 		Reservierung reservierung = reservierungDao.findById(id);
+		model.addAttribute(reservierung);
+		
+		List<ReservierungsService> serviceListe =  rsDao.findReservierungsServiceByReservierung(reservierung);		
+		model.addAttribute("reservierungserviceliste", serviceListe);
+
+		return "reservierung_details";
+	}
+	
+	@RequestMapping(value = "reservierung/reservierungservice/loeschen", method = RequestMethod.POST)
+	public String reservierungservice_loeschen(Model model, HttpServletRequest request) {
+		
+		String id_s = (String) request.getParameter("service_id");
+		long id = Long.parseLong(id_s);		
+		ReservierungsService service = rsDao.findById(id);
+		
+		long reservierung_id = service.getReservierung().getId();		
+		rsDao.remove(rsDao.getReference(id));
+		rsDao.flush();
+		
+		Reservierung reservierung = reservierungDao.findById(reservierung_id);
 		model.addAttribute(reservierung);
 		
 		List<ReservierungsService> serviceListe =  rsDao.findReservierungsServiceByReservierung(reservierung);		

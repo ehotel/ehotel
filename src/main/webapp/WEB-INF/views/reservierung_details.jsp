@@ -60,7 +60,8 @@
 			<td>${service.zusatzService.preis}</td>
 			<td><fmt:formatDate value="${start_service}" pattern="dd.MM.yyyy" /></td>
 			<td><fmt:formatDate value="${ende_service}" pattern="dd.MM.yyyy" /></td>
-			<td><form action="../reservierungservice/loeschen/${service.id}" method="POST">
+			<td><form action="../reservierungservice/loeschen" method="POST">
+			<input type="hidden" name="service_id" value="${service.id}" />
 			<input type="submit" value="löschen"/></form>
 			</td>
 		</tr>
