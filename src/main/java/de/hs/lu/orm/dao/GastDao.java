@@ -59,5 +59,9 @@ public class GastDao extends AbstractDao<Gast>{
 		}		
 		return null;		
 	}
+	
+    public List<Gast> findAll(){
+        return entityManager.createQuery("SELECT g FROM Gast g", Gast.class).getResultList();
+    }
 
 }

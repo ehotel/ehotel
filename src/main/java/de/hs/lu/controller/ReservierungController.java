@@ -42,7 +42,7 @@ import de.hs.lu.service.MailSender;
  * Handles requests for the application home page.
  */
 @Controller
-@SessionAttributes({"reservierung_id", "abreise" , "anreise", "min", "max"})
+@SessionAttributes({"reservierung_id", "abreise" , "anreise", "min", "max", "username"})
 public class ReservierungController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(ReservierungController.class);
@@ -95,7 +95,7 @@ public class ReservierungController {
 		if(z != null)
 		logger.info("zimmerid: " + z.getId().toString());
 		
-		
+		model.addAttribute("gaesteliste", gastDao.findAll());
 		model.addAttribute("anreise", anreise_s);
 		model.addAttribute("abreise", abreise_s);
 		model.addAttribute("zimmer", z);
@@ -118,6 +118,12 @@ public class ReservierungController {
 		String id = (String) request.getParameter("zimmer_id");
 		String anreise_s = (String) request.getParameter("anreise");
 		String abreise_s = (String) request.getParameter("abreise");
+		String user = (String) request.getParameter("user");
+		
+		if(username.equals("admin"))
+		{
+			username = user;
+		}
 		
 		DateFormat formatter = new SimpleDateFormat("dd.mm.yyyy");		
 		Date anreise = formatter.parse(anreise_s);
@@ -159,7 +165,7 @@ public class ReservierungController {
 		model.addAttribute("reservierung_id", r.getId());
 		model.addAttribute("anreise", anreise.getTime());
 		model.addAttribute("abreise", abreise.getTime());
-		
+		model.addAttribute("username", username);
 				
 		return "meldung";
 	}
@@ -229,8 +235,11 @@ public class ReservierungController {
 		rs.setZusatzService(zsDao.findById(zusatz_id));
 		rsDao.persist(rs);
 		
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String username = authentication.getName();
+//		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//		String username = authentication.getName();
+		
+		String username = (String) model.asMap().get("username");
+		
 		Gast gast = gastDao.findGastByBenutzername(username);
 		
         String bestaetigung = "Sie haben soeben eine ZusatService reserviert, die Details dazu können Sie im ehotel-System nachschauen";
@@ -293,6 +302,27 @@ public class ReservierungController {
 		model.addAttribute("reservierungserviceliste", serviceListe);
 
 		return "reservierung_details";
+	}
+	
+	
+	@RequestMapping(value = "/admin/reservierung/liste", method = RequestMethod.GET)
+	public String admin_reservierung_liste(Model model) {
+		
+		model.addAttribute("reservierungsliste", reservierungDao.findAll());
+		
+		return "reservierung_auflisten_admin";
+	}
+	
+	@RequestMapping(value = "admin/reservierung/stornieren/{id}", method = RequestMethod.POST)
+	public String admin_reservierung_stornieren(@PathVariable("id") Long id, Model model) {
+		
+		model.asMap().clear();
+		
+		Reservierung reservierung = reservierungDao.findById(id);
+		reservierung.setStatus(Status.Storniert);
+		reservierungDao.merge(reservierung);		
+		
+		return "redirect:/admin/reservierung/liste";
 	}
 	
 }

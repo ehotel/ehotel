@@ -25,5 +25,9 @@ public class ReservierungDao extends AbstractDao<Reservierung>{
 		List<Reservierung> reservierungen = query.getResultList();		
 		return reservierungen;
     }
+	
+    public List<Reservierung> findAll(){
+        return entityManager.createQuery("SELECT r FROM Reservierung r", Reservierung.class).getResultList();
+    }
 
 }
