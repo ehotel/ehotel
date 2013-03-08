@@ -35,6 +35,8 @@ import de.hs.lu.orm.dao.ZimmerkategorieDao;
 import de.hs.lu.orm.dao.ZusatzServiceDao;
 import de.hs.lu.service.Servicebelegung;
 import de.hs.lu.service.Zimmerbelegung;
+import de.hs.lu.service.MailSender;
+
 
 /**
  * Handles requests for the application home page.
@@ -126,16 +128,21 @@ public class ReservierungController {
 		logger.info(anreise_s);
 		logger.info(abreise_s);
 		
+		Gast gast = gastDao.findGastByBenutzername(username);
+		
 		Reservierung r = new Reservierung();
 		r.setStartdatum(anreise.getTime());
 		r.setEnddatum(abreise.getTime());
 		r.setZimmer(z);
-		r.setGast(gastDao.findGastByBenutzername(username));
+		r.setGast(gast);
 		r.setStatus(Status.Aktiv);
 		
 		reservierungDao.persist(r);
 		r = reservierungDao.merge(r);
 		model.addAttribute("meldung", "Reservierung wurde angelegt <br/> Moechten Sie einen ZusatzService <a href=\"freie_services_suche\">buchen</a>?");
+		
+        String bestaetigung = "Sie haben soeben eine Zimmer reserviert, die Details dazu kÃ¶nnen Sie im ehotel-System nachschauen";        
+        MailSender.sendMail(gast.getEmail(), "no-reply@ehotel-arno.com", bestaetigung);		
 			
         Calendar calendar_anreise = Calendar.getInstance();
         calendar_anreise.setTime(anreise);
@@ -161,15 +168,20 @@ public class ReservierungController {
 	public String services_suche(Model model) {
 		
 		long anreise_l = (Long) model.asMap().get("anreise");
-		long abreise_l = (Long) model.asMap().get("abreise");
+		long abreise_l = (Long) model.asMap().get("abreise");		
 		
-		Date anreise = new Date(anreise_l);
-		Date abreise = new Date(abreise_l);
+		DateFormat formatter = new SimpleDateFormat("yyyy,mm,dd");		
+		Date min = new Date(anreise_l);
+		Date max = new Date(abreise_l);
 		
-		logger.info("suche für anreise: " + anreise_l + " services");
-		logger.info("suche für abreise: " + abreise_l + " services");
+		String min_s = formatter.format(min);
+		String max_s = formatter.format(max);
 		
-		model.addAttribute("zusatzservices", servicebelegung.freieServiceSuche(anreise.getTime(), abreise.getTime()));		
+		//dieses variablen sind session_attribute!
+		model.addAttribute("min" , min_s);
+		model.addAttribute("max" , max_s);
+				
+		model.addAttribute("zusatzservices", servicebelegung.freieServiceSuche(anreise_l, abreise_l));		
 				
 		return "freie_services_suche";
 	}
@@ -185,11 +197,21 @@ public class ReservierungController {
 		model.addAttribute("anreise", r.getStartdatum());
 		model.addAttribute("abreise", r.getEnddatum());
 		
+		DateFormat formatter = new SimpleDateFormat("yyyy,mm,dd");
+		
+		Date min = new Date(r.getStartdatum());
+		Date max = new Date(r.getEnddatum());
+		
+		String min_s = formatter.format(min);
+		String max_s = formatter.format(max);
+		
+		model.addAttribute("min" , min_s);
+		model.addAttribute("max" , max_s);
+		
 		model.addAttribute("zusatzservices", servicebelegung.freieServiceSuche(r.getStartdatum(), r.getEnddatum()));
 				
 		return "freie_services_suche";
 	}
-	
 	
 	
 	@RequestMapping(value = "/service_reservieren", method = RequestMethod.POST)
@@ -205,7 +227,14 @@ public class ReservierungController {
 		
 		long zusatz_id = Long.valueOf(request.getParameter("service"));		
 		rs.setZusatzService(zsDao.findById(zusatz_id));
-		rsDao.persist(rs);			
+		rsDao.persist(rs);
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+		Gast gast = gastDao.findGastByBenutzername(username);
+		
+        String bestaetigung = "Sie haben soeben eine ZusatService reserviert, die Details dazu kÃ¶nnen Sie im ehotel-System nachschauen";
+        MailSender.sendMail(gast.getEmail(), "no-reply@ehotel-arno.com", bestaetigung);
 
 		model.addAttribute("meldung", "ZusatzService wurde reserviert");					
 				

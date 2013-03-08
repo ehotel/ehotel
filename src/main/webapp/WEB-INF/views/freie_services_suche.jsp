@@ -10,16 +10,12 @@
 <!--     <script src="js/jquery-ui-1.10.1.custom.min.js"></script>
  -->    <script> 
       $(document).ready(function(){
-    	  
-		var DateLimits = {min:null, max:null};
-
-		/*DateLimits.min = new Date(Date.parse("${min}")); 
-		DateLimits.max = new Date(Date.parse("${max}")); */  
-
-   	        	  
-    	$('#anreise').datepicker({ dateFormat: 'dd.mm.yy', minDate:  DateLimits.min});
-        $('#abreise').datepicker({ dateFormat: 'dd.mm.yy', minDate:  new Date(2013,02,03)});
-        });
+    	     	        	  
+    	$('#anreise').datepicker({ dateFormat: 'dd.mm.yy', minDate:  new Date("${min}"), maxDate: new Date("${max}")});
+        $('#abreise').datepicker({ dateFormat: 'dd.mm.yy', minDate:  new Date("${min}"), maxDate: new Date("${max}")});
+        
+        
+        });      
     </script> 
 </head><body>
 <h1>

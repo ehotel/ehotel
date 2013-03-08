@@ -1,5 +1,7 @@
 package de.hs.lu.controller;
 
+import java.util.UUID;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -92,8 +94,7 @@ public class GastController {
         gastDao.persist(gast);
         gastDao.flush();
         
-        String bestaetigung = "Bitte hier klicken localhost:8080/ehotel-spring-mvc/aktivierung/" + gast.getAktivierungsHash();
-        
+        //String bestaetigung = "Bitte hier klicken localhost:8080/ehotel-spring-mvc/aktivierung/" + gast.getAktivierungsHash();        
         //MailSender.sendMail(gast.getEmail(), "no-reply@ehotel-arno.com", bestaetigung);
         
         uiModel.addAttribute("meldung" , "Ihr Benutzer wurde erfolgreich registriert, checken sie ihre E-Mails");
@@ -162,6 +163,29 @@ public class GastController {
 	public String test(Model model) {
 		
 		model.addAttribute("meldung", "Das hier sehen nur angemeldete benutzer");
+		
+      return "meldung";
+	}
+	
+	@RequestMapping(value = "/reset", method = RequestMethod.POST)
+	public String reset(Model model, HttpServletRequest request) {
+		
+		
+		String username = (String) request.getParameter("username");
+		
+		Gast gast = gastDao.findGastByBenutzername(username);
+		
+		String temp_pwd = UUID.randomUUID().toString();
+		temp_pwd = temp_pwd.replace("-", "");
+		temp_pwd = temp_pwd.substring(0, 8);
+		gast.setPassword(temp_pwd);
+		gastDao.merge(gast);
+		
+        String bestaetigung = "Ihr neues Password lautet: " + temp_pwd;        
+        MailSender.sendMail(gast.getEmail(), "no-reply@ehotel-arno.com", bestaetigung);
+        logger.info("Neues Password ist: "  + temp_pwd);
+		
+		model.addAttribute("meldung", "Ihr neues Password wurde per Mail an Sie geschickt");
 		
       return "meldung";
 	}

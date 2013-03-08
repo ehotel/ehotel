@@ -34,9 +34,11 @@
 			</tr>
 			<tr>
 				<td>Password:</td>
-				<td><input type='password' name='j_password' />
-				</td>
+				<td><input type='password' name='j_password' /></td>
 			</tr>
+			<tr>
+				<td colspan='2'> Sie haben ihr Password vergessen? <a href="reset_pwd">hier zuruecksetzen</a></td>
+			</tr>			
 			<tr>
 				<td colspan='2'><input name="submit" type="submit"
 					value="submit" />
