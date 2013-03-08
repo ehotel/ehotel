@@ -19,7 +19,7 @@ object {vertical-align:top;outline:none}
 #reservation-form fieldset {border:none}
 #reservation-form .field {display:block;height:55px}
 #reservation-form label {display:block;padding-bottom:4px}
-#reservation-form select {border:1px solid #5d3825;background:#1d110b;color:#bca695}
+#reservation-form select {border:1px solid #5d3825;background:red;color:#bca695}
 #reservation-form select.select1 {width:40px;margin-right:10px}
 #reservation-form select.select2 {width:127px}
 #reservation-form input {width:23px;text-align:center;border:1px solid #5d3825;background:#1d110b;color:#bca695}
