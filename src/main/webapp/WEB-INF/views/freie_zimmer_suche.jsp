@@ -10,8 +10,21 @@
 <!--     <script src="js/jquery-ui-1.10.1.custom.min.js"></script>
  -->    <script> 
       $(document).ready(function(){ 
-    	$('#anreise').datepicker({ dateFormat: 'dd.mm.yy', minDate: 0});
-        $('#abreise').datepicker({ dateFormat: 'dd.mm.yy', minDate: 1});
+		   	$('#anreise').datepicker({
+		   		dateFormat: 'dd.mm.yy',
+		   		minDate: 0,
+		   	 	onClose: function( selectedDate ) {
+			   		$( "#abreise" ).datepicker( "option", "minDate", selectedDate );
+		   		}
+		   	});
+		   	
+		       $('#abreise').datepicker({
+		       	dateFormat: 'dd.mm.yy',
+		        minDate: 1,
+		   	 	onClose: function( selectedDate ) {
+			   		$( "#anreise" ).datepicker( "option", "maxDate", selectedDate );
+		   		}
+		    });
         }); 
     </script> 
 </head><body>
