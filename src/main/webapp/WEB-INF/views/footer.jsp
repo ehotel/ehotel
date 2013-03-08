@@ -11,10 +11,6 @@
 			<li><a href="testimonials.html">Testimonials</a>|</li>
 			<li><a href="booking.html">Booking</a></li>
 		</ul>
-		<div class="wrapper">
-			<div class="fleft">Copyright (c) 2009 FiveStar Hotel</div>
-			<div class="fright">Flash Templates from <a href="http://www.templatemonster.com/flash-templates.php" target="_blank" rel="nofollow">www.templatemonster.com</a> - Squeeze Your Competitors.</div>
-		</div>
 	</div>
 </div>
 </body>

@@ -4,7 +4,6 @@
 <title>Login</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="Content-Style-Type" content="text/css" />
-<meta name="description" content="This is a wonderful homepage of the Free Hotel Website Template provided by TemplateMonster."/>
 <link href="resources/style.css" rel="stylesheet" type="text/css" />
 <link href="resources/layout.css" rel="stylesheet" type="text/css" />
 <script src="resources/maxheight.js" type="text/javascript"></script>

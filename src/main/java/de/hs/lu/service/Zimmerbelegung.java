@@ -59,7 +59,7 @@ public class Zimmerbelegung {
 				return false;
 			}
 			
-			//unser wunschtermin startet vor der reservierung an und endet nach der reservierung
+			//unser wunschtermin startet vor der reservierung und endet nach der reservierung
 			if(start <= r.getStartdatum() && ende >= r.getEnddatum())
 			{
 				return false;

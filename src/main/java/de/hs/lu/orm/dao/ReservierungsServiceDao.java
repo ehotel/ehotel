@@ -24,9 +24,9 @@ public class ReservierungsServiceDao extends AbstractDao<ReservierungsService>{
     @SuppressWarnings("unchecked")
 	public List<Object[]> findReservierungsServiceByStartAndEnd(long start, long ende){
 		
-		String where ="o.startdatum<= :start and o.enddatum>= :start or "
-					+ "o.startdatum<= :ende  and o.enddatum>= :ende or "
-					+ "o.startdatum>= :start and o.enddatum<= :ende";
+		String where ="o.startdatum < :start and o.enddatum > :start or "
+					+ "o.startdatum < :ende  and o.enddatum > :ende or "
+					+ "o.startdatum >= :start and o.enddatum <= :ende";
 		
 		Query query = entityManager.createQuery("select zusatzService, count(*) as anzahl FROM ReservierungsService o where " + where + " group by zusatz_service_id");
 		query.setParameter("start", start);

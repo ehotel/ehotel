@@ -4,6 +4,7 @@ package de.hs.lu.controller;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -27,6 +28,7 @@ import de.hs.lu.model.Reservierung;
 import de.hs.lu.model.ReservierungsService;
 import de.hs.lu.model.Status;
 import de.hs.lu.model.Zimmer;
+import de.hs.lu.model.Zimmerkategorie;
 import de.hs.lu.orm.dao.GastDao;
 import de.hs.lu.orm.dao.ReservierungDao;
 import de.hs.lu.orm.dao.ReservierungsServiceDao;
@@ -81,7 +83,7 @@ public class ReservierungController {
 	}
 	
 	@RequestMapping(value = "/zimmer_suche", method = RequestMethod.POST)
-	public String suche(Model model, HttpServletRequest request) throws ParseException {
+	public String zimmer_suche(Model model, HttpServletRequest request) throws ParseException {
 		
 		String zimmerkategorie = (String) request.getParameter("zk_typ");
 		String anreise_s = (String) request.getParameter("anreise");
@@ -89,16 +91,32 @@ public class ReservierungController {
 		
     	DateFormat formatter = new SimpleDateFormat("dd.mm.yyyy");		
 		Date anreise = formatter.parse(anreise_s);
-		Date abreise = formatter.parse(abreise_s);		
+		Date abreise = formatter.parse(abreise_s);
+		
+		List<Zimmer> zimmerliste = new ArrayList<Zimmer>();	
 				
-		Zimmer z = belegung.freieZimmerSuche(zimmerkategorie, anreise.getTime(), abreise.getTime());
-		if(z != null)
-		logger.info("zimmerid: " + z.getId().toString());
+		if(zimmerkategorie.equals("egal"))
+		{
+			List<Zimmerkategorie> zk_liste = zkDao.findAll();
+			for(Zimmerkategorie zk: zk_liste)
+			{
+				Zimmer z = belegung.freieZimmerSuche(zk.getZimmertyp(), anreise.getTime(), abreise.getTime());
+				if(z != null)
+				{
+					zimmerliste.add(z);
+				}				
+			}
+		}
+		else
+		{
+			Zimmer z = belegung.freieZimmerSuche(zimmerkategorie, anreise.getTime(), abreise.getTime());
+			zimmerliste.add(z);			
+		}	
 		
 		model.addAttribute("gaesteliste", gastDao.findAll());
 		model.addAttribute("anreise", anreise_s);
 		model.addAttribute("abreise", abreise_s);
-		model.addAttribute("zimmer", z);
+		model.addAttribute("zimmerliste", zimmerliste);
 				
 		return "freie_zimmer_liste";
 	}
@@ -197,7 +215,6 @@ public class ReservierungController {
 		
 		String id_s = (String) request.getParameter("reservierung_id");
 		Reservierung r = reservierungDao.findById(Long.parseLong(id_s));
-		model.asMap().clear();
 		
 		model.addAttribute("reservierung_id", r.getId());
 		model.addAttribute("anreise", r.getStartdatum());
@@ -256,6 +273,7 @@ public class ReservierungController {
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		Gast g = gastDao.findGastByBenutzername(username);		
 		model.addAttribute("reservierungsliste", reservierungDao.findReservierungenByGast(g));
+		model.addAttribute("username", g.getBenutzername());
 		
 		return "reservierung_auflisten";
 	}
