@@ -22,6 +22,7 @@
    <td>Enddatum</td>
    <td>Status</td>
    <td>Stornieren</td>
+   <td>Aendern</td>
   </tr>
 		<jsp:useBean id="start" class="java.util.Date" />
 		<jsp:setProperty name="start" property="time" value="${reservierung.startdatum}" />
@@ -38,6 +39,9 @@
 			<td>${reservierung.status}</td>
 			<td><form action="../../reservierung/stornieren/${reservierung.id}" method="POST">
 			<input type="submit" value="stornieren"/></form>
+			</td>
+			<td><form action="../../reservierung/aendern/${reservierung.id}" method="POST">
+			<input type="submit" value="ändern"/></form>
 			</td>
 		</tr>
   </table>

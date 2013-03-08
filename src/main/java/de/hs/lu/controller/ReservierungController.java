@@ -165,7 +165,7 @@ public class ReservierungController {
 		r = reservierungDao.merge(r);
 		model.addAttribute("meldung", "Reservierung wurde angelegt <br/> Moechten Sie einen ZusatzService <a href=\"freie_services_suche\">buchen</a>?");
 		
-        String bestaetigung = "Sie haben soeben eine Zimmer reserviert, die Details dazu kÃ¶nnen Sie im ehotel-System nachschauen";        
+        String bestaetigung = "Sie haben soeben eine Zimmer reserviert, die Details dazu können Sie im ehotel-System nachschauen";        
         MailSender.sendMail(gast.getEmail(), "no-reply@ehotel-arno.com", bestaetigung);		
 			
         Calendar calendar_anreise = Calendar.getInstance();
@@ -290,6 +290,73 @@ public class ReservierungController {
 		return "redirect:/reservierung/liste";
 	}
 	
+	@RequestMapping(value = "/reservierung/aendern/{id}", method = RequestMethod.POST)
+	public String reservierung_aendern(@PathVariable("id") Long id, Model model) {
+		
+		
+		Reservierung r = reservierungDao.findById(id);
+		//model.asMap().clear();
+		
+		model.addAttribute("reservierung_id", r.getId());
+		//model.addAttribute("anreise", r.getStartdatum());
+		//model.addAttribute("abreise", r.getEnddatum());
+		
+		DateFormat formatter = new SimpleDateFormat("dd.mm.yyyy");
+		
+		Date min = new Date(r.getStartdatum());
+		Date max = new Date(r.getEnddatum());
+		
+		String min_s = formatter.format(min);
+		String max_s = formatter.format(max);
+		
+		model.addAttribute("min" , min_s);
+		model.addAttribute("max" , max_s);
+		model.addAttribute("zimmerkategorieliste", zkDao.findAll());
+		model.addAttribute("zimmerkategorie", r.getZimmer().getZimmerkategorie().getZimmertyp());
+		List<ReservierungsService> serviceListe =  rsDao.findReservierungsServiceByReservierung(r);		
+		model.addAttribute("reservierungserviceliste", serviceListe);
+		
+		
+		//r.setStatus(Status.AendernErwuenscht);
+		reservierungDao.merge(r);		
+		
+		return "reservierung_aendern";
+	}
+	
+	@RequestMapping(value = "/reservierung/update/{id}", method = RequestMethod.POST)
+	public String reservierung_update(@PathVariable("id") Long id, Model model) {
+		
+		
+		Reservierung r = reservierungDao.findById(id);
+		model.asMap().clear();
+		
+		model.addAttribute("reservierung_id", r.getId());
+		model.addAttribute("anreise", r.getStartdatum());
+		model.addAttribute("abreise", r.getEnddatum());
+		
+		DateFormat formatter = new SimpleDateFormat("dd.mm.yyyy");
+		
+		Date min = new Date(r.getStartdatum());
+		Date max = new Date(r.getEnddatum());
+		
+		String min_s = formatter.format(min);
+		String max_s = formatter.format(max);
+		
+		model.addAttribute("min" , min_s);
+		model.addAttribute("max" , max_s);
+		model.addAttribute("zimmerkategorieliste", zkDao.findAll());
+		model.addAttribute("zimmerkategorie", r.getZimmer().getZimmerkategorie().getZimmertyp());
+		
+		List<ReservierungsService> serviceListe =  rsDao.findReservierungsServiceByReservierung(r);	
+		model.addAttribute("reservierungserviceliste", serviceListe);
+		model.addAttribute("zusatzservices", servicebelegung.freieServiceSuche(r.getStartdatum(), r.getEnddatum()));
+		
+		//r.setStatus(Status.AendernErwuenscht);
+		reservierungDao.merge(r);		
+		
+		return "reservierung_aendern";
+	}
+	
 	@RequestMapping(value = "/reservierung/details/{id}", method = RequestMethod.POST)
 	public String reservierung_details(@PathVariable("id") Long id, Model model) {
 		
@@ -304,6 +371,26 @@ public class ReservierungController {
 	
 	@RequestMapping(value = "reservierung/reservierungservice/loeschen", method = RequestMethod.POST)
 	public String reservierungservice_loeschen(Model model, HttpServletRequest request) {
+		
+		String id_s = (String) request.getParameter("service_id");
+		long id = Long.parseLong(id_s);		
+		ReservierungsService service = rsDao.findById(id);
+		
+		long reservierung_id = service.getReservierung().getId();		
+		rsDao.remove(rsDao.getReference(id));
+		rsDao.flush();
+		
+		Reservierung reservierung = reservierungDao.findById(reservierung_id);
+		model.addAttribute(reservierung);
+		
+		List<ReservierungsService> serviceListe =  rsDao.findReservierungsServiceByReservierung(reservierung);		
+		model.addAttribute("reservierungserviceliste", serviceListe);
+
+		return "reservierung_details";
+	}
+	
+	@RequestMapping(value = "reservierung/reservierungservice/aendern", method = RequestMethod.POST)
+	public String reservierungservice_aendern(Model model, HttpServletRequest request) {
 		
 		String id_s = (String) request.getParameter("service_id");
 		long id = Long.parseLong(id_s);		
@@ -342,5 +429,7 @@ public class ReservierungController {
 		
 		return "redirect:/admin/reservierung/liste";
 	}
+	
+
 	
 }
