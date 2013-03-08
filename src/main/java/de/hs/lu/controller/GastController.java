@@ -8,6 +8,8 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,18 +33,94 @@ public class GastController {
 	private GastDao gastDao;
 	
 	@RequestMapping(value = "/registrieren", method = RequestMethod.GET)
-    public String blub() {
+    public String registrieren(Model model) {
+		
+		model.addAttribute("modus", "create");
+		
         return "registrieren";
-	}	
+	}
+	
+	@RequestMapping(value = "/profil", method = RequestMethod.GET)
+    public String profil(Model model) {
+		
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		
+		if(authentication == null || !authentication.isAuthenticated())
+		{
+			return "login";
+		}
+		
+		String username = authentication.getName();
+		Gast gast = gastDao.findGastByBenutzername(username);
+		
+		model.addAttribute("gast", gast);		
+		model.addAttribute("modus", "edit");
+		
+        return "registrieren";
+	}
+	
+	@RequestMapping(value = "/profilUpdate", method = RequestMethod.POST)
+    public String update(@Valid Gast gast, BindingResult bindingResult, Model model, HttpServletRequest request) {
+		
+        if (bindingResult.hasErrors()) {
+        	model.addAttribute("meldung" , "Fehler beim Binding des Gastes");
+            return "meldung"; 
+        }
+        
+    	model.addAttribute("gast", gast);
+		model.addAttribute("modus", "edit");
+        
+        if(!gast.getEmail().matches("[a-z0-9A-Z_\\.]+@[a-z0-9A-Z]+\\.[a-zA-Z]+"))
+        {
+        	model.addAttribute("emailError", "E-Mail Syntax ist falsch");
+        	return "registrieren";
+        }
+        
+        
+        Gast gast_temp = gastDao.findGastByEMail(gast.getEmail());
+        Gast gast_alt = gastDao.findGastByBenutzername(gast.getBenutzername());
+        
+        if(gast_temp != null && gast_temp.getId() != gast_alt.getId())
+        {
+        	model.addAttribute("emailError", "E-Mail ist schon vergeben");
+        	return "registrieren";
+        }
+        
+        String p1 = (String) request.getParameter("password");
+        String p2 = (String) request.getParameter("password2");
+        
+        if(!p1.equalsIgnoreCase(p2))
+        {
+        	model.addAttribute("passwordError", "Passwörter müssen übereinstimmen");
+        	return "registrieren";
+        }
+        
+        //alten und neuen gast mergen
+        gast_alt.setVorname(gast.getVorname());
+        gast_alt.setNachname(gast.getNachname());
+        gast_alt.setEmail(gast.getEmail());
+        if(!p1.isEmpty())
+        {
+        	gast_alt.setPassword(p1);
+        }
+        gastDao.merge(gast_alt);
+        
+        model.addAttribute("meldung", "Ihre Aenderungen wurden gespeichert");        
+        return "meldung";
+	}
+	
 	
 	@RequestMapping(value = "/erzeugeGast", method = RequestMethod.POST)
-    public String update(@Valid Gast gast, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
+    public String create(@Valid Gast gast, BindingResult bindingResult, Model uiModel, HttpServletRequest request) {
 		
         if (bindingResult.hasErrors()) {
         	uiModel.addAttribute("meldung" , "Fehler beim Binding des Gastes");
             return "meldung";
         }        
-        HttpServletRequest r = httpServletRequest;
+        HttpServletRequest r = request;
+        
+        uiModel.addAttribute("gast", gast);
         
         
         if( gast.getVorname().isEmpty()||
@@ -70,7 +148,7 @@ public class GastController {
         	return "registrieren";
         }        
         
-        if(gastDao.findGastByEMAil(gast.getEmail()) != null)
+        if(gastDao.findGastByEMail(gast.getEmail()) != null)
         {
         	fillForm(uiModel, gast);
         	uiModel.addAttribute("emailError", "E-Mail ist schon vergeben");
@@ -103,11 +181,11 @@ public class GastController {
 	
 	public void fillForm(Model uiModel, Gast g)
 	{
-		uiModel.asMap().clear();
-    	uiModel.addAttribute("vorname", g.getVorname());
-    	uiModel.addAttribute("nachname", g.getNachname());
-    	uiModel.addAttribute("benutzername", g.getBenutzername());
-    	uiModel.addAttribute("email", g.getEmail());
+//		uiModel.asMap().clear();
+//    	uiModel.addAttribute("vorname", g.getVorname());
+//    	uiModel.addAttribute("nachname", g.getNachname());
+//    	uiModel.addAttribute("benutzername", g.getBenutzername());
+//    	uiModel.addAttribute("email", g.getEmail());
 	}
 	
 	@RequestMapping(value = "/aktivierung/{hash}", method = RequestMethod.GET)
@@ -169,12 +247,9 @@ public class GastController {
 	
 	@RequestMapping(value = "/reset", method = RequestMethod.POST)
 	public String reset(Model model, HttpServletRequest request) {
-		
-		
-		String username = (String) request.getParameter("username");
-		
-		Gast gast = gastDao.findGastByBenutzername(username);
-		
+				
+		String username = (String) request.getParameter("username");		
+		Gast gast = gastDao.findGastByBenutzername(username);		
 		String temp_pwd = UUID.randomUUID().toString();
 		temp_pwd = temp_pwd.replace("-", "");
 		temp_pwd = temp_pwd.substring(0, 8);

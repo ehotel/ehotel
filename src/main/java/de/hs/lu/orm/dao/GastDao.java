@@ -35,7 +35,7 @@ public class GastDao extends AbstractDao<Gast>{
 	}
 	
 	@SuppressWarnings("unchecked")
-	public Gast findGastByEMAil(String email)
+	public Gast findGastByEMail(String email)
 	{
 		Query query = entityManager.createQuery("select g FROM Gast g where g.email= :email");
 		query.setParameter("email", email);

@@ -26,10 +26,9 @@
 	<!-- <context:component-scan base-package="de.hs.lu" /> -->
 	
 	<view-controller path="/login" view-name="login"/>
-<!-- 	<view-controller path="/zimmerkategorie_anlegen" view-name="zimmerkategorie_anlegen"/>
- -->	<view-controller path="/datepicker" view-name="datepicker"/>
- <view-controller path="/login_user" view-name="login_user"/>
- <view-controller path="/reset_pwd" view-name="reset_login"/>
+	<view-controller path="/datepicker" view-name="datepicker"/>
+	<view-controller path="/login_user" view-name="login_user"/>
+	<view-controller path="/reset_pwd" view-name="reset_login"/>
 	
 	
 </beans:beans>
