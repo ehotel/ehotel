@@ -21,6 +21,7 @@
    <td>Status</td>
    <td>Stornieren</td>
    <td>Details</td>
+   <td>Zusatzservice</td>
   </tr>
 	<c:forEach var="reservierung" items="${reservierungsliste}">
 		<jsp:useBean id="start" class="java.util.Date" />
@@ -39,6 +40,13 @@
 			</td>
 			<td><form action="../../reservierung/details/${reservierung.id}" method="POST">
 			<input type="submit" value="details"/></form>
+			</td>
+			<td><form action="../../freie_services_suche_extra" method="POST">
+				<c:if test="${reservierung.status=='Aktiv'}">
+					<input type="hidden" name="reservierung_id" value="${reservierung.id}" />
+					<input type="submit" value="service buchen"/>
+				</c:if>
+				</form>
 			</td>
 		</tr>
 	</c:forEach>  
