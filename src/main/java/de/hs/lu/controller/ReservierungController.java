@@ -89,7 +89,7 @@ public class ReservierungController {
 		String anreise_s = (String) request.getParameter("anreise");
 		String abreise_s = (String) request.getParameter("abreise");
 		
-    	DateFormat formatter = new SimpleDateFormat("dd.mm.yyyy");		
+    	DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");		
 		Date anreise = formatter.parse(anreise_s);
 		Date abreise = formatter.parse(abreise_s);
 		
@@ -143,7 +143,7 @@ public class ReservierungController {
 			username = user;
 		}
 		
-		DateFormat formatter = new SimpleDateFormat("dd.mm.yyyy");		
+		DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");		
 		Date anreise = formatter.parse(anreise_s);
 		Date abreise = formatter.parse(abreise_s);
 		
@@ -165,7 +165,7 @@ public class ReservierungController {
 		r = reservierungDao.merge(r);
 		model.addAttribute("meldung", "Reservierung wurde angelegt <br/> Moechten Sie einen ZusatzService <a href=\"freie_services_suche\">buchen</a>?");
 		
-        String bestaetigung = "Sie haben soeben eine Zimmer reserviert, die Details dazu können Sie im ehotel-System nachschauen";        
+        String bestaetigung = "Sie haben soeben eine Zimmer reserviert, die Details dazu kï¿½nnen Sie im ehotel-System nachschauen";        
         MailSender.sendMail(gast.getEmail(), "no-reply@ehotel-arno.com", bestaetigung);		
 			
         Calendar calendar_anreise = Calendar.getInstance();
@@ -194,7 +194,7 @@ public class ReservierungController {
 		long anreise_l = (Long) model.asMap().get("anreise");
 		long abreise_l = (Long) model.asMap().get("abreise");		
 		
-		DateFormat formatter = new SimpleDateFormat("yyyy,mm,dd");		
+		DateFormat formatter = new SimpleDateFormat("yyyy,MM,dd");		
 		Date min = new Date(anreise_l);
 		Date max = new Date(abreise_l);
 		
@@ -220,7 +220,7 @@ public class ReservierungController {
 		model.addAttribute("anreise", r.getStartdatum());
 		model.addAttribute("abreise", r.getEnddatum());
 		
-		DateFormat formatter = new SimpleDateFormat("yyyy,mm,dd");
+		DateFormat formatter = new SimpleDateFormat("yyyy,MM,dd");
 		
 		Date min = new Date(r.getStartdatum());
 		Date max = new Date(r.getEnddatum());
@@ -301,7 +301,7 @@ public class ReservierungController {
 		//model.addAttribute("anreise", r.getStartdatum());
 		//model.addAttribute("abreise", r.getEnddatum());
 		
-		DateFormat formatter = new SimpleDateFormat("dd.mm.yyyy");
+		DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
 		
 		Date min = new Date(r.getStartdatum());
 		Date max = new Date(r.getEnddatum());
@@ -334,7 +334,7 @@ public class ReservierungController {
 		model.addAttribute("anreise", r.getStartdatum());
 		model.addAttribute("abreise", r.getEnddatum());
 		
-		DateFormat formatter = new SimpleDateFormat("dd.mm.yyyy");
+		DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
 		
 		Date min = new Date(r.getStartdatum());
 		Date max = new Date(r.getEnddatum());
