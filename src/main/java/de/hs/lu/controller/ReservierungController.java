@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +19,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,6 +31,7 @@ import de.hs.lu.model.ReservierungsService;
 import de.hs.lu.model.Status;
 import de.hs.lu.model.Zimmer;
 import de.hs.lu.model.Zimmerkategorie;
+import de.hs.lu.model.ZusatzService;
 import de.hs.lu.orm.dao.GastDao;
 import de.hs.lu.orm.dao.ReservierungDao;
 import de.hs.lu.orm.dao.ReservierungsServiceDao;
@@ -151,7 +154,7 @@ public class ReservierungController {
 		
 		logger.info(anreise_s);
 		logger.info(abreise_s);
-		
+				
 		Gast gast = gastDao.findGastByBenutzername(username);
 		
 		Reservierung r = new Reservierung();
@@ -315,47 +318,68 @@ public class ReservierungController {
 		model.addAttribute("zimmerkategorieliste", zkDao.findAll());
 		model.addAttribute("zimmerkategorie", r.getZimmer().getZimmerkategorie().getZimmertyp());
 		List<ReservierungsService> serviceListe =  rsDao.findReservierungsServiceByReservierung(r);		
-		model.addAttribute("reservierungserviceliste", serviceListe);
-		
-		
-		//r.setStatus(Status.AendernErwuenscht);
-		reservierungDao.merge(r);		
+		model.addAttribute("reservierungserviceliste", serviceListe);		
 		
 		return "reservierung_aendern";
 	}
 	
-	@RequestMapping(value = "/reservierung/update/{id}", method = RequestMethod.POST)
-	public String reservierung_update(@PathVariable("id") Long id, Model model) {
+	@RequestMapping(value = "reservierung/update", method = RequestMethod.POST)
+    public String reservierung_update(@Valid Reservierung reservierung,BindingResult bindingResult, Model model, HttpServletRequest request) throws ParseException {
 		
+		//1. über die id das datenbankobjekt holen
+		Reservierung r = reservierungDao.findById(reservierung.getId());
+					
+		String typ = request.getParameter("zk_typ");
+		String start =(String) request.getParameter("startdatum");
+		String end =(String) request.getParameter("enddatum");
 		
-		Reservierung r = reservierungDao.findById(id);
-		model.asMap().clear();
+		DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");		
+		Date anreise = formatter.parse(start);
+		Date abreise = formatter.parse(end);
 		
-		model.addAttribute("reservierung_id", r.getId());
-		model.addAttribute("anreise", r.getStartdatum());
-		model.addAttribute("abreise", r.getEnddatum());
+		logger.info(start);
+		logger.info(typ);
+		logger.info(String.valueOf(anreise));
+		logger.info(String.valueOf(abreise));
+		Zimmer z = belegung.freieZimmerSuche(typ, anreise.getTime(), abreise.getTime());
+/*		if(z != null)
+		{
+			logger.info(z.getId().toString());
+			model.addAttribute("meldung", "Zimmertyp ist verfügbar");
+			
+			return "meldung";
+		}
+		else
+		{
+			logger.info("kein zimmer in z");
+			model.asMap().clear();
+			model.addAttribute("meldung", "Zimmertyp zum gewählten Datum nicht verfügbar");
+					
+			return "meldung";
+		}*/
+		if(z != null)
+		{
+			//2. vom datenbankobjekt die neuen start-end-datum setztn
+			r.setStartdatum(anreise.getTime());
+			r.setEnddatum(abreise.getTime());
+			r.setZimmer(z);	
+			
+			reservierungDao.persist(r);
+			r = reservierungDao.merge(r);
+			        	        	        
+			model.asMap().clear();
+			model.addAttribute("meldung", "Reservierung wurde geaendert");
+					
+			return "meldung";
+		}	
+		else
+		{
+			model.asMap().clear();
+			model.addAttribute("meldung", "Zimmertyp zum gewählten Datum nicht verfügbar");
+					
+			return "meldung";
+		}
 		
-		DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
-		
-		Date min = new Date(r.getStartdatum());
-		Date max = new Date(r.getEnddatum());
-		
-		String min_s = formatter.format(min);
-		String max_s = formatter.format(max);
-		
-		model.addAttribute("min" , min_s);
-		model.addAttribute("max" , max_s);
-		model.addAttribute("zimmerkategorieliste", zkDao.findAll());
-		model.addAttribute("zimmerkategorie", r.getZimmer().getZimmerkategorie().getZimmertyp());
-		
-		List<ReservierungsService> serviceListe =  rsDao.findReservierungsServiceByReservierung(r);	
-		model.addAttribute("reservierungserviceliste", serviceListe);
-		model.addAttribute("zusatzservices", servicebelegung.freieServiceSuche(r.getStartdatum(), r.getEnddatum()));
-		
-		//r.setStatus(Status.AendernErwuenscht);
-		reservierungDao.merge(r);		
-		
-		return "reservierung_aendern";
 	}
 	
 	@RequestMapping(value = "/reservierung/details/{id}", method = RequestMethod.POST)

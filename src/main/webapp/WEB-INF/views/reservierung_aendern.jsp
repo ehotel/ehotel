@@ -26,27 +26,28 @@
 </h1>
 
 <p><font color="#FF0000">${felderError}</font></p>
-<form method="POST" action="reservierung_update">
+<form method="POST" action="../../reservierung/update">
  <table>
  <tr>
    <td>ZimmerTyp:</td>
    <td><select name="zk_typ">
 			<c:forEach var="zk" items="${zimmerkategorieliste}">				
-				<option <c:if test="${zimmerkategorie == zk.zimmertyp}">selected</c:if> value="${zk.zimmertyp}">${zk.zimmertyp}</option>        
+				<option <c:if test="${zk.zimmertyp == zimmerkategorie}">selected</c:if> value="${zk.zimmertyp}">${zk.zimmertyp}</option>        
       		</c:forEach>
   		</select>
    </td>
  </tr>
  <tr>
  <td>Anreise:</td>
- <td><input type="text" name="anreise" id="anreise" value="${min}"/></td>
+ <td><input type="text" name="startdatum" id="anreise" value="${min}"/></td>
  </tr>
  <tr>
  <td>Abreise:</td>
- <td><input type="text" name="abreise" id="abreise" value="${max}"/></td>
+ <td><input type="text" name="enddatum" id="abreise" value="${max}"/></td>
  </tr>
  </table>
- <input type="submit"/>
+ <input type="hidden" name="id" value="${reservierung.id}" />
+ <input type="submit" value="Reservierung aendern"/>
 </form>
 
 <br>
