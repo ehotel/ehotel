@@ -1,5 +1,7 @@
 package de.hs.lu.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -13,8 +15,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import de.hs.lu.model.Reservierung;
 import de.hs.lu.model.Zimmer;
 import de.hs.lu.model.Zimmerkategorie;
+import de.hs.lu.orm.dao.ReservierungDao;
 import de.hs.lu.orm.dao.ZimmerDao;
 import de.hs.lu.orm.dao.ZimmerkategorieDao;
 
@@ -31,6 +35,9 @@ public class ZimmerController {
 	@Autowired
 	private ZimmerDao zimmerDao;
 	
+	@Autowired
+	private ReservierungDao rsDao;
+	
 	private static final Logger logger = LoggerFactory.getLogger(ZimmerController.class);
 
 	@RequestMapping(value = "/erstellen", method = RequestMethod.POST)
@@ -38,7 +45,7 @@ public class ZimmerController {
 		
         if (bindingResult.hasErrors()) {
         	model.addAttribute("meldung" , "Fehler beim Binding des Zimmers");
-            return "meldung";
+            return "meldung_admin";
         }
         
         String zk_id = request.getParameter("zk_id");
@@ -49,7 +56,7 @@ public class ZimmerController {
 		
 		model.addAttribute("meldung", "zimmer wurde erfoglreich angelegt");
 		
-		return "meldung";
+		return "meldung_admin";
 	}
 	
 	@RequestMapping(value = "/anlegen", method = RequestMethod.GET)
@@ -86,7 +93,7 @@ public class ZimmerController {
 		
         if (bindingResult.hasErrors()) {
         	model.addAttribute("meldung" , "Fehler beim Binding des Zimmers");
-            return "meldung";
+            return "meldung_admin";
         }
         
         logger.info(zimmer.getId().toString());
@@ -99,19 +106,30 @@ public class ZimmerController {
 		model.asMap().clear();
 		model.addAttribute("meldung", "zimmer wurde geändert");
 				
-		return "meldung";
+		return "meldung_admin";
 	}
 	
 	@RequestMapping(value = "/loeschen/{id}", method = RequestMethod.GET)
     public String loeschen(@PathVariable("id") Long id, Model model) {
+		
 				
-		Zimmer z = zimmerDao.getReference(id);
+		Zimmer z = zimmerDao.findById(id);
+		List<Reservierung> rlist = rsDao.findReservierungenByZimmer(z);
+		
+		for(Reservierung r: rlist)
+		{
+			if(r.getEnddatum() > System.currentTimeMillis())
+			{				
+				model.addAttribute("meldung", "zimmer kann nicht gelöscht werden weil noch reservierungen in der zukunft liegen");				
+				return "meldung_admin";				
+			}
+		}
+		
 		zimmerDao.remove(z);
 		
 		model.asMap().clear();
-		model.addAttribute("meldung", "zimmer wurde erfolgreich gelöscht");
 				
-		return "meldung";
+		return "redirect:/zimmer/liste";
 	}
 
 

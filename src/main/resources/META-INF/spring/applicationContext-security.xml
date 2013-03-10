@@ -11,7 +11,7 @@
         <intercept-url pattern="/gast/test" access="hasRole('ROLE_USER')" />
         <intercept-url pattern="/reservieren" access="isAuthenticated()" />
         <intercept-url pattern="/reservierung/**" access="isAuthenticated()" />
-        <form-login login-page="/login" default-target-url="/test"
+        <form-login login-page="/login" default-target-url="/"
 			authentication-failure-url="/loginfailed" />
 		<logout logout-success-url="/logout" />
     </http>
