@@ -34,6 +34,7 @@
 	<view-controller path="/testimonials" view-name="testimonials"/>
 	<view-controller path="/services" view-name="services"/>
 	<view-controller path="/restaurant" view-name="restaurant"/>
+	<view-controller path="/home" view-name="home"/>
 	<view-controller path="/404" view-name="404"/>
 	<view-controller path="/405" view-name="405"/>
 	<view-controller path="/500" view-name="500"/>

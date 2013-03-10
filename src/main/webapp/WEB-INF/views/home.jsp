@@ -45,7 +45,7 @@
 				 	Feel free to contact us anytime in case you have any questions or concerns.<br><br>
 					<div style="float:right;">
 						<div class="button" ><span><span><a href="login_user">Log On Here!</a></span></span></div> 
-						<div class="aligncenter">new&ensp;? &emsp; <a href="registration.html">Register now!</a></div> 
+						<div class="aligncenter">new&ensp;? &emsp; <a href="registrieren">Register now!</a></div> 
 					</div>
 				</div>
 						      

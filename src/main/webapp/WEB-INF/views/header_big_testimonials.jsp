@@ -30,7 +30,7 @@
 					<strong>True Luxury</strong>
 				</div>
 				<div class="othermenu">
-					<div class="fright">My E-Hotel<i>Y</i> | Anfahrt | Kontakt | Impressum</div>
+					<div class="fright">My E-Hotel<i>Y</i> | Anfahrt | Kontakt | Impressum</div><br/>
 					<div class="fright"><sec:authorize ifAnyGranted="ROLE_USER">
     	 			<sec:authentication property="principal.username"/>(<a href="<c:url value="/j_spring_security_logout"/>" >Logout</a>)
     </sec:authorize></div>
