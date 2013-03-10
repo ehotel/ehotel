@@ -1,15 +1,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
-<html>
-<head>
-	<title>Zimmerkategorien auflisten</title>
-</head>
-<body>
-<h1>
-	Hello ehotel!  
-</h1>
+
+<jsp:include page="header_admin.jsp"/>
+
 <p><font color="#FF0000">${felderError}</font></p>
- <table border="1">
+ <table>
    <tr>
    <td>ZimmerTyp</td>
    <td>ZimmerPreis</td>
@@ -25,6 +19,6 @@
 		</tr>        
 	</c:forEach>  
   </table>
+  
+<jsp:include page="footer.jsp"/>
 
-</body>
-</html>

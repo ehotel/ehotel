@@ -60,6 +60,8 @@
     <sec:authorize ifAnyGranted="ROLE_ADMIN">
     	<br />Sie sind Admin
     </sec:authorize>
+    
+    <p>hier klicken für 	<a href="<c:url value="/j_spring_security_logout" />" > Logout</a> <p>
 	
 </body>
 </html>

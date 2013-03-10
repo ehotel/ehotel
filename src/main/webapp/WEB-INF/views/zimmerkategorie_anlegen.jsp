@@ -1,14 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
-<html>
-<html>
-<head>
-	<title>Zimmerkategorie Anlegen</title>
-</head>
-<body>
-<h1>
-	Hello ehotel!  
-</h1>
+
+<jsp:include page="header_admin.jsp"/>
+
 <p><font color="#FF0000">${felderError}</font></p>
 <form method="POST" action=
 <c:choose>
@@ -18,18 +11,16 @@
 >
 
 <input type="hidden" name="id" value="${zk.id}"/>
- <table>
-  <tr>
-   <td>Zimmertyp:</td>
-   <td><input type="text" name="zimmertyp" value="${zk.zimmertyp}"/></td>
-  </tr>
-  <tr>
-   <td>Preis:</td>
-   <td><input type="text" name="preis" value="${zk.preis}"/></td>
-  </tr>
-  </table>
- <input type="submit"/>
+ <fieldset>
+ 	<legend>Zimmerkategorie anlegen</legend>
+   	<label>Zimmertyp:</label>
+   	<input type="text" name="zimmertyp" value="${zk.zimmertyp}"/><br><br>
+   	<label>Preis:</label>
+   	<input type="text" name="preis" value="${zk.preis}"/><br><br>
+   <input type="submit" value="Kategorie anlegen"/>
+  </fieldset>
+
 </form>
 
-</body>
-</html>
+<jsp:include page="footer.jsp"/>
+

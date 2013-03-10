@@ -5,9 +5,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta name="description" content="homepage"/>
-<link href="resources/style.css" rel="stylesheet" type="text/css" />
-<link href="resources/layout.css" rel="stylesheet" type="text/css" />
-<script src="maxheight.js" type="text/javascript"></script>
+<link href="/ehotel/resources/style.css" rel="stylesheet" type="text/css" />
+<link href="/ehotel/resources/layout.css" rel="stylesheet" type="text/css" />
+<script src="/ehotel/resources/maxheight.js" type="text/javascript"></script>
 <!--[if lt IE 7]>
 	<link href="ie_style.css" rel="stylesheet" type="text/css" />
    <script type="text/javascript" src="ie_png.js"></script>
