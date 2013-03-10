@@ -12,7 +12,7 @@
 					</c:if>
 						
 
-					<form id="login-form" method="post" action="home" >			
+					<form id="login-form" method="post" action="j_spring_security_check" >			
 						<fieldset>
 						<div class="field">UserID<br/><br/>
 								<input type="text"  name="j_username" /></div>
