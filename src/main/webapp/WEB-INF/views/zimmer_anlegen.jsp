@@ -1,13 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
-<html>
-<head>
-	<title>Zimmerkategorie Anlegen</title>
-</head>
-<body>
-<h1>
-	Hello ehotel!  
-</h1>
+<jsp:include page="header_admin.jsp"/>
+
 <p><font color="#FF0000">${felderError}</font></p>
 <form method="POST" action=
 <c:choose>
@@ -16,23 +9,19 @@
 </c:choose>
 >
 <input type="hidden" name="id" value="${zimmer.id}"/>
- <table>
-  <tr>
-   <td>ZimmerNr:</td>
-   <td><input type="text" name="zimmerNr" value="${zimmer.zimmerNr}"/></td>
-  </tr>
-  <tr>
-   <td>ZimmerTyp:</td>
-   <td><select name="zk_id">
+  <fieldset>
+ 	<legend>Zusatzservice anlegen</legend>
+   	<label>ZimmerNr:</label>
+   	<input type="text" name="zimmerNr" value="${zimmer.zimmerNr}"/><br><br>
+   	<label>ZimmerTyp:</label>
+   	<select name="zk_id">
 			<c:forEach var="zk" items="${zimmerkategorien}">
 				<option <c:if test="${zimmer.zimmerkategorie.id == zk.id}">selected</c:if> value="${zk.id}">${zk.zimmertyp}</option>        
       		</c:forEach>
-  		</select>
-   </td>
-  </tr>
-  </table>
- <input type="submit"/>
+  	</select><br><br>
+   <input type="submit" value="Service anlegen"/>
+  </fieldset>
+   
 </form>
 
-</body>
-</html>
+<jsp:include page="footer.jsp"/>

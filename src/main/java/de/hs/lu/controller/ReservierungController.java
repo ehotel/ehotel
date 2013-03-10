@@ -1,6 +1,5 @@
 package de.hs.lu.controller;
 
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -39,10 +38,6 @@ import de.hs.lu.service.Servicebelegung;
 import de.hs.lu.service.Zimmerbelegung;
 import de.hs.lu.service.MailSender;
 
-
-/**
- * Handles requests for the application home page.
- */
 @Controller
 @SessionAttributes({"reservierung_id", "abreise" , "anreise", "min", "max", "username"})
 public class ReservierungController {
@@ -73,7 +68,6 @@ public class ReservierungController {
 	@Autowired
 	private Servicebelegung servicebelegung;
 	
-	
 	@RequestMapping(value = "/freie_zimmer_suche", method = RequestMethod.GET)
 	public String anlegen(Model model) {
 		
@@ -89,7 +83,7 @@ public class ReservierungController {
 		String anreise_s = (String) request.getParameter("anreise");
 		String abreise_s = (String) request.getParameter("abreise");
 		
-    	DateFormat formatter = new SimpleDateFormat("dd.mm.yyyy");		
+    	DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");		
 		Date anreise = formatter.parse(anreise_s);
 		Date abreise = formatter.parse(abreise_s);
 		
@@ -143,7 +137,7 @@ public class ReservierungController {
 			username = user;
 		}
 		
-		DateFormat formatter = new SimpleDateFormat("dd.mm.yyyy");		
+		DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");		
 		Date anreise = formatter.parse(anreise_s);
 		Date abreise = formatter.parse(abreise_s);
 		
@@ -165,7 +159,7 @@ public class ReservierungController {
 		r = reservierungDao.merge(r);
 		model.addAttribute("meldung", "Reservierung wurde angelegt <br/> Moechten Sie einen ZusatzService <a href=\"freie_services_suche\">buchen</a>?");
 		
-        String bestaetigung = "Sie haben soeben eine Zimmer reserviert, die Details dazu können Sie im ehotel-System nachschauen";        
+        String bestaetigung = "Sie haben soeben eine Zimmer reserviert, die Details dazu kï¿½nnen Sie im ehotel-System nachschauen";        
         MailSender.sendMail(gast.getEmail(), "no-reply@ehotel-arno.com", bestaetigung);		
 			
         Calendar calendar_anreise = Calendar.getInstance();
@@ -194,7 +188,7 @@ public class ReservierungController {
 		long anreise_l = (Long) model.asMap().get("anreise");
 		long abreise_l = (Long) model.asMap().get("abreise");		
 		
-		DateFormat formatter = new SimpleDateFormat("yyyy,mm,dd");		
+		DateFormat formatter = new SimpleDateFormat("yyyy,MM,dd");		
 		Date min = new Date(anreise_l);
 		Date max = new Date(abreise_l);
 		
@@ -219,8 +213,10 @@ public class ReservierungController {
 		model.addAttribute("reservierung_id", r.getId());
 		model.addAttribute("anreise", r.getStartdatum());
 		model.addAttribute("abreise", r.getEnddatum());
+		model.addAttribute("username", r.getGast().getBenutzername());
 		
-		DateFormat formatter = new SimpleDateFormat("yyyy,mm,dd");
+		
+		DateFormat formatter = new SimpleDateFormat("yyyy,MM,dd");
 		
 		Date min = new Date(r.getStartdatum());
 		Date max = new Date(r.getEnddatum());
@@ -243,6 +239,7 @@ public class ReservierungController {
 		ReservierungsService rs = new ReservierungsService();
 		rs.setStartdatum((Long) model.asMap().get("anreise"));
 		rs.setEnddatum((Long)model.asMap().get("abreise"));
+		
 		
 		Long reservierungs_id = (Long) (model.asMap().get("reservierung_id"));
 		
@@ -285,9 +282,9 @@ public class ReservierungController {
 		
 		Reservierung reservierung = reservierungDao.findById(id);
 		reservierung.setStatus(Status.StornierungErwuenscht);
-		reservierungDao.merge(reservierung);		
+		reservierungDao.merge(reservierung);
 		
-		return "redirect:/reservierung/liste";
+		return "redirect:admin/reservierung/liste";
 	}
 	
 	@RequestMapping(value = "/reservierung/aendern/{id}", method = RequestMethod.POST)
@@ -297,11 +294,12 @@ public class ReservierungController {
 		Reservierung r = reservierungDao.findById(id);
 		//model.asMap().clear();
 		
-		model.addAttribute("reservierung_id", r.getId());
+		//model.addAttribute("reservierung_id", r.getId());
+		model.addAttribute("reservierung", r);
 		//model.addAttribute("anreise", r.getStartdatum());
 		//model.addAttribute("abreise", r.getEnddatum());
 		
-		DateFormat formatter = new SimpleDateFormat("dd.mm.yyyy");
+		DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
 		
 		Date min = new Date(r.getStartdatum());
 		Date max = new Date(r.getEnddatum());
@@ -334,7 +332,7 @@ public class ReservierungController {
 		model.addAttribute("anreise", r.getStartdatum());
 		model.addAttribute("abreise", r.getEnddatum());
 		
-		DateFormat formatter = new SimpleDateFormat("dd.mm.yyyy");
+		DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
 		
 		Date min = new Date(r.getStartdatum());
 		Date max = new Date(r.getEnddatum());
@@ -367,6 +365,15 @@ public class ReservierungController {
 		model.addAttribute("reservierungserviceliste", serviceListe);
 
 		return "reservierung_details";
+	}
+	
+	@RequestMapping(value = "/reservierung/loeschen/{id}", method = RequestMethod.POST)
+	public String reservierung_loeschen(@PathVariable("id") Long id, Model model) {
+		
+		reservierungDao.remove(reservierungDao.findById(id));
+		reservierungDao.flush();
+		
+		return "redirect:/admin/reservierung/liste";
 	}
 	
 	@RequestMapping(value = "reservierung/reservierungservice/loeschen", method = RequestMethod.POST)
