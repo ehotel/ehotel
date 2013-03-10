@@ -4,15 +4,25 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import de.hs.lu.orm.dao.ReservierungsServiceDao;
 
 @Entity
 public class Reservierung {
+	
+	@Autowired
+	@Transient
+	ReservierungsServiceDao rsDao;	
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -32,9 +42,8 @@ public class Reservierung {
 	@JoinColumn(name="zimmer_id")
 	private Zimmer zimmer;
 	
-	@OneToMany(mappedBy="reservierung")
-	private Set<ReservierungsService> reservierungsServices = new HashSet<ReservierungsService>(); 
-	
+	@OneToMany(mappedBy="reservierung", fetch=FetchType.EAGER)
+	private Set<ReservierungsService> reservierungsServices = new HashSet<ReservierungsService>();
 
 	public Status getStatus() {
 		return status;

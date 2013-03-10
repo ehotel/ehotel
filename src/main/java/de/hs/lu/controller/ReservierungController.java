@@ -1,6 +1,5 @@
 package de.hs.lu.controller;
 
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -42,10 +41,6 @@ import de.hs.lu.service.Servicebelegung;
 import de.hs.lu.service.Zimmerbelegung;
 import de.hs.lu.service.MailSender;
 
-
-/**
- * Handles requests for the application home page.
- */
 @Controller
 @SessionAttributes({"reservierung_id", "abreise" , "anreise", "min", "max", "username"})
 public class ReservierungController {
@@ -75,7 +70,6 @@ public class ReservierungController {
 	
 	@Autowired
 	private Servicebelegung servicebelegung;
-	
 	
 	@RequestMapping(value = "/freie_zimmer_suche", method = RequestMethod.GET)
 	public String anlegen(Model model) {
@@ -222,6 +216,8 @@ public class ReservierungController {
 		model.addAttribute("reservierung_id", r.getId());
 		model.addAttribute("anreise", r.getStartdatum());
 		model.addAttribute("abreise", r.getEnddatum());
+		model.addAttribute("username", r.getGast().getBenutzername());
+		
 		
 		DateFormat formatter = new SimpleDateFormat("yyyy,MM,dd");
 		
@@ -246,6 +242,7 @@ public class ReservierungController {
 		ReservierungsService rs = new ReservierungsService();
 		rs.setStartdatum((Long) model.asMap().get("anreise"));
 		rs.setEnddatum((Long)model.asMap().get("abreise"));
+		
 		
 		Long reservierungs_id = (Long) (model.asMap().get("reservierung_id"));
 		
@@ -288,9 +285,9 @@ public class ReservierungController {
 		
 		Reservierung reservierung = reservierungDao.findById(id);
 		reservierung.setStatus(Status.StornierungErwuenscht);
-		reservierungDao.merge(reservierung);		
+		reservierungDao.merge(reservierung);
 		
-		return "redirect:/reservierung/liste";
+		return "redirect:admin/reservierung/liste";
 	}
 	
 	@RequestMapping(value = "/reservierung/aendern/{id}", method = RequestMethod.POST)
@@ -392,6 +389,15 @@ public class ReservierungController {
 		model.addAttribute("reservierungserviceliste", serviceListe);
 
 		return "reservierung_details";
+	}
+	
+	@RequestMapping(value = "/reservierung/loeschen/{id}", method = RequestMethod.POST)
+	public String reservierung_loeschen(@PathVariable("id") Long id, Model model) {
+		
+		reservierungDao.remove(reservierungDao.findById(id));
+		reservierungDao.flush();
+		
+		return "redirect:/admin/reservierung/liste";
 	}
 	
 	@RequestMapping(value = "reservierung/reservierungservice/loeschen", method = RequestMethod.POST)

@@ -1,5 +1,5 @@
 
-<jsp:include page="header_big.jsp"/>
+<jsp:include page="header_big_home.jsp"/>
 
     <link href="resources/jquery-ui-1.10.1.custom.min.css" rel="stylesheet" type="text/css" />
     <script src="resources/jquery-1.9.1.js"></script>
@@ -44,8 +44,8 @@
 					<p class="alt-top">Come alone or bring your family with you, stay here for a night or for weeks, stay here while on business trip or at some kind of conference - either way our hotel is the best possible variant.</p>
 				 	Feel free to contact us anytime in case you have any questions or concerns.<br><br>
 					<div style="float:right;">
-						<div class="button" ><span><span><a href="login_user.html">Log On Here!</a></span></span></div> 
-						<div class="aligncenter">new&ensp;? &emsp; <a href="registration.html">Register now!</a></div> 
+						<div class="button" ><span><span><a href="login_user">Log On Here!</a></span></span></div> 
+						<div class="aligncenter">new&ensp;? &emsp; <a href="registrieren">Register now!</a></div> 
 					</div>
 				</div>
 						      

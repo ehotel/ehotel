@@ -152,3 +152,10 @@ h6 {font-size:1em;color:#e7e7e7}
 #footer .nav {text-align:center;padding-bottom:25px}
 #footer .nav li {display:inline}
 #footer .nav li a {padding:0 48px 0 45px;color:#e3dad2}
+
+table, td { border: 2px solid black;   padding:5px; border-collapse:collapse;}
+table a{color:#C30000;}
+table tr:first-child{font-weight:bold; color:white;}
+
+fieldset {padding:20px}
+label {width:150px; float:left}

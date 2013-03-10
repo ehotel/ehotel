@@ -1,13 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
-<html>
-<head>
-	<title>Zimmer auflisten</title>
-</head>
-<body>
-<h1>
-	Hello ehotel!  
-</h1>
+
+<jsp:include page="header_admin.jsp"/>
+
 <p><font color="#FF0000">${felderError}</font></p>
  <table border="1">
    <tr>
@@ -26,5 +20,5 @@
 	</c:forEach>  
   </table>
 
-</body>
-</html>
+<jsp:include page="footer.jsp"/>
+
