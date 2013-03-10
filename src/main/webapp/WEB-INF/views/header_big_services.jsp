@@ -29,6 +29,9 @@
 				</div>
 				<div class="othermenu">
 					<div class="fright">My E-Hotel<i>Y</i> | Anfahrt | Kontakt | Impressum</div>
+					<div class="fright"><sec:authorize ifAnyGranted="ROLE_USER">
+    	 			<sec:authentication property="principal.username"/>(<a href="<c:url value="/j_spring_security_logout"/>" >Logout</a>)
+    </sec:authorize></div>
 				</div>
 			</div>
 		</div>
@@ -39,12 +42,12 @@
 				<div class="header-box">
 					<div class="inner">
 						<ul class="nav">
-					 		<li><a href="index.html" class="current">Home page</a></li>
-							<li><a href="services.html">Services</a></li>
-							<li><a href="gallery.html">Gallery</a></li>
-							<li><a href="restaurant.html">Restaurant</a></li>
-							<li><a href="testimonials.html">Testimonials</a></li>
-							<li><a href="booking.html">Booking</a></li>
+					 		<li><a href="home">Home page</a></li>
+							<li><a href="online_booking">Online Booking</a></li>
+							<li><a href="services" class="current">Services</a></li>
+							<li><a href="restaurant">Restaurant</a></li>
+							<li><a href="testimonials">Testimonials</a></li>
+							<li><a href="gallery">Gallery</a></li>
 						</ul>
 					</div>
 				</div>

@@ -1,57 +1,59 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
-<html>
-<head>
-	<title>Registrieren</title>
-</head>
-<body>
-<h1>
-	Hello ehotel!  
-</h1>
-<p><font color="#FF0000">${felderError}</font></p>
-<form method="POST" action=
+
+<jsp:include page="header_small.jsp"/>
+<div id="content">
+		<div class="wrapper">
+			<div class="aside maxheight">
+			
+<!-- box end -->
+			</div>
+			<div class="content">
+				<div class="indent">
+					<h2>Get Started with E-Hotely</h2>
+					<div class="h31"> Please fill the cases below to help us serve you better</div>
+					<div class="line-hor-lang"></div>
+					
+					
+					
+		<form method="POST" action=
 <c:choose>
       <c:when test="${modus=='create'}">"erzeugeGast"</c:when>
       <c:when test="${modus=='edit'}">"profilUpdate"</c:when>
 </c:choose>
 >
- <table>
-  <tr>
-   <td>Vorname:</td>
-   <td><input type="text" name="vorname" value="${gast.vorname}"/></td>
-  </tr>
-  <tr>
-   <td>Nachname:</td>
-   <td><input type="text" name="nachname" value="${gast.nachname}"/></td>
-  </tr>
-  <tr>
-  <td><font color="#FF0000">${emailError}</font></td>
-  </tr>
-  <tr>
-   <td>E-Mail:</td>
-   <td><input type="text" name="email" value="${gast.email}"/></td>
-  </tr>
-    <tr>
-  <td><font color="#FF0000">${benutzernameError}</font></td>
-  </tr>
-  <tr>
-   <td>Benutzername:</td>
-   <td><input type="text" name="benutzername" value="${gast.benutzername}" <c:if test="${modus=='edit'}">readonly</c:if>/></td>
-  </tr>
-  <tr>
-  <td><font color="#FF0000">${passwordError}</font></td>
-  </tr>
-  <tr>
-   <td>Password:</td>
-   <td><input type="password" name="password"/></td>
-  </tr>
-  <tr>
-   <td>Password wiederholen:</td>
-   <td><input type="password" name="password2"/></td>
-  </tr>
- </table>
- <input type="submit"/>
-</form>
+						<fieldset>
+							<div class="field">First Name <br/><br/>
+								<input type="text"  name="vorname" value="${gast.vorname}"/></div>
+								
+							<div class="field"><br/>Last Name  <br/><br/>
+								<input type="text" name="nachname" value="${gast.vorname}" /></div>
+						<font color="#FF0000">${emailError}</font>
+							<div class="field"><br/>Email address <br/><br/>
+								<input type="text" name="email" size=40 maxlength=40 value="${gast.email}"/></div>
+					<font color="#FF0000">${benutzernameError}</font>
+							<div class="field"><br/>E-HotelY user ID<br/><br/>
+								<input type="text" name="benutzername" value="${gast.benutzername}" size=40 maxlength=40/></div>
+						<font color="#FF0000">${passwordError}</font>
+							<div class="field"><br/>Password<br/><br/>
+								<input type="text" name="password1" size=40 maxlength=40/></div>
+							<div class="field"><br/>Confirm Password<br/><br/>
+								<input type="text" name="password2" size=40 maxlength=40/></div>
+						</fieldset>			
+						
+				<div style="float:right;">
+						<div class="button"><span><span><a onclick="document.getElementById('registration-form').submit()">Submit</a></span></span></div>
+					</div>
+				</div>
+					</form>			      
+					<div class="clear"></div>
+								
+				</div>
+			</div>
+		</div>
+	</div><br/><br/><br/><br/><br/><br/><br/>
+	
 
-</body>
-</html>
+<jsp:include page="footer.jsp"/>
+
+
+
+
