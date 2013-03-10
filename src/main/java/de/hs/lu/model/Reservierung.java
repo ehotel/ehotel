@@ -28,9 +28,9 @@ public class Reservierung {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
-	private long Startdatum;
+	private long startdatum;
 	
-	private long Enddatum;
+	private long enddatum;
 	
 	private Status status;
 	
@@ -45,22 +45,6 @@ public class Reservierung {
 	@OneToMany(mappedBy="reservierung", fetch=FetchType.EAGER)
 	private Set<ReservierungsService> reservierungsServices = new HashSet<ReservierungsService>();
 
-	public long getStartdatum() {
-		return Startdatum;
-	}
-
-	public void setStartdatum(long startdatum) {
-		Startdatum = startdatum;
-	}
-
-	public long getEnddatum() {
-		return Enddatum;
-	}
-
-	public void setEnddatum(long enddatum) {
-		Enddatum = enddatum;
-	}
-
 	public Status getStatus() {
 		return status;
 	}
@@ -72,6 +56,28 @@ public class Reservierung {
 	public Long getId() {
 		return id;
 	}
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public long getStartdatum() {
+		return startdatum;
+	}
+
+	public void setStartdatum(long startdatum) {
+		this.startdatum = startdatum;
+	}
+
+	public long getEnddatum() {
+		return enddatum;
+	}
+
+	public void setEnddatum(long enddatum) {
+		this.enddatum = enddatum;
+	}
+
+
 
 	public Gast getGast() {
 		return gast;

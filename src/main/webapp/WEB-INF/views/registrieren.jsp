@@ -1,8 +1,5 @@
 
 <jsp:include page="header_small.jsp"/>
-<div id="content">
-		<div class="wrapper">
-			<div class="aside maxheight">
 			
 <!-- box end -->
 			</div>
@@ -14,8 +11,7 @@
 					
 					
 					
-		<form method="POST" action=
-<c:choose>
+		<form method="POST" action= <c:choose>
       <c:when test="${modus=='create'}">"erzeugeGast"</c:when>
       <c:when test="${modus=='edit'}">"profilUpdate"</c:when>
 </c:choose>
