@@ -87,7 +87,7 @@
 			</td>
 			<td><form action="../reservierungservice/aendern" method="POST">
 			<input type="hidden" name="service_id" value="${service.id}" />
-			<input type="submit" value="ändern"/></form>
+			<input type="hidden" value="ändern"/></form>
 			</td>
 		</tr>
 	</c:forEach>  

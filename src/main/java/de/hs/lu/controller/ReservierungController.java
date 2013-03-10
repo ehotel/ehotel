@@ -219,7 +219,7 @@ public class ReservierungController {
 		model.addAttribute("username", r.getGast().getBenutzername());
 		
 		
-		DateFormat formatter = new SimpleDateFormat("yyyy,MM,dd");
+		DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
 		
 		Date min = new Date(r.getStartdatum());
 		Date max = new Date(r.getEnddatum());
@@ -321,11 +321,13 @@ public class ReservierungController {
 	}
 	
 	@RequestMapping(value = "reservierung/update", method = RequestMethod.POST)
-    public String reservierung_update(@Valid Reservierung reservierung,BindingResult bindingResult, Model model, HttpServletRequest request) throws ParseException {
+    public String reservierung_update(@Valid Reservierung reservierung, BindingResult bindingResult, Model model, HttpServletRequest request) throws ParseException {
 		
 		//1. über die id das datenbankobjekt holen
 		Reservierung r = reservierungDao.findById(reservierung.getId());
-					
+		
+		//String id_s = (String) request.getParameter("id");                        funktioniert nicht ohne BindingResult
+		//Reservierung r = reservierungDao.findById(Long.parseLong(id_s));			
 		String typ = request.getParameter("zk_typ");
 		String start =(String) request.getParameter("startdatum");
 		String end =(String) request.getParameter("enddatum");
@@ -339,21 +341,7 @@ public class ReservierungController {
 		logger.info(String.valueOf(anreise));
 		logger.info(String.valueOf(abreise));
 		Zimmer z = belegung.freieZimmerSuche(typ, anreise.getTime(), abreise.getTime());
-/*		if(z != null)
-		{
-			logger.info(z.getId().toString());
-			model.addAttribute("meldung", "Zimmertyp ist verfügbar");
-			
-			return "meldung";
-		}
-		else
-		{
-			logger.info("kein zimmer in z");
-			model.asMap().clear();
-			model.addAttribute("meldung", "Zimmertyp zum gewählten Datum nicht verfügbar");
-					
-			return "meldung";
-		}*/
+
 		if(z != null)
 		{
 			//2. vom datenbankobjekt die neuen start-end-datum setztn
@@ -361,7 +349,7 @@ public class ReservierungController {
 			r.setEnddatum(abreise.getTime());
 			r.setZimmer(z);	
 			
-			reservierungDao.persist(r);
+			//reservierungDao.persist(r);
 			r = reservierungDao.merge(r);
 			        	        	        
 			model.asMap().clear();
@@ -402,26 +390,6 @@ public class ReservierungController {
 	
 	@RequestMapping(value = "reservierung/reservierungservice/loeschen", method = RequestMethod.POST)
 	public String reservierungservice_loeschen(Model model, HttpServletRequest request) {
-		
-		String id_s = (String) request.getParameter("service_id");
-		long id = Long.parseLong(id_s);		
-		ReservierungsService service = rsDao.findById(id);
-		
-		long reservierung_id = service.getReservierung().getId();		
-		rsDao.remove(rsDao.getReference(id));
-		rsDao.flush();
-		
-		Reservierung reservierung = reservierungDao.findById(reservierung_id);
-		model.addAttribute(reservierung);
-		
-		List<ReservierungsService> serviceListe =  rsDao.findReservierungsServiceByReservierung(reservierung);		
-		model.addAttribute("reservierungserviceliste", serviceListe);
-
-		return "reservierung_details";
-	}
-	
-	@RequestMapping(value = "reservierung/reservierungservice/aendern", method = RequestMethod.POST)
-	public String reservierungservice_aendern(Model model, HttpServletRequest request) {
 		
 		String id_s = (String) request.getParameter("service_id");
 		long id = Long.parseLong(id_s);		
