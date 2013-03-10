@@ -383,7 +383,6 @@ public class ReservierungController {
 	public String reservierung_loeschen(@PathVariable("id") Long id, Model model) {
 		
 		reservierungDao.remove(reservierungDao.findById(id));
-		reservierungDao.flush();
 		
 		return "redirect:/admin/reservierung/liste";
 	}

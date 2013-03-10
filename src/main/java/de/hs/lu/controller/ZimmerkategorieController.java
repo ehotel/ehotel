@@ -37,14 +37,14 @@ public class ZimmerkategorieController {
 		
         if (bindingResult.hasErrors()) {
         	model.addAttribute("meldung" , "Fehler beim Binding der Zimmerskategorie");
-            return "meldung";
+            return "meldung_admin";
         }
         
         zkDao.persist(zimmerkategorie);
 		
 		model.addAttribute("meldung", "zimmerkategorie wurde erfoglreich angelegt");
 		
-		return "meldung";
+		return "meldung_admin";
 	}
 	
 	@RequestMapping(value = "/anlegen", method = RequestMethod.GET)
@@ -81,7 +81,7 @@ public class ZimmerkategorieController {
 		
         if (bindingResult.hasErrors()) {
         	model.addAttribute("meldung" , "Fehler beim Binding des Zimmers");
-            return "meldung";
+            return "meldung_admin";
         }
         
         logger.info(zimmerkategorie.getId().toString());
@@ -91,7 +91,7 @@ public class ZimmerkategorieController {
 		model.asMap().clear();
 		model.addAttribute("meldung", "zimmerkategorie wurde geändert");
 				
-		return "meldung";
+		return "meldung_admin";
 	}
 	
 	@RequestMapping(value = "/loeschen/{id}", method = RequestMethod.GET)
@@ -102,14 +102,14 @@ public class ZimmerkategorieController {
 		if(zimmerDao.findZimmerByZimmerkategorie(zkDao.findById(id)).size() > 0)
 		{
 			model.addAttribute("meldung", "zimmerkategorie kann nicht gelöscht werden da noch zimmer mit dieser kategorie existieren");
-			return "meldung";
+			return "meldung_admin";
 		}
 		
 		Zimmerkategorie zk = zkDao.getReference(id);
 		zkDao.remove(zk);		
 		
 		model.addAttribute("meldung", "zimmerkategorie wurde erfolgreich gelöscht");				
-		return "meldung";
+		return "meldung_admin";
 	}
 	
 }

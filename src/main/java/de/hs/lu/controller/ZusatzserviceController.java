@@ -1,5 +1,7 @@
 package de.hs.lu.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -13,7 +15,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import de.hs.lu.model.ReservierungsService;
 import de.hs.lu.model.ZusatzService;
+import de.hs.lu.orm.dao.ReservierungsServiceDao;
 import de.hs.lu.orm.dao.ZusatzServiceDao;
 
 /**
@@ -26,6 +30,9 @@ public class ZusatzserviceController {
 	@Autowired
 	private ZusatzServiceDao zsDao;
 	
+	@Autowired
+	private ReservierungsServiceDao rsDao;
+	
 	private static final Logger logger = LoggerFactory.getLogger(ZusatzserviceController.class);
 
 	@RequestMapping(value = "/erstellen", method = RequestMethod.POST)
@@ -33,14 +40,14 @@ public class ZusatzserviceController {
 		
         if (bindingResult.hasErrors()) {
         	model.addAttribute("meldung" , "Fehler beim Binding des Zusatzservice");
-            return "meldung";
+            return "meldung_admin";
         }
         
         zsDao.persist(zusatzservice);
 		
 		model.addAttribute("meldung", "zusatzservice wurde erfoglreich angelegt");
 		
-		return "meldung";
+		return "meldung_admin";
 	}
 	
 	@RequestMapping(value = "/anlegen", method = RequestMethod.GET)
@@ -77,7 +84,7 @@ public class ZusatzserviceController {
 		
         if (bindingResult.hasErrors()) {
         	model.addAttribute("meldung" , "Fehler beim Binding des Zusatzservices");
-            return "meldung";
+            return "meldung_admin";
         }
         
         logger.info(zusatzservice.getId().toString());
@@ -87,19 +94,31 @@ public class ZusatzserviceController {
 		model.asMap().clear();
 		model.addAttribute("meldung", "zusatzservice wurde geändert");
 				
-		return "meldung";
+		return "meldung_admin";
 	}
 	
 	@RequestMapping(value = "/loeschen/{id}", method = RequestMethod.GET)
     public String loeschen(@PathVariable("id") Long id, Model model) {
 		
-		model.asMap().clear();
+		ZusatzService zs = zsDao.findById(id);
+		
+		List<ReservierungsService> rslist =  rsDao.findReservierungsServiceByZusatzService(zs);	
+		
+		for(ReservierungsService rs: rslist)
+		{
+			if(rs.getEnddatum() > System.currentTimeMillis())
+			{
+				model.addAttribute("meldung", "zusatzservice kann nicht gelöscht werden da in der zukunft noch gebucht");				
+				return "meldung_admin";				
+			}
+		}		
 				
-		ZusatzService zs = zsDao.getReference(id);
+		model.asMap().clear();				
+		
 		zsDao.remove(zs);		
 		
 		model.addAttribute("meldung", "zusatzservice wurde erfolgreich gelöscht");				
-		return "meldung";
+		return "meldung_admin";
 	}
 	
 }

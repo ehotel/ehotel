@@ -1,14 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<%@ page session="false" %>
-<html>
-<head>
-	<title>Freie Zimmer Liste</title>
-</head>
-<body>
-<h1>
-	Hello ehotel!  
-</h1>
+
+<jsp:include page="header_big_booking.jsp"/>
+
 <p><font color="#FF0000">${felderError}</font></p>
  <form action="reservieren" method="POST">
  <table border="1">
@@ -49,5 +43,5 @@
   </c:if>
   </table>
   </form>
-</body>
-</html>
+
+<jsp:include page="footer.jsp"/>
