@@ -297,7 +297,8 @@ public class ReservierungController {
 		Reservierung r = reservierungDao.findById(id);
 		//model.asMap().clear();
 		
-		model.addAttribute("reservierung_id", r.getId());
+		//model.addAttribute("reservierung_id", r.getId());
+		model.addAttribute("reservierung", r);
 		//model.addAttribute("anreise", r.getStartdatum());
 		//model.addAttribute("abreise", r.getEnddatum());
 		
