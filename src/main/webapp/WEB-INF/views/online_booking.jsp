@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:include page="header_big_booking.jsp"/>
 					
 <div id="content">
@@ -7,13 +8,17 @@
 				<div class="box maxheight">
 					<div class="inner">
 						<h3>Reservation:</h3>
-						<form action="" id="reservation-form">
-				 			<fieldset>
-								<div class="field"><label>Check In:</label><select class="select1"><option>30</option></select><select class="select2"><option>April 2009</option></select></div>
-								<div class="field"><label>Check Out:</label><select class="select1"><option>01</option></select><select class="select2"><option>May 2009</option></select></div>
-								<div class="field">Persons: &nbsp;<input type="text" value="1"/>&nbsp; &nbsp; &nbsp; &nbsp; Rooms:&nbsp; <input type="text" value="1"/></div>
-								<div class="button"><span><span><a href="#" onclick="document.getElementById('reservation-form').submit()">Check Availability</a></span></span></div>
-							</fieldset>
+						<form method="POST" id="suche-form" action="zimmer_suche">
+								<div class="field"><label>Check In:</label><input type="text" name="anreise" id="anreise"/></div>
+								<div class="field"><label>Check Out:</label><input type="text" name="abreise" id="abreise"/></div>
+								<div class="field"> Room type: 
+									<select name="zk_typ">
+										<c:forEach var="zk" items="${zimmerkategorien}">
+											<option value="${zk.zimmertyp}">${zk.zimmertyp}</option>        
+	      								</c:forEach>
+	  								</select>
+  								</div><br/>
+								<div class="button"><span><span><a style="cursor:pointer;" onclick="document.getElementById('suche-form').submit()">Suche Zimmer</a></span></span></div>
 						</form>
 					</div>
 				</div>

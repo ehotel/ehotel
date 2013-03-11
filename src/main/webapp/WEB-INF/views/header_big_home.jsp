@@ -9,7 +9,7 @@
 <meta name="/ehotel/description" content="homepage"/>
 <link href="/ehotel/resources/style.css" rel="stylesheet" type="text/css" />
 <link href="/ehotel/resources/layout.css" rel="stylesheet" type="text/css" />
-<script src="/ehotel/resouces/axheight.js" type="text/javascript"></script>
+<script src="/ehotel/resources/maxheight.js" type="text/javascript"></script>
 <!--[if lt IE 7]>
 	<link href="ie_style.css" rel="stylesheet" type="text/css" />
    <script type="text/javascript" src="ie_png.js"></script>
@@ -25,7 +25,7 @@
 		<div class="row-1">
 			<div class="wrapper">
 				<div class="logo">
-					<h1><a href="homepage.jsp">E-Hotel<i>Y</i></a></h1>
+					<h1><a href="/ehotel">E-Hotel<i>Y</i></a></h1>
 					<em>Hotel</em>
 					<strong>True Luxury</strong>
 				</div>

@@ -71,6 +71,15 @@ public class ReservierungController {
 	@Autowired
 	private Servicebelegung servicebelegung;
 	
+	
+	@RequestMapping(value = "/online_booking", method = RequestMethod.GET)
+	public String booking(Model model) {
+				
+		model.addAttribute("zimmerkategorien", zkDao.findAll());
+		
+		return "online_booking";
+	}
+	
 	@RequestMapping(value = "/freie_zimmer_suche", method = RequestMethod.GET)
 	public String anlegen(Model model) {
 		
@@ -107,7 +116,10 @@ public class ReservierungController {
 		else
 		{
 			Zimmer z = belegung.freieZimmerSuche(zimmerkategorie, anreise.getTime(), abreise.getTime());
-			zimmerliste.add(z);			
+			if(z != null)
+			{
+				zimmerliste.add(z);
+			}
 		}	
 		
 		model.addAttribute("gaesteliste", gastDao.findAll());
@@ -323,7 +335,7 @@ public class ReservierungController {
 	@RequestMapping(value = "reservierung/update", method = RequestMethod.POST)
     public String reservierung_update(@Valid Reservierung reservierung, BindingResult bindingResult, Model model, HttpServletRequest request) throws ParseException {
 		
-		//1. über die id das datenbankobjekt holen
+		//1. ï¿½ber die id das datenbankobjekt holen
 		Reservierung r = reservierungDao.findById(reservierung.getId());
 		
 		//String id_s = (String) request.getParameter("id");                        funktioniert nicht ohne BindingResult
@@ -360,7 +372,7 @@ public class ReservierungController {
 		else
 		{
 			model.asMap().clear();
-			model.addAttribute("meldung", "Zimmertyp zum gewählten Datum nicht verfügbar");
+			model.addAttribute("meldung", "Zimmertyp zum gewï¿½hlten Datum nicht verfï¿½gbar");
 					
 			return "meldung";
 		}

@@ -2,6 +2,8 @@ package de.hs.lu.model;
 
 import static org.junit.Assert.*;
 
+import java.util.HashSet;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -51,6 +53,7 @@ public class ZimmerTest {
 		Zimmer z = new Zimmer();
 		z.setZimmerNr(124);
 		z.setZimmerkategorie(zk);
+		z.setReservierungen(new HashSet<Reservierung>());
 		assertEquals(z.getZimmerkategorie().getPreis(), 55f, 0);
 		
 		zimmerDao.persist(z);

@@ -130,28 +130,28 @@ public class GastController {
         	gast.getPassword().isEmpty())
         {
         	fillForm(uiModel, gast);
-        	uiModel.addAttribute("felderError", "Sie müssen alle Felder ausfüllen!");
+        	uiModel.addAttribute("felderError", "Sie müssen alle Felder ausfüllen!<br/>");
         	return "registrieren";        	
         }
         
         if(gastDao.findGastByBenutzername(gast.getBenutzername()) != null)
         {
         	fillForm(uiModel, gast);
-        	uiModel.addAttribute("benutzernameError", "Benutzername ist schon vergeben");
+        	uiModel.addAttribute("benutzernameError", "Benutzername ist schon vergeben <br/>");
         	return "registrieren";
         }
         
         if(!gast.getEmail().matches("[a-z0-9A-Z_\\.]+@[a-z0-9A-Z]+\\.[a-zA-Z]+"))
         {
         	fillForm(uiModel, gast);
-        	uiModel.addAttribute("emailError", "E-Mail Syntax ist falsch");
+        	uiModel.addAttribute("emailError", "E-Mail Syntax ist falsch <br/>");
         	return "registrieren";
         }        
         
         if(gastDao.findGastByEMail(gast.getEmail()) != null)
         {
         	fillForm(uiModel, gast);
-        	uiModel.addAttribute("emailError", "E-Mail ist schon vergeben");
+        	uiModel.addAttribute("emailError", "E-Mail ist schon vergeben <br/>");
         	return "registrieren";
         }
         
@@ -161,7 +161,7 @@ public class GastController {
         if(!p1.equalsIgnoreCase(p2) || p1.isEmpty())
         {
         	fillForm(uiModel, gast);
-        	uiModel.addAttribute("passwordError", "Passwörter müssen übereinstimmen");
+        	uiModel.addAttribute("passwordError", "Passwörter müssen übereinstimmen <br/>");
         	return "registrieren";
         }
         

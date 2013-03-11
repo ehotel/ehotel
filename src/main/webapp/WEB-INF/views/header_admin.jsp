@@ -23,7 +23,7 @@
 		<div class="row-1">
 			<div class="wrapper">
 				<div class="logo">
-					<h1><a href="index.html">E-Hotel<i>Y</i></a></h1>
+					<h1><a href="/ehotel">E-Hotel<i>Y</i></a></h1>
 					<br />
 					<div>
 						Sie sind als Admin eingeloggt. <a href="<c:url value="/j_spring_security_logout" />">Logout</a><br/><br/>

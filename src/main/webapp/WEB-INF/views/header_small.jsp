@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-<title>Login</title>
+<title>eHotel</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <link href="/ehotel/resources/style.css" rel="stylesheet" type="text/css" />
@@ -24,7 +24,7 @@
 		<div class="row-1">
 			<div class="wrapper">
 				<div class="logo">
-					<h1><a href="index.html">E-Hotel<i>Y</i></a></h1>
+					<h1><a href="/ehotel">E-Hotel<i>Y</i></a></h1>
 					<em>Hotel</em>
 					<strong>True Comfort</strong>
 				</div>

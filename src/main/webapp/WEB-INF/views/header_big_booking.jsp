@@ -25,7 +25,7 @@
 		<div class="row-1">
 			<div class="wrapper">
 				<div class="logo">
-					<h1><a href="index.html">Five Star</a></h1>
+					<h1><a href="/ehotel">Five Star</a></h1>
 					<em>Hotel</em>
 					<strong>True Luxury</strong>
 				</div>

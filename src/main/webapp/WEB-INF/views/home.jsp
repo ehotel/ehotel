@@ -1,15 +1,28 @@
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:include page="header_big_home.jsp"/>
 
-    <link href="resources/jquery-ui-1.10.1.custom.min.css" rel="stylesheet" type="text/css" />
+    <link href="resources/jquery-ui-1.10.1.custom.css" rel="stylesheet" type="text/css" />
     <script src="resources/jquery-1.9.1.js"></script>
     <script src="resources/jquery-ui-1.10.1.custom.js"></script>
 <!--     <script src="js/jquery-ui-1.10.1.custom.min.js"></script>
  -->    <script> 
-      $(document).ready(function(){ 
-    	$('#anreise').datepicker({ dateFormat: 'dd.mm.yy', minDate: 0});
-        $('#abreise').datepicker({ dateFormat: 'dd.mm.yy', minDate: 1});
-        }); 
+		 $(document).ready(function(){ 
+			   	$('#anreise').datepicker({
+			   		dateFormat: 'dd.mm.yy',
+			   		minDate: 0,
+			   	 	onClose: function( selectedDate ) {
+				   		$( "#abreise" ).datepicker( "option", "minDate", selectedDate );
+			   		}
+			   	});
+			   	
+			       $('#abreise').datepicker({
+			       	dateFormat: 'dd.mm.yy',
+			        minDate: 1,
+			   	 	onClose: function( selectedDate ) {
+				   		$( "#anreise" ).datepicker( "option", "maxDate", selectedDate );
+			   		}
+			    });
+		 	}); 
     </script>
 
 	<div id="content">
@@ -20,8 +33,7 @@
 				<div class="box maxheight">
 					<div class="inner">
 						<h3>Reservation:</h3>
-						<form method="POST" action="zimmer_suche">
-					 		<fieldset>
+						<form method="POST" id="suche-form" action="zimmer_suche">
 								<div class="field"><label>Check In:</label><input type="text" name="anreise" id="anreise"/></div>
 								<div class="field"><label>Check Out:</label><input type="text" name="abreise" id="abreise"/></div>
 								<div class="field"> Room type:&nbsp; <select name="zk_typ">
@@ -29,9 +41,8 @@
 															<option value="${zk.zimmertyp}">${zk.zimmertyp}</option>        
       														</c:forEach>
   																	</select>
-  								</div>
-								<div class="button"><span><span><a href="#" onclick="document.getElementById('reservation-form').submit()">Check Availability</a></span></span></div>
-							</fieldset>
+  								</div><br/>
+								<div class="button"><span><span><a style="cursor:pointer;" onclick="document.getElementById('suche-form').submit()">Suche Zimmer</a></span></span></div>
 						</form>
 					</div>
 				</div>
@@ -44,8 +55,8 @@
 					<p class="alt-top">Come alone or bring your family with you, stay here for a night or for weeks, stay here while on business trip or at some kind of conference - either way our hotel is the best possible variant.</p>
 				 	Feel free to contact us anytime in case you have any questions or concerns.<br><br>
 					<div style="float:right;">
-						<div class="button" ><span><span><a href="login_user">Log On Here!</a></span></span></div> 
-						<div class="aligncenter">new&ensp;? &emsp; <a href="registrieren">Register now!</a></div> 
+						<div class="button" ><span><span><a href="login_user">Hier einloggen!</a></span></span></div> 
+						<div class="aligncenter">neu? <a href="registrieren">Jetzt registrieren!</a></div> 
 					</div>
 				</div>
 						      
