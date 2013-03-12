@@ -1,6 +1,30 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:include page="header_big_booking.jsp"/>
-					
+
+    <link href="resources/jquery-ui-1.10.1.custom.css" rel="stylesheet" type="text/css" />
+    <script src="resources/jquery-1.9.1.js"></script>
+    <script src="resources/jquery-ui-1.10.1.custom.js"></script>
+<!--     <script src="js/jquery-ui-1.10.1.custom.min.js"></script>
+ -->    <script> 
+		 $(document).ready(function(){ 
+			   	$('#anreise').datepicker({
+			   		dateFormat: 'dd.mm.yy',
+			   		minDate: 0,
+			   	 	onClose: function( selectedDate ) {
+				   		$( "#abreise" ).datepicker( "option", "minDate", selectedDate );
+			   		}
+			   	});
+			   	
+			       $('#abreise').datepicker({
+			       	dateFormat: 'dd.mm.yy',
+			        minDate: 1,
+			   	 	onClose: function( selectedDate ) {
+				   		$( "#anreise" ).datepicker( "option", "maxDate", selectedDate );
+			   		}
+			    });
+		 	}); 
+    </script>
+    					
 <div id="content">
 		<div class="wrapper">
 			<div class="aside maxheight">
