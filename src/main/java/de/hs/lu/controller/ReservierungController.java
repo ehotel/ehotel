@@ -174,7 +174,8 @@ public class ReservierungController {
 		r = reservierungDao.merge(r);
 		model.addAttribute("meldung", "Reservierung wurde angelegt <br/> Moechten Sie einen ZusatzService <a href=\"freie_services_suche\">buchen</a>?");
 		
-        String bestaetigung = "Sie haben soeben eine Zimmer reserviert, die Details dazu k�nnen Sie im ehotel-System nachschauen";        
+        String bestaetigung = "Sie haben soeben eine Zimmer reserviert, die Details dazu koennen Sie im ehotel-System nachschauen";        
+
         MailSender.sendMail(gast.getEmail(), "no-reply@ehotel-arno.com", bestaetigung);		
 			
         Calendar calendar_anreise = Calendar.getInstance();
