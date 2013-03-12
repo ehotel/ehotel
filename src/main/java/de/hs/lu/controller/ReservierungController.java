@@ -353,7 +353,7 @@ public class ReservierungController {
 		logger.info(typ);
 		logger.info(String.valueOf(anreise));
 		logger.info(String.valueOf(abreise));
-		Zimmer z = belegung.freieZimmerSuche(typ, anreise.getTime(), abreise.getTime());
+		Zimmer z = belegung.freieZimmerSuche(typ, anreise.getTime(), abreise.getTime(), reservierung.getId());
 
 		if(z != null)
 		{
