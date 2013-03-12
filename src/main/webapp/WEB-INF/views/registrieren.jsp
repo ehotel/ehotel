@@ -1,57 +1,53 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
-<html>
-<head>
-	<title>Registrieren</title>
-</head>
-<body>
-<h1>
-	Hello ehotel!  
-</h1>
-<p><font color="#FF0000">${felderError}</font></p>
-<form method="POST" action=
-<c:choose>
-      <c:when test="${modus=='create'}">"erzeugeGast"</c:when>
-      <c:when test="${modus=='edit'}">"profilUpdate"</c:when>
-</c:choose>
->
- <table>
-  <tr>
-   <td>Vorname:</td>
-   <td><input type="text" name="vorname" value="${gast.vorname}"/></td>
-  </tr>
-  <tr>
-   <td>Nachname:</td>
-   <td><input type="text" name="nachname" value="${gast.nachname}"/></td>
-  </tr>
-  <tr>
-  <td><font color="#FF0000">${emailError}</font></td>
-  </tr>
-  <tr>
-   <td>E-Mail:</td>
-   <td><input type="text" name="email" value="${gast.email}"/></td>
-  </tr>
-    <tr>
-  <td><font color="#FF0000">${benutzernameError}</font></td>
-  </tr>
-  <tr>
-   <td>Benutzername:</td>
-   <td><input type="text" name="benutzername" value="${gast.benutzername}" <c:if test="${modus=='edit'}">readonly</c:if>/></td>
-  </tr>
-  <tr>
-  <td><font color="#FF0000">${passwordError}</font></td>
-  </tr>
-  <tr>
-   <td>Password:</td>
-   <td><input type="password" name="password"/></td>
-  </tr>
-  <tr>
-   <td>Password wiederholen:</td>
-   <td><input type="password" name="password2"/></td>
-  </tr>
- </table>
- <input type="submit"/>
-</form>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<jsp:include page="header_small.jsp"/>
 
-</body>
-</html>
+<script>
+function Event_Key(event)
+{  
+  if(event.keyCode == 13)
+  {
+	document.getElementById('login-form').submit()
+  }  
+}</script>
+
+<div class="content">
+	<div class="indent">
+		<h2>Get Started with E-Hotely</h2>
+		<div class="h31">Bitte füllen Sie alle Felder aus</div>
+		<form method="POST" id="registrieren" action=
+			<c:choose>
+		    	<c:when test="${modus=='create'}">"erzeugeGast"</c:when>
+	    	  	<c:when test="${modus=='edit'}">"profilUpdate"</c:when>
+			</c:choose> >
+			<fieldset>
+				<font color="#FF0000">${felderError}</font>			
+				<label>Vorname:</label>
+				<input type="text" name="vorname" value="${gast.vorname}" /><br/>
+				<label>Nachname:</label>
+				<input type="text" name="nachname" value="${gast.vorname}" /><br/>
+				<font color="#FF0000">${emailError}</font>
+				<label>E-Mail:</label><input type="text" name="email" size=40 maxlength=40 value="${gast.email}" /><br/>
+				<font color="#FF0000">${benutzernameError}</font>
+				<label>Benutzername:</label>
+				<input type="text" name="benutzername" value="${gast.benutzername}" size=40 maxlength=40 /><br/>
+				<font color="#FF0000">${passwordError}</font>
+				<label>Passoword:</label>
+				<input type="password" name="password" size=40 maxlength=40 /><br/>
+				<label>Password wiederholen:</label>
+				<input type="password" name="password2" size=40 maxlength=40 /><br/>
+			</fieldset>
+			<div style="float:left;">
+				<div class="button"><span><span><a style="cursor:pointer;" onclick="document.getElementById('registrieren').submit()">Registrieren</a></span></span></div>
+			</div>
+		</form>
+	</div>
+</div>								      
+
+
+			<div class="clear"></div>				
+				</div>
+			</div>
+		</div>
+	</div>	
+	
+<jsp:include page="footer.jsp"/>

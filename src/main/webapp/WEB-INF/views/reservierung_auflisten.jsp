@@ -34,18 +34,21 @@
 			<td><fmt:formatDate value="${ende}" pattern="dd.MM.yyyy" /></td>
 			<td>${reservierung.status}</td>
 			<td><form action="../reservierung/stornieren/${reservierung.id}" method="POST">
-			<input type="submit" value="stornieren"/></form>
+				<c:if test="${reservierung.status=='Aktiv'}">
+					<input type="submit" value="stornieren"/>
+				</c:if></form>
 			</td>
 			<td><form action="../reservierung/details/${reservierung.id}" method="POST">
-			<input type="submit" value="details"/></form>
-			</td>
+			<input type="submit" value="details"/></form></td>
 			<td><form action="../freie_services_suche_extra" method="POST">
-			<input type="hidden" name="reservierung_id" value="${reservierung.id}" />
-			<input type="submit" value="service buchen"/></form>
+				<c:if test="${reservierung.status=='Aktiv'}">
+					<input type="hidden" name="reservierung_id" value="${reservierung.id}" />
+					<input type="submit" value="service buchen"/>
+				</c:if>
+				</form>
 			</td>
 		</tr>
 	</c:forEach>  
   </table>
-
 </body>
 </html>

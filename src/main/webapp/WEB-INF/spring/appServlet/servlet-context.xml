@@ -29,6 +29,14 @@
 	<view-controller path="/datepicker" view-name="datepicker"/>
 	<view-controller path="/login_user" view-name="login_user"/>
 	<view-controller path="/reset_pwd" view-name="reset_login"/>
-	
+	<view-controller path="/gallery" view-name="gallery"/>
+	<view-controller path="/testimonials" view-name="testimonials"/>
+	<view-controller path="/services" view-name="services"/>
+	<view-controller path="/restaurant" view-name="restaurant"/>
+	<view-controller path="/404" view-name="404"/>
+	<view-controller path="/405" view-name="405"/>
+	<view-controller path="/500" view-name="500"/>
+
 	
 </beans:beans>
+

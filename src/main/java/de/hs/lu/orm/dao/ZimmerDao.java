@@ -6,14 +6,20 @@ import javax.persistence.Query;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
+import de.hs.lu.model.Reservierung;
 import de.hs.lu.model.Zimmer;
 import de.hs.lu.model.Zimmerkategorie;
 import de.hs.lu.orm.AbstractDao;
 
 @Component("zimmerDao")
 public class ZimmerDao extends AbstractDao<Zimmer> {
+
+	@Autowired
+	private ReservierungDao resDao;
 	
 	private final Log logger = LogFactory.getLog(ZimmerDao.class);
 	
@@ -49,6 +55,17 @@ public class ZimmerDao extends AbstractDao<Zimmer> {
 		query.setParameter("zk", zimmerkategorie);
 		List<Zimmer> zimmer = query.getResultList();		
 		return zimmer;    	
+    }
+	
+    @Transactional
+    public void remove(Zimmer z)
+    {
+        for (; z.getReservierungen().size() > 0; ) {
+        	Reservierung res = z.getReservierungen().iterator().next();
+            resDao.remove(resDao.getReference(res.getId()));
+            z.getReservierungen().remove(res);
+        }
+        super.remove(getReference(z.getId()));
     }
 	
 }
