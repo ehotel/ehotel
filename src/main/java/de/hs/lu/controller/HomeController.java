@@ -27,8 +27,7 @@ public class HomeController {
 
 	@RequestMapping(value = {"/" ,"/ehotel", "/home"}, method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! the client locale is "+ locale.toString());
-				
+			
 		model.addAttribute("zimmerkategorien", zkDao.findAll());
 		
 		return "home";
@@ -64,8 +63,9 @@ public class HomeController {
 		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		
-		if(authentication != null && authentication.isAuthenticated())
+		if(authentication != null && authentication.isAuthenticated() && !authentication.getName().contentEquals("anonymousUser"))
 		{
+			logger.info(authentication.getName());
 			model.addAttribute("meldung", "Sie sind bereits eingeloggt");
 			return "meldung";
 		}				

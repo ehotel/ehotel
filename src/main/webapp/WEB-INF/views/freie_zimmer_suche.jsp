@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<jsp:include page="header_big_booking.jsp"/>
+<jsp:include page="header_big.jsp"/>
 
     <link href="resources/jquery-ui-1.10.1.custom.css" rel="stylesheet" type="text/css" />
     <script src="resources/jquery-1.9.1.js"></script>
@@ -24,6 +24,9 @@
 		   		}
 		    });
         }); 
+      
+  	document.getElementById("booking").setAttribute("class", "current");
+      
     </script> 
 
 

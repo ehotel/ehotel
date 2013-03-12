@@ -1,4 +1,8 @@
-<jsp:include page="header_big_restaurant.jsp"/>
+<jsp:include page="header_big.jsp"/>
+
+<script type="text/javascript">
+	document.getElementById("restaurant").setAttribute("class", "current");
+</script>
 
 <div class="container">
 			<div class="aside maxheight">

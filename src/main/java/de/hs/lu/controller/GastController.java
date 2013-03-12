@@ -120,6 +120,7 @@ public class GastController {
         }        
         HttpServletRequest r = request;
         
+        uiModel.addAttribute("modus", "create");
         uiModel.addAttribute("gast", gast);
         
         

@@ -1,7 +1,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
-<jsp:include page="header_big_booking.jsp"/>
+<jsp:include page="header_big.jsp"/>
+
+<script type="text/javascript">
+	document.getElementById("booking").setAttribute("class", "current");
+</script>
 
 <p><font color="#FF0000">${felderError}</font></p>
  <form action="reservieren" method="POST">

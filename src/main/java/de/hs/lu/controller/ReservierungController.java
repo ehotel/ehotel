@@ -30,7 +30,6 @@ import de.hs.lu.model.ReservierungsService;
 import de.hs.lu.model.Status;
 import de.hs.lu.model.Zimmer;
 import de.hs.lu.model.Zimmerkategorie;
-import de.hs.lu.model.ZusatzService;
 import de.hs.lu.orm.dao.GastDao;
 import de.hs.lu.orm.dao.ReservierungDao;
 import de.hs.lu.orm.dao.ReservierungsServiceDao;

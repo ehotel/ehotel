@@ -26,7 +26,6 @@
 	<!-- <context:component-scan base-package="de.hs.lu" /> -->
 	
 	<view-controller path="/login" view-name="login"/>
-	<view-controller path="/datepicker" view-name="datepicker"/>
 	<view-controller path="/reset_pwd" view-name="reset_login"/>
 	<view-controller path="/gallery" view-name="gallery"/>
 	<view-controller path="/testimonials" view-name="testimonials"/>

@@ -1,7 +1,6 @@
-			</div>
-		</div>
-	</div>
 <!-- footer -->
+</div>
+</div>
 	<div id="footer">
   		<ul class="nav">
 	 		<li><a href="/ehotel">Home</a>|</li>

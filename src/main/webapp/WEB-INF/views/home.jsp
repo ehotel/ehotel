@@ -1,5 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<jsp:include page="header_big_home.jsp"/>
+<jsp:include page="header_big.jsp"/>
 
     <link href="resources/jquery-ui-1.10.1.custom.css" rel="stylesheet" type="text/css" />
     <script src="resources/jquery-1.9.1.js"></script>
@@ -22,7 +22,10 @@
 				   		$( "#anreise" ).datepicker( "option", "maxDate", selectedDate );
 			   		}
 			    });
-		 	}); 
+		 	});
+		 
+		 document.getElementById("home").setAttribute("class", "current");
+		 
     </script>
 
 	<div id="content">

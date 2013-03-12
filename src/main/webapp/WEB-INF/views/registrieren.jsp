@@ -6,9 +6,10 @@ function Event_Key(event)
 {  
   if(event.keyCode == 13)
   {
-	document.getElementById('login-form').submit()
+		document.getElementById('login-form').submit();
   }  
-}</script>
+}
+</script>
 
 <div class="content">
 	<div class="indent">
@@ -29,7 +30,7 @@ function Event_Key(event)
 				<label>E-Mail:</label><input type="text" name="email" size=40 maxlength=40 value="${gast.email}" /><br/>
 				<font color="#FF0000">${benutzernameError}</font>
 				<label>Benutzername:</label>
-				<input type="text" name="benutzername" value="${gast.benutzername}" size=40 maxlength=40 /><br/>
+				<input <c:if test="${modus=='edit'}">readonly</c:if> type="text" name="benutzername" value="${gast.benutzername}" size=40 maxlength=40 /><br/>
 				<font color="#FF0000">${passwordError}</font>
 				<label>Passoword:</label>
 				<input type="password" name="password" size=40 maxlength=40 /><br/>
@@ -37,17 +38,16 @@ function Event_Key(event)
 				<input type="password" name="password2" size=40 maxlength=40 /><br/>
 			</fieldset>
 			<div style="float:left;">
-				<div class="button"><span><span><a style="cursor:pointer;" onclick="document.getElementById('registrieren').submit()">Registrieren</a></span></span></div>
+				<div class="button"><span><span><a style="cursor:pointer;" onclick="document.getElementById('registrieren').submit()"><c:if test="${modus=='edit'}">Profil Updaten</c:if><c:if test="${modus=='create'}">Registrieren</c:if></a></span></span></div>
 			</div>
 		</form>
 	</div>
 </div>								      
 
 
-			<div class="clear"></div>				
-				</div>
+			<div class="clear"></div>
 			</div>
 		</div>
-	</div>	
-	
+	</div>
+				
 <jsp:include page="footer.jsp"/>

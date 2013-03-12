@@ -1,17 +1,19 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-<jsp:include page="header_big_booking.jsp"/>
+<jsp:include page="header_big.jsp"/>
 	
   	<link href="../../resources/jquery-ui-1.10.1.custom.min.css" rel="stylesheet" type="text/css" />
     <script src="../../resources/jquery-1.9.1.js"></script>
     <script src="../../resources/jquery-ui-1.10.1.custom.js"></script>
-<!--     <script src="js/jquery-ui-1.10.1.custom.min.js"></script>
- -->    <script> 
+	<script> 
       $(document).ready(function(){ 
     	$('#anreise').datepicker({ dateFormat: 'dd.mm.yy', minDate: 0});
         $('#abreise').datepicker({ dateFormat: 'dd.mm.yy', minDate: 1});
         }); 
+      
+		document.getElementById("booking").setAttribute("class", "current");
+      
     </script> 
 
 <p><font color="#FF0000">${felderError}</font></p>
