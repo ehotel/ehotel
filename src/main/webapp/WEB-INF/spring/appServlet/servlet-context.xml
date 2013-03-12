@@ -27,7 +27,6 @@
 	
 	<view-controller path="/login" view-name="login"/>
 	<view-controller path="/datepicker" view-name="datepicker"/>
-	<view-controller path="/login_user" view-name="login_user"/>
 	<view-controller path="/reset_pwd" view-name="reset_login"/>
 	<view-controller path="/gallery" view-name="gallery"/>
 	<view-controller path="/testimonials" view-name="testimonials"/>

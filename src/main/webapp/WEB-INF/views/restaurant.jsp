@@ -40,9 +40,5 @@
 			</div>
 			<div class="clear"></div>
 		</div>
-	</div>
+		
 <jsp:include page="footer.jsp"/>
-
-
-
-

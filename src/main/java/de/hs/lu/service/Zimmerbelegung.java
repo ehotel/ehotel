@@ -16,6 +16,7 @@ public class Zimmerbelegung {
 	@Autowired
 	private ZimmerkategorieDao zimmerkategorieDao;
 	
+	@Transactional
 	public Zimmer freieZimmerSuche(String zimmertyp, long start, long ende)
 	{
 		return freieZimmerSuche(zimmertyp, start, ende, -1l);

@@ -1,14 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ page session="false" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-	<title>Reservierung aendern</title>
+
+<jsp:include page="header_big_booking.jsp"/>
 	
-  <link href="../../resources/jquery-ui-1.10.1.custom.min.css" rel="stylesheet" type="text/css" />
+  	<link href="../../resources/jquery-ui-1.10.1.custom.min.css" rel="stylesheet" type="text/css" />
     <script src="../../resources/jquery-1.9.1.js"></script>
     <script src="../../resources/jquery-ui-1.10.1.custom.js"></script>
 <!--     <script src="js/jquery-ui-1.10.1.custom.min.js"></script>
@@ -18,12 +13,6 @@
         $('#abreise').datepicker({ dateFormat: 'dd.mm.yy', minDate: 1});
         }); 
     </script> 
-</head>
-
-<body>
-<h1>
-	Hello ehotel!  
-</h1>
 
 <p><font color="#FF0000">${felderError}</font></p>
 <form method="POST" action="../../reservierung/update">
@@ -96,6 +85,6 @@
   <c:if test="${empty reservierungserviceliste}">
   <p> Keine ZusatzServices gebucht </p>
   </c:if>
-
-</body>
-</html>
+  
+  
+<jsp:include page="footer.jsp"/>

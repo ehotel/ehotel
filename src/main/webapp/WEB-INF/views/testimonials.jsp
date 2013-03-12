@@ -1,4 +1,5 @@
 <jsp:include page="header_big_testimonials.jsp"/>
+
 <div class="indent">
 			<h2>Customers' testimonials</h2>
 			<ul class="list4">
@@ -9,5 +10,5 @@
 			</ul><br/>
 			<div class="button1"><span><span><a href="#">Geben Sie ihre eigene Bewertung ab</a></span></span></div>
 		</div>
-	</div>
+		
 <jsp:include page="footer.jsp"/>

@@ -336,7 +336,7 @@ public class ReservierungController {
 	@RequestMapping(value = "reservierung/update", method = RequestMethod.POST)
     public String reservierung_update(@Valid Reservierung reservierung, BindingResult bindingResult, Model model, HttpServletRequest request) throws ParseException {
 		
-		//1. �ber die id das datenbankobjekt holen
+		//1. ueber die id das datenbankobjekt holen
 		Reservierung r = reservierungDao.findById(reservierung.getId());
 		
 		//String id_s = (String) request.getParameter("id");                        funktioniert nicht ohne BindingResult
@@ -373,7 +373,7 @@ public class ReservierungController {
 		else
 		{
 			model.asMap().clear();
-			model.addAttribute("meldung", "Zimmertyp zum gew�hlten Datum nicht verf�gbar");
+			model.addAttribute("meldung", "Zimmertyp zum gewaehlten Datum nicht verfuegbar");
 					
 			return "meldung";
 		}
