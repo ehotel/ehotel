@@ -2,6 +2,6 @@ package de.hs.lu.model;
 
 public enum Status {
 	
-	Aktiv, StornierungErwuenscht, Storniert, AendernErwuenscht
+	Aktiv, StornierungErwuenscht, Storniert, Beendet
 
 }

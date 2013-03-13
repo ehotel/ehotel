@@ -2,9 +2,12 @@ package de.hs.lu.controller;
 
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -16,6 +19,11 @@ import de.hs.lu.orm.dao.BewertungDao;
 import de.hs.lu.orm.dao.GastDao;
 import de.hs.lu.orm.dao.ReservierungDao;
 import de.hs.lu.orm.dao.ZimmerkategorieDao;
+
+//import de.hs.lu.model.Gast;
+//import de.hs.lu.model.Reservierung;
+//import de.hs.lu.model.Zimmer;
+import de.hs.lu.model.Bewertung;
 
 /**
  * Handles requests for the application home page.
@@ -38,8 +46,8 @@ public class BewertungController {
 	private ReservierungDao reservierungDao;
 
 	
-	@RequestMapping(value = "/bewertung/anlegen", method = RequestMethod.GET)
-	public String bewertung(Model model) {
+	@RequestMapping(value = "/bewertung/anlegen", method = RequestMethod.POST)
+	public String bewertung_anlegen(Model model) {
 		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		
@@ -48,9 +56,28 @@ public class BewertungController {
 			return "login";
 		}
 		
-		model.addAttribute("meldung", "Login fehlgeschlagen");
-		
 		return "bewertung_anlegen";
+	}
+	
+	@RequestMapping(value = "/bewertung/erstellen", method = RequestMethod.POST)
+	public String bewertung_erstellen(Model model, HttpServletRequest request) {
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		
+		if(authentication == null || !authentication.isAuthenticated())
+		{
+			return "login";
+		}
+		
+		String r_id = (String) request.getParameter("reservierung_id");
+		String username = authentication.getName();
+		String bw_text = request.getParameter("text");
+		int bw_punkte = Integer.parseInt(request.getParameter("punkte"));
+		
+		
+		Bewertung bw = new Bewertung();
+		model.addAttribute("meldung", "Reservierungs ID:" + r_id);
+		return "meldung";
 	}
 	
 }

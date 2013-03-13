@@ -44,6 +44,13 @@
 				<a class="form-link" onclick="document.getElementById('aendern').submit()">aendern</a>
 			</form>
 			</td>
+			<td><form id="bewerten" action="../../bewertung/anlegen" method="POST">
+				<c:if test="${reservierung.status=='Aktiv'}">
+					<input type="hidden" name="reservierung_id" value="${reservierung.id}" />
+					<a class="form-link" onclick="document.getElementById('bewerten').submit()">Zimmer bewerten</a>
+				</c:if>
+				</form>
+			</td>
 		</tr>
   </table>
   
