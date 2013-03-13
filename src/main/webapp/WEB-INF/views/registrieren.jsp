@@ -1,8 +1,9 @@
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <jsp:include page="header_small.jsp"/>
 			
 <!-- box end -->
-			</div>
+			
 			<div class="content">
 				<div class="indent">
 					<h2>Get Started with E-Hotely</h2>
