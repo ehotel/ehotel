@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import de.hs.lu.model.Reservierung;
 import de.hs.lu.model.ReservierungsService;
+import de.hs.lu.model.ZusatzService;
 import de.hs.lu.orm.AbstractDao;
 
 @Component("reservierungServiceDao")
@@ -41,6 +42,15 @@ public class ReservierungsServiceDao extends AbstractDao<ReservierungsService>{
 		
 		Query query = entityManager.createQuery("select r FROM ReservierungsService r where r.reservierung= :reservierung");
 		query.setParameter("reservierung", reservierung);
+		List<ReservierungsService> services = query.getResultList();		
+		return services;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<ReservierungsService> findReservierungsServiceByZusatzService(ZusatzService service){
+		
+		Query query = entityManager.createQuery("select r FROM ReservierungsService r where r.zusatzService= :service");
+		query.setParameter("service", service);
 		List<ReservierungsService> services = query.getResultList();		
 		return services;
 	}

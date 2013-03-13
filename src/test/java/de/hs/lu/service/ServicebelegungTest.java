@@ -108,7 +108,8 @@ public class ServicebelegungTest {
 	}
 	
 	@Transactional
-	@Test
+//	@Test
+//funktioniert nur bei leerer datenbank
 	public void BelegungTest()
 	{	
 		zb.freieZimmerSuche("blub", 1l, 2l);
@@ -120,7 +121,7 @@ public class ServicebelegungTest {
 	
 	@Transactional
 //	@Test
-	//funktioniert nur bei leerer datenbank
+//funktioniert nur bei leerer datenbank
 	public void BelegungTest2()
 	{	
 		zs.setAnzahl(0);

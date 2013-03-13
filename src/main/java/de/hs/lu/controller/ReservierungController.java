@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +18,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -68,6 +70,15 @@ public class ReservierungController {
 	@Autowired
 	private Servicebelegung servicebelegung;
 	
+	
+	@RequestMapping(value = "/online_booking", method = RequestMethod.GET)
+	public String booking(Model model) {
+				
+		model.addAttribute("zimmerkategorien", zkDao.findAll());
+		
+		return "online_booking";
+	}
+	
 	@RequestMapping(value = "/freie_zimmer_suche", method = RequestMethod.GET)
 	public String anlegen(Model model) {
 		
@@ -104,7 +115,10 @@ public class ReservierungController {
 		else
 		{
 			Zimmer z = belegung.freieZimmerSuche(zimmerkategorie, anreise.getTime(), abreise.getTime());
-			zimmerliste.add(z);			
+			if(z != null)
+			{
+				zimmerliste.add(z);
+			}
 		}	
 		
 		model.addAttribute("gaesteliste", gastDao.findAll());
@@ -145,7 +159,7 @@ public class ReservierungController {
 		
 		logger.info(anreise_s);
 		logger.info(abreise_s);
-		
+				
 		Gast gast = gastDao.findGastByBenutzername(username);
 		
 		Reservierung r = new Reservierung();
@@ -159,7 +173,8 @@ public class ReservierungController {
 		r = reservierungDao.merge(r);
 		model.addAttribute("meldung", "Reservierung wurde angelegt <br/> Moechten Sie einen ZusatzService <a href=\"freie_services_suche\">buchen</a>?");
 		
-        String bestaetigung = "Sie haben soeben eine Zimmer reserviert, die Details dazu k�nnen Sie im ehotel-System nachschauen";        
+        String bestaetigung = "Sie haben soeben eine Zimmer reserviert, die Details dazu koennen Sie im ehotel-System nachschauen";        
+
         MailSender.sendMail(gast.getEmail(), "no-reply@ehotel-arno.com", bestaetigung);		
 			
         Calendar calendar_anreise = Calendar.getInstance();
@@ -216,7 +231,7 @@ public class ReservierungController {
 		model.addAttribute("username", r.getGast().getBenutzername());
 		
 		
-		DateFormat formatter = new SimpleDateFormat("yyyy,MM,dd");
+		DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
 		
 		Date min = new Date(r.getStartdatum());
 		Date max = new Date(r.getEnddatum());
@@ -312,47 +327,56 @@ public class ReservierungController {
 		model.addAttribute("zimmerkategorieliste", zkDao.findAll());
 		model.addAttribute("zimmerkategorie", r.getZimmer().getZimmerkategorie().getZimmertyp());
 		List<ReservierungsService> serviceListe =  rsDao.findReservierungsServiceByReservierung(r);		
-		model.addAttribute("reservierungserviceliste", serviceListe);
-		
-		
-		//r.setStatus(Status.AendernErwuenscht);
-		reservierungDao.merge(r);		
+		model.addAttribute("reservierungserviceliste", serviceListe);		
 		
 		return "reservierung_aendern";
 	}
 	
-	@RequestMapping(value = "/reservierung/update/{id}", method = RequestMethod.POST)
-	public String reservierung_update(@PathVariable("id") Long id, Model model) {
+	@RequestMapping(value = "reservierung/update", method = RequestMethod.POST)
+    public String reservierung_update(@Valid Reservierung reservierung, BindingResult bindingResult, Model model, HttpServletRequest request) throws ParseException {
 		
+		//1. ueber die id das datenbankobjekt holen
+		Reservierung r = reservierungDao.findById(reservierung.getId());
 		
-		Reservierung r = reservierungDao.findById(id);
-		model.asMap().clear();
+		//String id_s = (String) request.getParameter("id");                        funktioniert nicht ohne BindingResult
+		//Reservierung r = reservierungDao.findById(Long.parseLong(id_s));			
+		String typ = request.getParameter("zk_typ");
+		String start =(String) request.getParameter("startdatum");
+		String end =(String) request.getParameter("enddatum");
 		
-		model.addAttribute("reservierung_id", r.getId());
-		model.addAttribute("anreise", r.getStartdatum());
-		model.addAttribute("abreise", r.getEnddatum());
+		DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");		
+		Date anreise = formatter.parse(start);
+		Date abreise = formatter.parse(end);
 		
-		DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
+		logger.info(start);
+		logger.info(typ);
+		logger.info(String.valueOf(anreise));
+		logger.info(String.valueOf(abreise));
+		Zimmer z = belegung.freieZimmerSuche(typ, anreise.getTime(), abreise.getTime(), reservierung.getId());
+
+		if(z != null)
+		{
+			//2. vom datenbankobjekt die neuen start-end-datum setztn
+			r.setStartdatum(anreise.getTime());
+			r.setEnddatum(abreise.getTime());
+			r.setZimmer(z);	
+			
+			//reservierungDao.persist(r);
+			r = reservierungDao.merge(r);
+			        	        	        
+			model.asMap().clear();
+			model.addAttribute("meldung", "Reservierung wurde geaendert");
+					
+			return "meldung";
+		}	
+		else
+		{
+			model.asMap().clear();
+			model.addAttribute("meldung", "Zimmertyp zum gewaehlten Datum nicht verfuegbar");
+					
+			return "meldung";
+		}
 		
-		Date min = new Date(r.getStartdatum());
-		Date max = new Date(r.getEnddatum());
-		
-		String min_s = formatter.format(min);
-		String max_s = formatter.format(max);
-		
-		model.addAttribute("min" , min_s);
-		model.addAttribute("max" , max_s);
-		model.addAttribute("zimmerkategorieliste", zkDao.findAll());
-		model.addAttribute("zimmerkategorie", r.getZimmer().getZimmerkategorie().getZimmertyp());
-		
-		List<ReservierungsService> serviceListe =  rsDao.findReservierungsServiceByReservierung(r);	
-		model.addAttribute("reservierungserviceliste", serviceListe);
-		model.addAttribute("zusatzservices", servicebelegung.freieServiceSuche(r.getStartdatum(), r.getEnddatum()));
-		
-		//r.setStatus(Status.AendernErwuenscht);
-		reservierungDao.merge(r);		
-		
-		return "reservierung_aendern";
 	}
 	
 	@RequestMapping(value = "/reservierung/details/{id}", method = RequestMethod.POST)
@@ -371,33 +395,12 @@ public class ReservierungController {
 	public String reservierung_loeschen(@PathVariable("id") Long id, Model model) {
 		
 		reservierungDao.remove(reservierungDao.findById(id));
-		reservierungDao.flush();
 		
 		return "redirect:/admin/reservierung/liste";
 	}
 	
 	@RequestMapping(value = "reservierung/reservierungservice/loeschen", method = RequestMethod.POST)
 	public String reservierungservice_loeschen(Model model, HttpServletRequest request) {
-		
-		String id_s = (String) request.getParameter("service_id");
-		long id = Long.parseLong(id_s);		
-		ReservierungsService service = rsDao.findById(id);
-		
-		long reservierung_id = service.getReservierung().getId();		
-		rsDao.remove(rsDao.getReference(id));
-		rsDao.flush();
-		
-		Reservierung reservierung = reservierungDao.findById(reservierung_id);
-		model.addAttribute(reservierung);
-		
-		List<ReservierungsService> serviceListe =  rsDao.findReservierungsServiceByReservierung(reservierung);		
-		model.addAttribute("reservierungserviceliste", serviceListe);
-
-		return "reservierung_details";
-	}
-	
-	@RequestMapping(value = "reservierung/reservierungservice/aendern", method = RequestMethod.POST)
-	public String reservierungservice_aendern(Model model, HttpServletRequest request) {
 		
 		String id_s = (String) request.getParameter("service_id");
 		long id = Long.parseLong(id_s);		

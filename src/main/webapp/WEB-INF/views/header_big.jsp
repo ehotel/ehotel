@@ -1,4 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <title>Homepage</title>
@@ -23,12 +25,22 @@
 		<div class="row-1">
 			<div class="wrapper">
 				<div class="logo">
-					<h1><a href="index.html">Five Star</a></h1>
+					<h1><a href="/ehotel">EHOTEL<i>Y</i></a></h1>
 					<em>Hotel</em>
 					<strong>True Luxury</strong>
 				</div>
 				<div class="othermenu">
-					<div class="fright">My E-Hotel<i>Y</i> | Anfahrt | Kontakt | Impressum</div>
+					<div class="fright"><a href="/ehotel/menu">My E-Hotel<i>Y</i></a> | Anfahrt | Kontakt | Impressum</div><br/>
+					<div class="fright">
+						<sec:authorize ifAnyGranted="ROLE_USER">
+					    	<a href="/ehotel/profil"><sec:authentication property="principal.username"/></a>
+						    (<a href="<c:url value="/j_spring_security_logout"/>"> Logout</a>)
+					    </sec:authorize>
+						<sec:authorize ifAnyGranted="ROLE_ADMIN">
+					    	<a href="/ehotel/admin"><sec:authentication property="principal.username"/></a>
+						    (<a href="<c:url value="/j_spring_security_logout"/>"> Logout</a>)
+					    </sec:authorize>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -39,12 +51,12 @@
 				<div class="header-box">
 					<div class="inner">
 						<ul class="nav">
-					 		<li><a href="index.html" class="current">Home page</a></li>
-							<li><a href="services.html">Services</a></li>
-							<li><a href="gallery.html">Gallery</a></li>
-							<li><a href="restaurant.html">Restaurant</a></li>
-							<li><a href="testimonials.html">Testimonials</a></li>
-							<li><a href="booking.html">Booking</a></li>
+					 		<li><a id="home" href="/ehotel">Home page</a></li>
+							<li><a id="booking" href="/ehotel/online_booking">Online Booking</a></li>
+							<li><a id="services" href="/ehotel/services">Services</a></li>
+							<li><a id="restaurant" href="/ehotel/restaurant">Restaurant</a></li>
+							<li><a id="testimonials" href="/ehotel/testimonials">Testimonials</a></li>
+							<li><a id="gallery" href="/ehotel/gallery">Gallery</a></li>
 						</ul>
 					</div>
 				</div>

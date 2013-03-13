@@ -1,52 +1,44 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ page session="false" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-	<title>Reservierung aendern</title>
+
+<jsp:include page="header_big.jsp"/>
 	
-  <link href="../../resources/jquery-ui-1.10.1.custom.min.css" rel="stylesheet" type="text/css" />
+  	<link href="../../resources/jquery-ui-1.10.1.custom.min.css" rel="stylesheet" type="text/css" />
     <script src="../../resources/jquery-1.9.1.js"></script>
     <script src="../../resources/jquery-ui-1.10.1.custom.js"></script>
-<!--     <script src="js/jquery-ui-1.10.1.custom.min.js"></script>
- -->    <script> 
+	<script> 
       $(document).ready(function(){ 
     	$('#anreise').datepicker({ dateFormat: 'dd.mm.yy', minDate: 0});
         $('#abreise').datepicker({ dateFormat: 'dd.mm.yy', minDate: 1});
         }); 
+      
+		document.getElementById("booking").setAttribute("class", "current");
+      
     </script> 
-</head>
-
-<body>
-<h1>
-	Hello ehotel!  
-</h1>
-
+<div id="content">
 <p><font color="#FF0000">${felderError}</font></p>
-<form method="POST" action="reservierung_update">
+<form method="POST" action="../../reservierung/update">
  <table>
  <tr>
    <td>ZimmerTyp:</td>
    <td><select name="zk_typ">
 			<c:forEach var="zk" items="${zimmerkategorieliste}">				
-				<option <c:if test="${zimmerkategorie == zk.zimmertyp}">selected</c:if> value="${zk.zimmertyp}">${zk.zimmertyp}</option>        
+				<option <c:if test="${zk.zimmertyp == zimmerkategorie}">selected</c:if> value="${zk.zimmertyp}">${zk.zimmertyp}</option>        
       		</c:forEach>
   		</select>
    </td>
  </tr>
  <tr>
  <td>Anreise:</td>
- <td><input type="text" name="anreise" id="anreise" value="${min}"/></td>
+ <td><input type="text" name="startdatum" id="anreise" value="${min}"/></td>
  </tr>
  <tr>
  <td>Abreise:</td>
- <td><input type="text" name="abreise" id="abreise" value="${max}"/></td>
+ <td><input type="text" name="enddatum" id="abreise" value="${max}"/></td>
  </tr>
  </table>
- <input type="submit"/>
+ <input type="hidden" name="id" value="${reservierung.id}" />
+ <input type="submit" value="Reservierung aendern"/>
 </form>
 
 <br>
@@ -54,7 +46,7 @@
   <form action="../../freie_services_suche_extra" method="POST">
 				<c:if test="${reservierung.status=='Aktiv'}">
 					<input type="hidden" name="reservierung_id" value="${reservierung.id}" />
-					<input type="submit" value="service buchen"/>
+					<input type="submit" value="service buchen"/><br/>
 				</c:if>
   </form>
   
@@ -67,7 +59,7 @@
    <td>Startdatum</td>
    <td>Enddatum</td>
    <td>Löschen</td>
-   <td>Ändern</td>
+<!--    <td>Ändern</td> -->
   </tr>
 	<c:forEach var="service" items="${reservierungserviceliste}">
 		<jsp:useBean id="start_service" class="java.util.Date" />
@@ -80,14 +72,17 @@
 			<td>${service.zusatzService.preis}</td>
 			<td><fmt:formatDate value="${start_service}" pattern="dd.MM.yyyy" /></td>
 			<td><fmt:formatDate value="${ende_service}" pattern="dd.MM.yyyy" /></td>
-			<td><form action="../reservierungservice/loeschen" method="POST">
+			<td><form id="loeschen" action="../reservierungservice/loeschen" method="POST">
 			<input type="hidden" name="service_id" value="${service.id}" />
-			<input type="submit" value="löschen"/></form>
+			<a class="form-link" onclick="document.getElementById('loeschen').submit()">loeschen</a>
+			</form>
 			</td>
-			<td><form action="../reservierungservice/aendern" method="POST">
+<%-- 			<td><form id="aendern" action="../reservierungservice/aendern" method="POST">
 			<input type="hidden" name="service_id" value="${service.id}" />
-			<input type="submit" value="ändern"/></form>
-			</td>
+			<input type="hidden" value="ändern"/>
+			<a class="form-link" onclick="document.getElementById('aendern').submit()">aendern</a>
+			</form>
+			</td> --%>
 		</tr>
 	</c:forEach>  
   </table>
@@ -95,6 +90,6 @@
   <c:if test="${empty reservierungserviceliste}">
   <p> Keine ZusatzServices gebucht </p>
   </c:if>
-
-</body>
-</html>
+</div>  
+  
+<jsp:include page="footer.jsp"/>

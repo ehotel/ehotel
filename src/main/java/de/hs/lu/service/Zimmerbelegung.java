@@ -16,9 +16,15 @@ public class Zimmerbelegung {
 	@Autowired
 	private ZimmerkategorieDao zimmerkategorieDao;
 	
-	
 	@Transactional
 	public Zimmer freieZimmerSuche(String zimmertyp, long start, long ende)
+	{
+		return freieZimmerSuche(zimmertyp, start, ende, -1l);
+	}
+	
+	
+	@Transactional
+	public Zimmer freieZimmerSuche(String zimmertyp, long start, long ende, long reservierung_id)
 	{
 		Zimmerkategorie zk = zimmerkategorieDao.findZimmerkategorieByZimmertyp(zimmertyp);
 			
@@ -27,7 +33,7 @@ public class Zimmerbelegung {
 			//wir schauen ob irgendein zimmer frei ist, das erste wird zurück gegeben
 			for(Zimmer z:zk.getZimmer())
 			{
-				if(zimmerIstFrei(z, start, ende))
+				if(zimmerIstFrei(z, start, ende, reservierung_id))
 				{
 					return z;
 				}
@@ -37,11 +43,16 @@ public class Zimmerbelegung {
 		return null;
 	}
 	
-	public boolean zimmerIstFrei(Zimmer zimmer, long start, long ende)
+	public boolean zimmerIstFrei(Zimmer zimmer, long start, long ende, long reservierung_id)
 	{
 		//finden wir eine reservierung die überlappt?
 		for(Reservierung r: zimmer.getReservierungen())
 		{
+			if(r.getId() == reservierung_id)
+			{
+				continue;
+			}
+			
 			if(r.getStatus() == Status.Storniert)
 			{
 				continue;

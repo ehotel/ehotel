@@ -1,4 +1,8 @@
-<jsp:include page="header_big_services.jsp"/>
+<jsp:include page="header_big.jsp"/>
+
+<script type="text/javascript">
+	document.getElementById("services").setAttribute("class", "current");
+</script>
 
 <div class="wrapper">
 			<div class="aside maxheight">
@@ -67,6 +71,5 @@
 				</div>
 			</div>
 		</div>
-	</div>
 
 <jsp:include page="footer.jsp"/>

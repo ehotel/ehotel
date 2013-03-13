@@ -1,4 +1,8 @@
-<jsp:include page="header_big_restaurant.jsp"/>
+<jsp:include page="header_big.jsp"/>
+
+<script type="text/javascript">
+	document.getElementById("restaurant").setAttribute("class", "current");
+</script>
 
 <div class="container">
 			<div class="aside maxheight">
@@ -7,17 +11,16 @@
 					<div class="inner">
 						<h3>Menu</h3>
 						<ul class="list3">
-					 		<li><a href="#">Specials</a></li>
-							<li><a href="#">Lunch</a></li>
-							<li><a href="#">Diner</a></li>
-							<li><a href="#">Beverage</a></li>
-							<li><a href="#">Winery</a></li>
-							<li><a href="#">Dessert</a></li>
-							<li><a href="#">Italian</a></li>
-							<li><a href="#">French</a></li>
-							<li><a href="#">German</a></li>
+					 		<li>Specials</li>
+							<li>Lunch</li>
+							<li>Diner</li>
+							<li>Beverage</li>
+							<li>Winery</li>
+							<li>Dessert</li>
+							<li>Italian</li>
+							<li>French</li>
+							<li>German</li>
 						</ul>
-						<div class="button"><span><span><a href="#">Make Reservation</a></span></span></div>
 					</div>
 				</div>
 <!-- box end -->
@@ -41,9 +44,5 @@
 			</div>
 			<div class="clear"></div>
 		</div>
-	</div>
+		
 <jsp:include page="footer.jsp"/>
-
-
-
-

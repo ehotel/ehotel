@@ -1,15 +1,18 @@
 package de.hs.lu.controller;
 
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import de.hs.lu.orm.dao.ZimmerkategorieDao;
 
 /**
  * Handles requests for the application home page.
@@ -18,17 +21,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	
+	@Autowired
+	private ZimmerkategorieDao zkDao;
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = {"/" ,"/ehotel", "/home"}, method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! the client locale is "+ locale.toString());
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
+			
+		model.addAttribute("zimmerkategorien", zkDao.findAll());
 		
 		return "home";
 	}
@@ -56,5 +56,28 @@ public class HomeController {
 		model.addAttribute("meldung", "Sie haben sich erfolgreich ausgeloggt");
 		
 		return "meldung";
+	}
+	
+	@RequestMapping(value = "/login_user", method = RequestMethod.GET)
+	public String login(Model model) {
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		
+		if(authentication != null && authentication.isAuthenticated() && !authentication.getName().contentEquals("anonymousUser"))
+		{
+			logger.info(authentication.getName());
+			model.addAttribute("meldung", "Sie sind bereits eingeloggt");
+			return "meldung";
+		}				
+		
+		return "login_user";
+	}
+	
+	@RequestMapping(value = "/admin", method = RequestMethod.GET)
+	public String admin(Model model) {
+				
+		model.addAttribute("meldung", "Waehlen Sie oben eines der Menupunkte aus!");
+		
+		return "meldung_admin";
 	}
 }

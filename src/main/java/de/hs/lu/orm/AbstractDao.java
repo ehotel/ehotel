@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.transaction.annotation.Transactional;
 
 @Configurable
-public abstract class AbstractDao<T> {
+public abstract class AbstractDao<T> {//implements DaoInterface<T> {
 	
     @PersistenceContext
     protected EntityManager entityManager;

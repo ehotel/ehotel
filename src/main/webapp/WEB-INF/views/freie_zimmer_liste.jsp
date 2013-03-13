@@ -1,20 +1,19 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<%@ page session="false" %>
-<html>
-<head>
-	<title>Freie Zimmer Liste</title>
-</head>
-<body>
-<h1>
-	Hello ehotel!  
-</h1>
+
+<jsp:include page="header_big.jsp"/>
+
+<script type="text/javascript">
+	document.getElementById("booking").setAttribute("class", "current");
+</script>
+
+<div id="content">
 <p><font color="#FF0000">${felderError}</font></p>
- <form action="reservieren" method="POST">
+ <form id="reservieren" action="reservieren" method="POST">
  <table border="1">
    <tr>
-   <td>ZimmerTyp</td>
-   <td>ZimmerPreis</td>
+   <td>Zimmertyp</td>
+   <td>Zimmerpreis</td>
    <sec:authorize ifAnyGranted="ROLE_ADMIN">
     	<td>Username</td>
     </sec:authorize>
@@ -39,7 +38,7 @@
   		</td>
    	</sec:authorize>
 	<td>
-	<input type="submit" value="reservieren"/>
+	<a class="form-link" onclick="document.getElementById('reservieren').submit()">reservieren</a>
 	<input type="hidden" name="anreise" value="${anreise}"/>
 	<input type="hidden" name="abreise" value="${abreise}"/>
 	<input type="hidden" name="zimmer_id" value="${zimmer.id}"/>
@@ -49,5 +48,6 @@
   </c:if>
   </table>
   </form>
-</body>
-</html>
+</div>
+
+<jsp:include page="footer.jsp"/>

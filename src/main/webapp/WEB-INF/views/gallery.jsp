@@ -1,5 +1,7 @@
 <jsp:include page="header_middle_gallery.jsp"/>
 
+
+
 <div class="container">
 			<div class="aside maxheight">
 <!-- box begin -->
