@@ -31,23 +31,22 @@
 			<td>${reservierung.status}</td>
 			<td><form id="stornieren" action="../../admin/reservierung/stornieren/${reservierung.id}" method="POST">
 			<a style="cursor:pointer;text-decoration:underline" onclick="document.getElementById('extra').submit()">stornieren</a>
-			<!-- <input type="submit" value="Stornieren"/> --></form>
+			</form>
 			</td>
 			<td><form id="details" action="../../reservierung/details/${reservierung.id}" method="POST">
 			<a style="cursor:pointer;text-decoration:underline" onclick="document.getElementById('details').submit()">Details</a>
-			<!-- <input type="submit" value="Details"/> --></form>
+			</form>
 			</td>
 			<td><form id="extra" action="../../freie_services_suche_extra"  method="POST">
 				<c:if test="${reservierung.status=='Aktiv'}">
 					<input type="hidden" name="reservierung_id" value="${reservierung.id}" />
 					<a style="cursor:pointer;text-decoration:underline" onclick="document.getElementById('extra').submit()">Service buchen</a>
-					<!-- <input type="submit" value="Service buchen"/> -->
 				</c:if>
 				</form>
 			</td>
 			<td><form id="loeschen" action="../../reservierung/loeschen/${reservierung.id}" method="POST">
 			<a style="cursor:pointer;text-decoration:underline" onclick="document.getElementById('loeschen').submit()">Loeschen</a>
-			<!-- <input type="submit" value="Loeschen"/> --></form>
+			</form>
 			</td>
 		</tr>
 	</c:forEach>  

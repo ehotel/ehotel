@@ -29,7 +29,7 @@
       
     </script> 
 
-
+<div id="content">
 <p><font color="#FF0000">${felderError}</font></p>
 <form method="POST" action="zimmer_suche">
  <fieldset>
@@ -48,6 +48,7 @@
  <input type="submit"/>
  </fieldset>
 </form>
+</div>
 <div style="height:100px"></div>
 
 <jsp:include page="footer.jsp"/>

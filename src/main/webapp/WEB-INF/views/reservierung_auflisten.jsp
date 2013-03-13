@@ -6,11 +6,10 @@
 <script type="text/javascript">
 	document.getElementById("booking").setAttribute("class", "current");
 </script>
-
+<div id="content">
 <p><font color="#FF0000">${felderError}</font></p>
  <table border="1">
    <tr>
-   <td>ReservierungsId</td>
    <td>Zimmertyp</td>
    <td>Startdatum</td>
    <td>Enddatum</td>
@@ -25,28 +24,28 @@
 		<jsp:useBean id="ende" class="java.util.Date" />
 		<jsp:setProperty name="ende" property="time" value="${reservierung.enddatum}" />
 	  	<tr>
-			<td>${reservierung.id}</td>
 			<td>${reservierung.zimmer.zimmerkategorie.zimmertyp}</td>
 			<td><fmt:formatDate value="${start}" pattern="dd.MM.yyyy" /></td>
 			<td><fmt:formatDate value="${ende}" pattern="dd.MM.yyyy" /></td>
 			<td>${reservierung.status}</td>
-			<td><form action="../reservierung/stornieren/${reservierung.id}" method="POST">
+			<td><form id="stornieren" action="../reservierung/stornieren/${reservierung.id}" method="POST">
 				<c:if test="${reservierung.status=='Aktiv'}">
-					<input type="submit" value="stornieren"/>
+					<a class="form-link" onclick="document.getElementById('stornieren').submit()">stornieren</a>
 				</c:if></form>
 			</td>
-			<td><form action="../reservierung/details/${reservierung.id}" method="POST">
-			<input type="submit" value="details"/></form></td>
-			<td><form action="../freie_services_suche_extra" method="POST">
+			<td><form id="details" action="../reservierung/details/${reservierung.id}" method="POST">
+			<a class="form-link" onclick="document.getElementById('details').submit()">Details</a>
+			</form></td>
+			<td><form id="extra_service" action="../freie_services_suche_extra" method="POST">
 				<c:if test="${reservierung.status=='Aktiv'}">
 					<input type="hidden" name="reservierung_id" value="${reservierung.id}" />
-					<input type="submit" value="service buchen"/>
+					<a class="form-link" onclick="document.getElementById('extra_service').submit()">Service buchen</a>
 				</c:if>
 				</form>
 			</td>
 		</tr>
 	</c:forEach>  
   </table>
-
+</div>
 <jsp:include page="footer.jsp"/>
 

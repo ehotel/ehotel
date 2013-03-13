@@ -8,7 +8,7 @@
 <script type="text/javascript">
 	document.getElementById("booking").setAttribute("class", "current");
 </script>
-
+<div id="content">
 <p><font color="#FF0000">${felderError}</font></p>
  <table border="1">
    <tr>
@@ -36,11 +36,13 @@
 			<td><fmt:formatDate value="${start}" pattern="dd.MM.yyyy" /></td>
 			<td><fmt:formatDate value="${ende}" pattern="dd.MM.yyyy" /></td>
 			<td>${reservierung.status}</td>
-			<td><form action="../../reservierung/stornieren/${reservierung.id}" method="POST">
-			<input type="submit" value="stornieren"/></form>
+			<td><form id="stornieren" action="../../reservierung/stornieren/${reservierung.id}" method="POST">
+			<a class="form-link" onclick="document.getElementById('stornieren').submit()">stornieren</a>				
+			</form>
 			</td>
-			<td><form action="../../reservierung/aendern/${reservierung.id}" method="POST">
-			<input type="submit" value="ändern"/></form>
+			<td><form id="aendern" action="../../reservierung/aendern/${reservierung.id}" method="POST">
+				<a class="form-link" onclick="document.getElementById('aendern').submit()">aendern</a>
+			</form>
 			</td>
 		</tr>
   </table>
@@ -69,9 +71,10 @@
 			<td>${service.zusatzService.preis}</td>
 			<td><fmt:formatDate value="${start_service}" pattern="dd.MM.yyyy" /></td>
 			<td><fmt:formatDate value="${ende_service}" pattern="dd.MM.yyyy" /></td>
-			<td><form action="../reservierungservice/loeschen" method="POST">
+			<td><form id="loeschen" action="../reservierungservice/loeschen" method="POST">
 			<input type="hidden" name="service_id" value="${service.id}" />
-			<input type="submit" value="löschen"/></form>
+				<a class="form-link" onclick="document.getElementById('loeschen').submit()">loeschen</a>
+			</form>
 			</td>
 		</tr>
 	</c:forEach>  
@@ -80,5 +83,5 @@
   <c:if test="${empty reservierungserviceliste}">
   <p> Keine ZusatzServices gefunden </p>
   </c:if>
-
+</div>
 <jsp:include page="footer.jsp"/>

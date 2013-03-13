@@ -31,28 +31,31 @@
       
     </script> 
 
+<div id="content">
 <p><font color="#FF0000">${felderError}</font></p>
    <c:if test="${empty zusatzservices}">
     <p>Keine freien ZusatzServices gefunden</p>
   </c:if>
   <c:if test="${not empty zusatzservices}">
 	<form method="POST" action="service_reservieren">
- <fieldset>
-<legend>Service Suche</legend>
-	<label>Service:</label>
-	   <select name="service">
-			<c:forEach var="z" items="${zusatzservices}">
-				<option value="${z.id}">${z.name}</option>        
-	    	</c:forEach>
-	  	</select><br><br>
-	<label>Anreise:</label>
-	<input type="text" name="anreise" id="anreise"/><br><br>
-	<label>Abreise:</label>
-	<input type="text" name="abreise" id="abreise"/><br><br>
-	<input type="submit"/>
-	</fieldset>
+	 	<fieldset>
+			<legend>Service Suche</legend>
+			<label>Service:</label>
+		   	<select name="service">
+				<c:forEach var="z" items="${zusatzservices}">
+					<option value="${z.id}">${z.name}</option>        
+		    	</c:forEach>
+		  	</select><br><br>
+			<label>Anreise:</label>
+			<input type="text" name="anreise" id="anreise"/><br><br>
+			<label>Abreise:</label>
+			<input type="text" name="abreise" id="abreise"/><br><br>
+			<input type="submit"/>
+		</fieldset>
+	</form>	
   </c:if>
-  <div style="height:100px"></div>
+</div>  
+<div style="height:100px"></div>
 
 <jsp:include page="footer.jsp"/>
 

@@ -37,8 +37,8 @@
 					<div class="inner">
 						<h3>Reservation:</h3>
 						<form method="POST" id="suche-form" action="zimmer_suche">
-								<div class="field"><label>Check In:</label><input type="text" name="anreise" id="anreise"/></div>
-								<div class="field"><label>Check Out:</label><input type="text" name="abreise" id="abreise"/></div>
+								<div class="field"><label>Check In:</label><input type="text" name="anreise" id="anreise" size="14"/></div>
+								<div class="field"><label>Check Out:</label><input type="text" name="abreise" id="abreise" size="14"/></div>
 								<div class="field"> Room type:&nbsp; <select name="zk_typ">
 															<c:forEach var="zk" items="${zimmerkategorien}">
 															<option value="${zk.zimmertyp}">${zk.zimmertyp}</option>        
@@ -51,7 +51,7 @@
 				</div>
 <!-- box end -->
 			</div>
-			<div class="content">
+			<div class="content" style="font-size:0.75em">
 				<div class="indent">
 					<h2>FiveStar is happy to welcome you!</h2>
 					<img class="img-indent png" alt="" src="resources/images/1page-img1.png" />

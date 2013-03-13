@@ -15,7 +15,7 @@
 		document.getElementById("booking").setAttribute("class", "current");
       
     </script> 
-
+<div id="content">
 <p><font color="#FF0000">${felderError}</font></p>
 <form method="POST" action="../../reservierung/update">
  <table>
@@ -46,7 +46,7 @@
   <form action="../../freie_services_suche_extra" method="POST">
 				<c:if test="${reservierung.status=='Aktiv'}">
 					<input type="hidden" name="reservierung_id" value="${reservierung.id}" />
-					<input type="submit" value="service buchen"/>
+					<input type="submit" value="service buchen"/><br/>
 				</c:if>
   </form>
   
@@ -59,7 +59,7 @@
    <td>Startdatum</td>
    <td>Enddatum</td>
    <td>Löschen</td>
-   <td>Ändern</td>
+<!--    <td>Ändern</td> -->
   </tr>
 	<c:forEach var="service" items="${reservierungserviceliste}">
 		<jsp:useBean id="start_service" class="java.util.Date" />
@@ -72,14 +72,17 @@
 			<td>${service.zusatzService.preis}</td>
 			<td><fmt:formatDate value="${start_service}" pattern="dd.MM.yyyy" /></td>
 			<td><fmt:formatDate value="${ende_service}" pattern="dd.MM.yyyy" /></td>
-			<td><form action="../reservierungservice/loeschen" method="POST">
+			<td><form id="loeschen" action="../reservierungservice/loeschen" method="POST">
 			<input type="hidden" name="service_id" value="${service.id}" />
-			<input type="submit" value="löschen"/></form>
+			<a class="form-link" onclick="document.getElementById('loeschen').submit()">loeschen</a>
+			</form>
 			</td>
-			<td><form action="../reservierungservice/aendern" method="POST">
+<%-- 			<td><form id="aendern" action="../reservierungservice/aendern" method="POST">
 			<input type="hidden" name="service_id" value="${service.id}" />
-			<input type="hidden" value="ändern"/></form>
-			</td>
+			<input type="hidden" value="ändern"/>
+			<a class="form-link" onclick="document.getElementById('aendern').submit()">aendern</a>
+			</form>
+			</td> --%>
 		</tr>
 	</c:forEach>  
   </table>
@@ -87,6 +90,6 @@
   <c:if test="${empty reservierungserviceliste}">
   <p> Keine ZusatzServices gebucht </p>
   </c:if>
-  
+</div>  
   
 <jsp:include page="footer.jsp"/>

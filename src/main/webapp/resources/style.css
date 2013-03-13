@@ -162,4 +162,4 @@ fieldset {padding:20px}
 
 #registrieren fieldset {border:none}
 
-
+.form-link {cursor:pointer; text-decoration:underline}

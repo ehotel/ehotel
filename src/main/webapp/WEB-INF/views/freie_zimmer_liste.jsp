@@ -7,6 +7,7 @@
 	document.getElementById("booking").setAttribute("class", "current");
 </script>
 
+<div id="content">
 <p><font color="#FF0000">${felderError}</font></p>
  <form action="reservieren" method="POST">
  <table border="1">
@@ -47,5 +48,6 @@
   </c:if>
   </table>
   </form>
+</div>
 
 <jsp:include page="footer.jsp"/>

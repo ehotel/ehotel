@@ -34,8 +34,8 @@
 					<div class="inner">
 						<h3>Reservation:</h3>
 						<form method="POST" id="suche-form" action="zimmer_suche">
-								<div class="field"><label>Check In:</label><input type="text" name="anreise" id="anreise"/></div>
-								<div class="field"><label>Check Out:</label><input type="text" name="abreise" id="abreise"/></div>
+								<div class="field"><label>Check In:</label><input type="text" name="anreise" id="anreise" size="14"/></div>
+								<div class="field"><label>Check Out:</label><input type="text" name="abreise" id="abreise" size="14"/></div>
 								<div class="field"> Room type: 
 									<select name="zk_typ">
 										<c:forEach var="zk" items="${zimmerkategorien}">

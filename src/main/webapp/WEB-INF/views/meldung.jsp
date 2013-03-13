@@ -2,7 +2,8 @@
 
 <jsp:include page="header_big.jsp"/>
 
-<P>${meldung}</P>
-
+<div id="content">
+	<p>${meldung}</p>
+</div>
 <jsp:include page="footer.jsp"/>
 

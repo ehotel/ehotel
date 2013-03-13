@@ -72,4 +72,12 @@ public class HomeController {
 		
 		return "login_user";
 	}
+	
+	@RequestMapping(value = "/admin", method = RequestMethod.GET)
+	public String admin(Model model) {
+				
+		model.addAttribute("meldung", "Waehlen Sie oben eines der Menupunkte aus!");
+		
+		return "meldung_admin";
+	}
 }
