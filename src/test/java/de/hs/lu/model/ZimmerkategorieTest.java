@@ -11,7 +11,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import de.hs.lu.orm.dao.BewertungDao;
 import de.hs.lu.orm.dao.ZimmerDao;
 import de.hs.lu.orm.dao.ZimmerkategorieDao;
 
@@ -24,16 +23,11 @@ public class ZimmerkategorieTest {
 	
 	@Autowired
 	private ZimmerkategorieDao zimmerkategorieDao;
-	
-	@Autowired
-	private BewertungDao bewertungDao;
-	
+
 	private Zimmerkategorie zk = new Zimmerkategorie();
 	
 	private Zimmer z = new Zimmer();
 	
-	private Bewertung b = new Bewertung();
-
 	@Before
 	@Transactional
 	public void setUp() throws Exception {
@@ -47,13 +41,9 @@ public class ZimmerkategorieTest {
 		z.setZimmerNr(667);
 		z.setZimmerkategorie(zk);
 		zimmerDao.persist(z);
+		zimmerDao.flush();
+
 		
-		//Bewertung b = new Bewertung();
-		b.setBewertungspunkte(5);
-		b.setText("best zimmer ever");
-		b.setZimmerkategorie(zk);
-		bewertungDao.persist(b);
-		bewertungDao.flush();
 	}
 
 	@After
@@ -67,8 +57,7 @@ public class ZimmerkategorieTest {
 		Zimmerkategorie zk2 = zimmerkategorieDao.findById(zk.getId());
 		
 		assertNotNull(zk2);
-		assertEquals(b.getId(), zk2.getBewertungen().iterator().next().getId());
-		assertEquals(z.getId(), zk2.getZimmer().iterator().next().getId());		
+		assertEquals(z.getId(), zk2.getZimmer().iterator().next().getId());
 	
 	}
 

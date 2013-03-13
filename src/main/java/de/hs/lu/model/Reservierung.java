@@ -47,7 +47,7 @@ public class Reservierung {
 	private Set<ReservierungsService> reservierungsServices = new HashSet<ReservierungsService>();
 	
 	@OneToOne(mappedBy="reservierung")
-	private Set<Bewertung> bewertungen = new HashSet<Bewertung>();
+	private Bewertung bewertung;
 
 	public Status getStatus() {
 		return status;
@@ -107,12 +107,12 @@ public class Reservierung {
 		this.reservierungsServices = reservierungsServices;
 	}
 	
-	public Set<Bewertung> getBewertungen() {
-		return bewertungen;
+	public Bewertung getBewertungen() {
+		return bewertung;
 	}
 
-	public void setBewertungen(Set<Bewertung> bewertungen) {
-		this.bewertungen = bewertungen;
+	public void setBewertungen(Bewertung bewertung) {
+		this.bewertung = bewertung;
 	}	
 
 }
