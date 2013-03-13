@@ -22,11 +22,16 @@
    <td>Status</td>
    <td>Stornieren</td>
    <td>Aendern</td>
+   <td>Bewertung</td>
   </tr>
 		<jsp:useBean id="start" class="java.util.Date" />
 		<jsp:setProperty name="start" property="time" value="${reservierung.startdatum}" />
 		<jsp:useBean id="ende" class="java.util.Date" />
 		<jsp:setProperty name="ende" property="time" value="${reservierung.enddatum}" />
+		
+		<jsp:useBean id="ende_heute" class="java.util.Date" />
+		<jsp:setProperty name="ende_heute" property="time" />
+				
 	  	<tr>
 			<td>${reservierung.id}</td>
 			<sec:authorize ifAnyGranted="ROLE_ADMIN">
@@ -45,10 +50,16 @@
 			</form>
 			</td>
 			<td><form id="bewerten" action="../../bewertung/anlegen" method="POST">
-				<c:if test="${reservierung.status=='Aktiv'}">
-					<input type="hidden" name="reservierung_id" value="${reservierung.id}" />
+				<input type="hidden" name="reservierung_id" value="${reservierung.id}" />
+				<c:if test="${ende < ende_heute}">
 					<a class="form-link" onclick="document.getElementById('bewerten').submit()">Zimmer bewerten</a>
 				</c:if>
+				<c:if test="${ende >= ende_heute}">				
+					<a class="form-link" onclick="document.getElementById('bewerten').submit()" contenteditable="false">Zimmer bewerten</a>
+				</c:if>
+				
+<%-- 				<td><fmt:formatDate value="${ende_heute}" pattern="dd.MM.yyyy" /></td> --%>
+				
 				</form>
 			</td>
 		</tr>

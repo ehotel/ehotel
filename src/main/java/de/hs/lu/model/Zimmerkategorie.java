@@ -22,10 +22,7 @@ public class Zimmerkategorie {
 	
 	@OneToMany(mappedBy="zimmerkategorie")
 	private Set<Zimmer> zimmer = new HashSet<Zimmer>();
-	
-	@OneToMany(mappedBy="zimmerkategorie")
-	private Set<Bewertung> bewertungen = new HashSet<Bewertung>();
-	
+		
 	public String getZimmertyp() {
 		return zimmertyp;
 	}
@@ -58,12 +55,4 @@ public class Zimmerkategorie {
 		this.zimmer = zimmer;
 	}
 
-	public Set<Bewertung> getBewertungen() {
-		return bewertungen;
-	}
-
-	public void setBewertungen(Set<Bewertung> bewertungen) {
-		this.bewertungen = bewertungen;
-	}	
-	
 }

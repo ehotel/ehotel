@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,9 @@ public class Reservierung {
 	
 	@OneToMany(mappedBy="reservierung", fetch=FetchType.EAGER)
 	private Set<ReservierungsService> reservierungsServices = new HashSet<ReservierungsService>();
+	
+	@OneToOne(mappedBy="reservierung")
+	private Set<Bewertung> bewertungen = new HashSet<Bewertung>();
 
 	public Status getStatus() {
 		return status;
@@ -102,5 +106,13 @@ public class Reservierung {
 	public void setReservierungsServices(Set<ReservierungsService> reservierungsServices) {
 		this.reservierungsServices = reservierungsServices;
 	}
+	
+	public Set<Bewertung> getBewertungen() {
+		return bewertungen;
+	}
+
+	public void setBewertungen(Set<Bewertung> bewertungen) {
+		this.bewertungen = bewertungen;
+	}	
 
 }

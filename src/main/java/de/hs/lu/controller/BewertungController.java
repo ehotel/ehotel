@@ -76,8 +76,13 @@ public class BewertungController {
 		
 		
 		Bewertung bw = new Bewertung();
+		bw.setGast(gastDao.findGastByBenutzername(username));
+		bw.setBewertungspunkte(bw_punkte);
+		bw.setText(bw_text);
+		bw.setDatum(System.currentTimeMillis());
 		model.addAttribute("meldung", "Reservierungs ID:" + r_id);
 		return "meldung";
 	}
 	
+
 }
