@@ -25,9 +25,9 @@
 		<div class="row-1">
 			<div class="wrapper">
 				<div class="logo">
-					<h1><a href="/ehotel">EHOTEL<i>Y</i></a></h1>
+					<h1><a href="/ehotel">E-HOTEL<i>Y</i></a></h1>
 					<em>Hotel</em>
-					<strong>True Luxury</strong>
+					<strong>True Comfort</strong>
 				</div>
 				<div class="othermenu">
 					<div class="fright"><a href="/ehotel/menu">My E-Hotel<i>Y</i></a> | Anfahrt | Kontakt | Impressum</div><br/>

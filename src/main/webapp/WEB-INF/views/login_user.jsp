@@ -12,28 +12,27 @@ function Event_Key(event)
 
 			<div class="content">
 				<div class="indent">
-					<h2>Willkommen to E-HotelY</h2>
+ 					<h2>Willkommen to E-HotelY</h2>
 					<div class="h31"> Loggen Sie sich ein mit Benutzernamen und Password</div>
-					<div class="h31"> </div>
-					<div class="line-hor-lang"></div>
+					<div class="line-hor-lang" style="margin:10px 0px"></div>
 					<c:if test="${not empty error}">
 						Your login attempt was not successful, try again.<br /> Caused :
 						${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
 					</c:if>
 					<form id="login-form" method="post" action="j_spring_security_check" onkeydown="Event_Key(event);">			
-						<fieldset>
+						<fieldset style="padding:10px">
 						<div class="field">
 							Benutzername<br/><br/><input type="text"  name="j_username" />
 						</div>
 						<div class="field">
 							<br/>Password <br/><br/><input type="password" name="j_password"  /><br/>
-							Forgot your <a href="reset_pwd">password</a>?
+							<p style="margin:10px 0px">Forgot your <a href="reset_pwd">password?</a></p>
 						</div>
 						<div style="float:left;">
 							<div class="button">
 								<span><span><a style="cursor:pointer;" onclick="document.getElementById('login-form').submit()">Einloggen</a></span></span>
 							</div>
-						</div><br/><br/><br/><br/>
+						</div><br/><br/><br/>
 						<div class="field">New to E-HotelY?</div>
 						<div style="float:left;">
 							<div class="button">
@@ -42,9 +41,10 @@ function Event_Key(event)
 						</div>
 						</fieldset>
 					</form>
+				</div>
 				</div>								      
 				<div class="clear"></div>				
-				</div>
+
 			</div>
 		</div>
 	</div>
