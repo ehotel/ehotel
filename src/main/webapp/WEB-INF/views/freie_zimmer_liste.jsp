@@ -9,11 +9,11 @@
 
 <div id="content">
 <p><font color="#FF0000">${felderError}</font></p>
- <form action="reservieren" method="POST">
+ <form id="reservieren" action="reservieren" method="POST">
  <table border="1">
    <tr>
-   <td>ZimmerTyp</td>
-   <td>ZimmerPreis</td>
+   <td>Zimmertyp</td>
+   <td>Zimmerpreis</td>
    <sec:authorize ifAnyGranted="ROLE_ADMIN">
     	<td>Username</td>
     </sec:authorize>
@@ -38,7 +38,7 @@
   		</td>
    	</sec:authorize>
 	<td>
-	<input type="submit" value="reservieren"/>
+	<a class="form-link" onclick="document.getElementById('reservieren').submit()">reservieren</a>
 	<input type="hidden" name="anreise" value="${anreise}"/>
 	<input type="hidden" name="abreise" value="${abreise}"/>
 	<input type="hidden" name="zimmer_id" value="${zimmer.id}"/>

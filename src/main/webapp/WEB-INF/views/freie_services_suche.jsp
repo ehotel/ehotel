@@ -37,7 +37,7 @@
     <p>Keine freien ZusatzServices gefunden</p>
   </c:if>
   <c:if test="${not empty zusatzservices}">
-	<form method="POST" action="service_reservieren">
+	<form id="service_suche" method="POST" action="service_reservieren">
 	 	<fieldset>
 			<legend>Service Suche</legend>
 			<label>Service:</label>
@@ -50,7 +50,7 @@
 			<input type="text" name="anreise" id="anreise"/><br><br>
 			<label>Abreise:</label>
 			<input type="text" name="abreise" id="abreise"/><br><br>
-			<input type="submit"/>
+			<div class="button" style="text-align:left"><span><span><a class="form-link" onclick="document.getElementById('service_suche').submit()">buche Service</a></span></span></div>
 		</fieldset>
 	</form>	
   </c:if>
