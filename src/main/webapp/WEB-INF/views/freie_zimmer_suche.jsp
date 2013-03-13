@@ -34,7 +34,7 @@
 <form method="POST" action="zimmer_suche">
  <fieldset>
  <legend>Zimmer suchen</legend>
-   <label>ZimmerTyp:</label>
+   <label>Zimmertyp:</label>
    <select name="zk_typ">
 	<option value="egal">-- egal --</option>
 		<c:forEach var="zk" items="${zimmerkategorien}">
@@ -45,7 +45,7 @@
  <input type="text" name="anreise" id="anreise"/><br><br>
  <label>Abreise:</label>
  <input type="text" name="abreise" id="abreise"/><br><br>
- <input type="submit"/>
+ <div class="button" style="text-align:left"><span><span style="text-align:center"><a class="form-link" onclick="document.getElementById('service_suche').submit()">Suche Zimmer</a></span></span></div> 
  </fieldset>
 </form>
 </div>

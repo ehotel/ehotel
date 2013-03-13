@@ -6,7 +6,7 @@ function Event_Key(event)
 {  
   if(event.keyCode == 13)
   {
-	document.getElementById('login-form').submit()
+	document.getElementById('login-form').submit();
   }  
 }</script>
 
@@ -48,4 +48,6 @@ function Event_Key(event)
 			</div>
 		</div>
 	</div>
+
 <jsp:include page="footer.jsp"/>
+

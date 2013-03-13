@@ -27,18 +27,18 @@ function Event_Key(event)
 				<label>Nachname:</label>
 				<input type="text" name="nachname" value="${gast.vorname}" /><br/>
 				<font color="#FF0000">${emailError}</font>
-				<label>E-Mail:</label><input type="text" name="email" size=40 maxlength=40 value="${gast.email}" /><br/>
+				<label>E-Mail:</label><input type="text" name="email" value="${gast.email}" /><br/>
 				<font color="#FF0000">${benutzernameError}</font>
 				<label>Benutzername:</label>
-				<input <c:if test="${modus=='edit'}">readonly</c:if> type="text" name="benutzername" value="${gast.benutzername}" size=40 maxlength=40 /><br/>
+				<input <c:if test="${modus=='edit'}">readonly</c:if> type="text" name="benutzername" value="${gast.benutzername}" /><br/>
 				<font color="#FF0000">${passwordError}</font>
 				<label>Passoword:</label>
-				<input type="password" name="password" size=40 maxlength=40 /><br/>
-				<label>Password wiederholen:</label>
-				<input type="password" name="password2" size=40 maxlength=40 /><br/>
+				<input type="password" name="password" /><br/>
+				<label>Password best.:</label>
+				<input type="password" name="password2" /><br/>
 			</fieldset>
 			<div style="float:left;">
-				<div class="button"><span><span><a style="cursor:pointer;" onclick="document.getElementById('registrieren').submit()"><c:if test="${modus=='edit'}">Profil Updaten</c:if><c:if test="${modus=='create'}">Registrieren</c:if></a></span></span></div>
+				<div class="button"><span><span><a style="cursor:pointer;" onclick="document.getElementById('registrieren').submit()"><c:if test="${modus=='edit'}">Speichern</c:if><c:if test="${modus=='create'}">Registrieren</c:if></a></span></span></div>
 			</div>
 		</form>
 	</div>

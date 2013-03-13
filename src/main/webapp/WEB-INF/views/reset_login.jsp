@@ -12,7 +12,7 @@
 							<input type="text"  name="username" />
 						</div>
 						<div style="float:left;">
-							<br><div class="button"><span><span><a style="cursor:pointer;" onclick="document.getElementById('reset-form').submit()">Reset password </a></span></span></div>
+							<br><div class="button"><span><span><a style="cursor:pointer;" onclick="document.getElementById('reset-form').submit()">Reset</a></span></span></div>
 						</div><br><br><br>
 					</form>
 				</div>							      

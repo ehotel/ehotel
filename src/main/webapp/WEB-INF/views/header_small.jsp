@@ -32,5 +32,4 @@
 		</div>
 	<div id="content">
 		<div class="wrapper">
-			<div class="aside maxheight">
-	 		</div>
+			<div class="aside maxheight"></div>
