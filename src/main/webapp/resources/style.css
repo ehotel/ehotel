@@ -95,7 +95,7 @@ h6 {font-size:1em;color:#e7e7e7}
 .dept-list dd span {float:left;padding-right:25px}
 .dept-list dd p {text-align:left}
 /* header */
-#header .row-1 {height:136px;}
+#header .row-1 {height:150px;}
 #header .row-2 {height:390px;background:url(images/header-bg.png) no-repeat left bottom}
 #header .row-2.alt {height:278px;background:url(images/header-bg1.png) no-repeat left bottom;width:100%;padding:0;margin:0}
 #header .row-2 .indent {padding:13px 0 0 13px}
