@@ -2,7 +2,9 @@
 
 <jsp:include page="header_admin.jsp"/>
 
-<P>${meldung}</P>
+<div id="content">
+	<p>${meldung}</p>
+</div>
 
 <jsp:include page="footer.jsp"/>
 

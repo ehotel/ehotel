@@ -4,6 +4,7 @@
 	document.getElementById("restaurant").setAttribute("class", "current");
 </script>
 
+<div id="content">
 <div class="container">
 			<div class="aside maxheight">
 <!-- box begin -->
@@ -44,5 +45,6 @@
 			</div>
 			<div class="clear"></div>
 		</div>
+</div>
 		
 <jsp:include page="footer.jsp"/>

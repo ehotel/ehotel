@@ -4,6 +4,7 @@
 	document.getElementById("services").setAttribute("class", "current");
 </script>
 
+<div id="content">
 <div class="wrapper">
 			<div class="aside maxheight">
 <!-- box begin -->
@@ -71,5 +72,5 @@
 				</div>
 			</div>
 		</div>
-
+	</div>
 <jsp:include page="footer.jsp"/>

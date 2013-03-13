@@ -19,7 +19,6 @@
 <body id="page1" onload="new ElementMaxHeight();">
 <div id="main">
 <!-- HEADER -->
-	<div id="">
 		<div class="row-1">
 			<div class="wrapper">
 				<div class="logo">
@@ -51,5 +50,3 @@
 			<div style="margin-bottom:20px"></div>
 		</div>
 		
-	<div id="content">
-		<div class="wrapper" style="font-size:10pt"> 
