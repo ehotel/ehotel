@@ -298,21 +298,18 @@ public class ReservierungController {
 		Reservierung reservierung = reservierungDao.findById(id);
 		reservierung.setStatus(Status.StornierungErwuenscht);
 		reservierungDao.merge(reservierung);
+		reservierungDao.flush();
+		logger.info("stornierungswunsch entgegengenommen");
 		
-		return "redirect:admin/reservierung/liste";
+		return "redirect:/reservierung/liste";
 	}
 	
 	@RequestMapping(value = "/reservierung/aendern/{id}", method = RequestMethod.POST)
 	public String reservierung_aendern(@PathVariable("id") Long id, Model model) {
 		
 		
-		Reservierung r = reservierungDao.findById(id);
-		//model.asMap().clear();
-		
-		//model.addAttribute("reservierung_id", r.getId());
+		Reservierung r = reservierungDao.findById(id);		
 		model.addAttribute("reservierung", r);
-		//model.addAttribute("anreise", r.getStartdatum());
-		//model.addAttribute("abreise", r.getEnddatum());
 		
 		DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
 		
@@ -335,11 +332,9 @@ public class ReservierungController {
 	@RequestMapping(value = "reservierung/update", method = RequestMethod.POST)
     public String reservierung_update(@Valid Reservierung reservierung, BindingResult bindingResult, Model model, HttpServletRequest request) throws ParseException {
 		
-		//1. ueber die id das datenbankobjekt holen
+
 		Reservierung r = reservierungDao.findById(reservierung.getId());
 		
-		//String id_s = (String) request.getParameter("id");                        funktioniert nicht ohne BindingResult
-		//Reservierung r = reservierungDao.findById(Long.parseLong(id_s));			
 		String typ = request.getParameter("zk_typ");
 		String start =(String) request.getParameter("startdatum");
 		String end =(String) request.getParameter("enddatum");
@@ -356,12 +351,9 @@ public class ReservierungController {
 
 		if(z != null)
 		{
-			//2. vom datenbankobjekt die neuen start-end-datum setztn
 			r.setStartdatum(anreise.getTime());
 			r.setEnddatum(abreise.getTime());
-			r.setZimmer(z);	
-			
-			//reservierungDao.persist(r);
+			r.setZimmer(z);			
 			r = reservierungDao.merge(r);
 			        	        	        
 			model.asMap().clear();

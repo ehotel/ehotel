@@ -28,9 +28,9 @@
 			<td><fmt:formatDate value="${start}" pattern="dd.MM.yyyy" /></td>
 			<td><fmt:formatDate value="${ende}" pattern="dd.MM.yyyy" /></td>
 			<td>${reservierung.status}</td>
-			<td><form id="stornieren" action="../reservierung/stornieren/${reservierung.id}" method="POST">
+			<td><form id="stornieren${reservierung.id}" action="../reservierung/stornieren/${reservierung.id}" method="POST">
 				<c:if test="${reservierung.status=='Aktiv'}">
-					<a class="form-link" onclick="document.getElementById('stornieren').submit()">stornieren</a>
+					<a class="form-link" onclick="document.getElementById('stornieren${reservierung.id}').submit()">stornieren</a>
 				</c:if></form>
 			</td>
 			<td><form id="details" action="../reservierung/details/${reservierung.id}" method="POST">

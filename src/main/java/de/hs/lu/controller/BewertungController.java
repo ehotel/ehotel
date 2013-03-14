@@ -1,13 +1,11 @@
 package de.hs.lu.controller;
 
-import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -18,11 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import de.hs.lu.orm.dao.BewertungDao;
 import de.hs.lu.orm.dao.GastDao;
 import de.hs.lu.orm.dao.ReservierungDao;
-import de.hs.lu.orm.dao.ZimmerkategorieDao;
 
-//import de.hs.lu.model.Gast;
-//import de.hs.lu.model.Reservierung;
-//import de.hs.lu.model.Zimmer;
 import de.hs.lu.model.Bewertung;
 
 /**
@@ -38,9 +32,6 @@ public class BewertungController {
 	
 	@Autowired
 	private GastDao gastDao;
-	
-	@Autowired
-	private ZimmerkategorieDao zkDao;
 	
 	@Autowired
 	private ReservierungDao reservierungDao;
@@ -86,7 +77,8 @@ public class BewertungController {
 		
 		bwDao.persist(bw);
 		bw = bwDao.merge(bw);
-		model.addAttribute("meldung", "Bewertung wurde erflogreich angelegt. Reservierungs ID:" + r_id + "BewertungsID: " + bw.getId() + bw.getText());
+		logger.info("Reservierungs ID:" + r_id + "BewertungsID: " + bw.getId() + bw.getText());
+		model.addAttribute("meldung", "Bewertung wurde erflogreich entgegengenommen.");
 		return "meldung";
 	}
 

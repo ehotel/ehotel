@@ -23,7 +23,7 @@
 			   		$( "#anreise" ).datepicker( "option", "maxDate", selectedDate );
 		   		}
 		    });
-        }); 
+        });
       
   	document.getElementById("booking").setAttribute("class", "current");
       
@@ -40,11 +40,11 @@
 		<c:forEach var="zk" items="${zimmerkategorien}">
 			<option value="${zk.zimmertyp}">${zk.zimmertyp}</option>        
    		</c:forEach>
- 	</select><br><br>
+ 	</select><br/><br/>
  <label>Anreise:</label>
- <input type="text" name="anreise" id="anreise"/><br><br>
+ <input type="text" name="anreise" id="anreise"/><br/><br/>
  <label>Abreise:</label>
- <input type="text" name="abreise" id="abreise"/><br><br>
+ <input type="text" name="abreise" id="abreise"/><br/><br/>
  <div class="button" style="text-align:left"><span><span style="text-align:center"><a class="form-link" onclick="document.getElementById('zimmer-suche').submit()">Suche Zimmer</a></span></span></div> 
  </fieldset>
 </form>

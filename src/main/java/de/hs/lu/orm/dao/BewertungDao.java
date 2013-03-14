@@ -15,6 +15,6 @@ public class BewertungDao extends AbstractDao<Bewertung>{
     }
 	
     public List<Bewertung> findAll(){
-        return entityManager.createQuery("SELECT b FROM Bewertung b", Bewertung.class).getResultList();
+        return entityManager.createQuery("SELECT b FROM Bewertung b ORDER BY b.datum desc", Bewertung.class).getResultList();
     }
 }

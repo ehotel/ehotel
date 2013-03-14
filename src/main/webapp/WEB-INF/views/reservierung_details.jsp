@@ -12,7 +12,6 @@
 <p><font color="#FF0000">${felderError}</font></p>
  <table border="1">
    <tr>
-   <td>ReservierungsId</td>
    <sec:authorize ifAnyGranted="ROLE_ADMIN">
    		<td>Username</td>
    </sec:authorize>
@@ -33,7 +32,6 @@
 		<jsp:setProperty name="ende_heute" property="time" />
 				
 	  	<tr>
-			<td>${reservierung.id}</td>
 			<sec:authorize ifAnyGranted="ROLE_ADMIN">
    				<td>${reservierung.gast.benutzername}</td>
    			</sec:authorize>
@@ -71,12 +69,10 @@
   <c:if test="${not empty reservierungserviceliste}">  
   <table border="1">
    <tr>
-   <td>ZusatzServiceId</td>
    <td>Name</td>
    <td>Preis</td>
    <td>Startdatum</td>
    <td>Enddatum</td>
-   <td>Löschen</td>
   </tr>
 	<c:forEach var="service" items="${reservierungserviceliste}">
 		<jsp:useBean id="start_service" class="java.util.Date" />
@@ -84,16 +80,10 @@
 		<jsp:useBean id="ende_service" class="java.util.Date" />
 		<jsp:setProperty name="ende_service" property="time" value="${service.enddatum}" />
 	  	<tr>
-			<td>${service.id}</td>
 			<td>${service.zusatzService.name}</td>
 			<td>${service.zusatzService.preis}</td>
 			<td><fmt:formatDate value="${start_service}" pattern="dd.MM.yyyy" /></td>
 			<td><fmt:formatDate value="${ende_service}" pattern="dd.MM.yyyy" /></td>
-			<td><form id="loeschen" action="../reservierungservice/loeschen" method="POST">
-			<input type="hidden" name="service_id" value="${service.id}" />
-				<a class="form-link" onclick="document.getElementById('loeschen').submit()">loeschen</a>
-			</form>
-			</td>
 		</tr>
 	</c:forEach>  
   </table>
