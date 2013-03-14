@@ -3,7 +3,7 @@
 <jsp:include page="header_admin.jsp"/>
 
 <p><font color="#FF0000">${felderError}</font></p>
-<form method="POST" action=
+<form id="anlegen" method="POST" action=
 <c:choose>
       <c:when test="${modus=='create'}">"../zusatzservice/erstellen"</c:when>
       <c:when test="${modus=='edit'}">"../../zusatzservice/aendern"</c:when>
@@ -17,8 +17,8 @@
    	<label>Preis:</label>
    	<input type="text" name="preis" value="${zs.preis}"/><br><br>
    	<label>Anzahl:</label>
-   	<input type="text" name="anzahl" value="${zs.anzahl}"/><br><br>   	
-   <input type="submit" value="Service anlegen"/>
+   	<input type="text" name="anzahl" value="${zs.anzahl}"/><br><br>
+	<div class="button" style="text-align:left"><span><span style="text-align:center"><a class="form-link" onclick="document.getElementById('anlegen').submit()">anlegen</a></span></span></div>   	
   </fieldset>
 
 </form>

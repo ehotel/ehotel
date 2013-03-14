@@ -31,7 +31,7 @@
 
 <div id="content">
 <p><font color="#FF0000">${felderError}</font></p>
-<form method="POST" action="zimmer_suche">
+<form id="zimmer-suche" method="POST" action="zimmer_suche">
  <fieldset>
  <legend>Zimmer suchen</legend>
    <label>Zimmertyp:</label>
@@ -45,7 +45,7 @@
  <input type="text" name="anreise" id="anreise"/><br><br>
  <label>Abreise:</label>
  <input type="text" name="abreise" id="abreise"/><br><br>
- <div class="button" style="text-align:left"><span><span style="text-align:center"><a class="form-link" onclick="document.getElementById('service_suche').submit()">Suche Zimmer</a></span></span></div> 
+ <div class="button" style="text-align:left"><span><span style="text-align:center"><a class="form-link" onclick="document.getElementById('zimmer-suche').submit()">Suche Zimmer</a></span></span></div> 
  </fieldset>
 </form>
 </div>

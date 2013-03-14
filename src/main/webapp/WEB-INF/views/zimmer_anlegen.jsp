@@ -2,7 +2,7 @@
 <jsp:include page="header_admin.jsp"/>
 
 <p><font color="#FF0000">${felderError}</font></p>
-<form method="POST" action=
+<form id="anlegen" method="POST" action=
 <c:choose>
       <c:when test="${modus=='create'}">"../zimmer/erstellen"</c:when>
       <c:when test="${modus=='edit'}">"../../zimmer/aendern"</c:when>
@@ -19,7 +19,7 @@
 				<option <c:if test="${zimmer.zimmerkategorie.id == zk.id}">selected</c:if> value="${zk.id}">${zk.zimmertyp}</option>        
       		</c:forEach>
   	</select><br><br>
-   <input type="submit" value="Service anlegen"/>
+	<div class="button" style="text-align:left"><span><span style="text-align:center"><a class="form-link" onclick="document.getElementById('anlegen').submit()">anlegen</a></span></span></div>  	
   </fieldset>
    
 </form>
