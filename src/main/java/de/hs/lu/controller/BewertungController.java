@@ -47,7 +47,7 @@ public class BewertungController {
 
 	
 	@RequestMapping(value = "/bewertung/anlegen", method = RequestMethod.POST)
-	public String bewertung_anlegen(Model model) {
+	public String bewertung_anlegen(Model model, HttpServletRequest request) {
 		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		
@@ -55,6 +55,8 @@ public class BewertungController {
 		{
 			return "login";
 		}
+		String id = request.getParameter("reservierung_id");
+		model.addAttribute("reservierung_id", id);
 		
 		return "bewertung_anlegen";
 	}
@@ -69,9 +71,9 @@ public class BewertungController {
 			return "login";
 		}
 		
-		String r_id = (String) request.getParameter("reservierung_id");
+		Long r_id = Long.parseLong(request.getParameter("reservierung_id"));
 		String username = authentication.getName();
-		String bw_text = request.getParameter("text");
+		String bw_text = request.getParameter("bw_text");
 		int bw_punkte = Integer.parseInt(request.getParameter("punkte"));
 		
 		
@@ -80,9 +82,14 @@ public class BewertungController {
 		bw.setBewertungspunkte(bw_punkte);
 		bw.setText(bw_text);
 		bw.setDatum(System.currentTimeMillis());
-		model.addAttribute("meldung", "Reservierungs ID:" + r_id);
+		bw.setReservierung(reservierungDao.findById(r_id));
+		
+		bwDao.persist(bw);
+		bw = bwDao.merge(bw);
+		model.addAttribute("meldung", "Bewertung wurde erflogreich angelegt. Reservierungs ID:" + r_id + "BewertungsID: " + bw.getId() + bw.getText());
 		return "meldung";
 	}
+
 	
 
 }
