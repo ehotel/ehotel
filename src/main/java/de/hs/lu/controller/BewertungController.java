@@ -84,5 +84,14 @@ public class BewertungController {
 		return "meldung";
 	}
 	
+	
+	@RequestMapping(value = "/testimonials", method = RequestMethod.GET)
+	public String testimonials(Model model) {
+		
+		model.addAttribute("bewertungsliste", bwDao.findAll());	
+				
+		return "testimonials";
+	}
+	
 
 }

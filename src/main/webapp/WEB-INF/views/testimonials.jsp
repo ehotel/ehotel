@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:include page="header_big.jsp"/>
 
 <script type="text/javascript">
@@ -8,7 +9,23 @@
 <div class="indent">
 			<h2>Customers' testimonials</h2>
 			<ul class="list4">
-				<li><p><b>Matthew, London</b>
+			
+				<c:forEach var="bewertung" items="${bewertungsliste}">
+				<li>
+					<p>
+						<b>${bewertung.gast.vorname} ${bewertung.gast.nachname}</b>
+						<c:forEach var="i" begin="1" end="${bewertung.bewertungspunkte}" >
+							<img src="/ehotel/resources/images/stern_rot.png" height="20px" />		
+						</c:forEach>
+						<c:forEach var="i" begin="${bewertung.bewertungspunkte}" end="4" >
+							<img src="/ehotel/resources/images/stern_schwarz.png" height="20px" />		
+						</c:forEach>						
+					</p>						
+					${bewertung.text} <br/><br/>
+				</li>
+				</c:forEach>			
+			
+<!-- 				<li><p><b>Matthew, London</b>
 				<img src="/ehotel/resources/images/stern_rot.png" height="20px" />
 				<img src="/ehotel/resources/images/stern_rot.png" height="20px" />
 				<img src="/ehotel/resources/images/stern_rot.png" height="20px" />
@@ -38,8 +55,10 @@
 				<img src="/ehotel/resources/images/stern_rot.png" height="20px" />
 				<img src="/ehotel/resources/images/stern_schwarz.png" height="20px" />
 				</p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquast, qui dolorem ipsum.</li>
+				 -->
+				
 			</ul><br/>
-			<div class="button1"><span><span><a href="#">Geben Sie ihre eigene Bewertung ab</a></span></span></div>
+<!-- 			<div class="button1"><span><span><a href="#">Geben Sie ihre eigene Bewertung ab</a></span></span></div> -->
 		</div>
 </div>
 		

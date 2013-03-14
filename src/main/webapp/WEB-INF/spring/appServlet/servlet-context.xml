@@ -28,7 +28,6 @@
 	<view-controller path="/login" view-name="login"/>
 	<view-controller path="/reset_pwd" view-name="reset_login"/>
 	<view-controller path="/gallery" view-name="gallery"/>
-	<view-controller path="/testimonials" view-name="testimonials"/>
 	<view-controller path="/services" view-name="services"/>
 	<view-controller path="/restaurant" view-name="restaurant"/>
 	<view-controller path="/menu" view-name="menu"/>
