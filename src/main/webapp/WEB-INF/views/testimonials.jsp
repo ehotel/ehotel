@@ -13,7 +13,7 @@
 				<c:forEach var="bewertung" items="${bewertungsliste}">
 				<li>
 					<p>
-						<b>${bewertung.gast.vorname} ${bewertung.gast.nachname}</b>
+						<b>${bewertung.reservierung.zimmer.zimmerkategorie.zimmertyp} ${bewertung.gast.vorname} ${bewertung.gast.nachname}</b>
 						<c:forEach var="i" begin="1" end="${bewertung.bewertungspunkte}" >
 							<img src="/ehotel/resources/images/stern_rot.png" height="20px" />		
 						</c:forEach>

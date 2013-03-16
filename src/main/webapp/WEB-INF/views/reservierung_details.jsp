@@ -11,6 +11,15 @@
 <div id="content">
 <p><font color="#FF0000">${felderError}</font></p>
  <table border="1">
+ 	
+ 	<jsp:useBean id="start" class="java.util.Date" />
+	<jsp:setProperty name="start" property="time" value="${reservierung.startdatum}" />
+	<jsp:useBean id="ende" class="java.util.Date" />
+	<jsp:setProperty name="ende" property="time" value="${reservierung.enddatum}" />
+	
+	<jsp:useBean id="heute" class="java.util.Date" />
+	<jsp:setProperty name="heute" property="time" />
+ 
    <tr>
    <sec:authorize ifAnyGranted="ROLE_ADMIN">
    		<td>Username</td>
@@ -21,16 +30,10 @@
    <td>Status</td>
    <td>Stornieren</td>
    <td>Aendern</td>
-   <td>Bewertung</td>
-  </tr>
-		<jsp:useBean id="start" class="java.util.Date" />
-		<jsp:setProperty name="start" property="time" value="${reservierung.startdatum}" />
-		<jsp:useBean id="ende" class="java.util.Date" />
-		<jsp:setProperty name="ende" property="time" value="${reservierung.enddatum}" />
-		
-		<jsp:useBean id="ende_heute" class="java.util.Date" />
-		<jsp:setProperty name="ende_heute" property="time" />
-				
+   <c:if test="${ende < heute}">
+   		<td>Bewertung</td>
+   </c:if>
+  </tr>				
 	  	<tr>
 			<sec:authorize ifAnyGranted="ROLE_ADMIN">
    				<td>${reservierung.gast.benutzername}</td>
@@ -47,19 +50,14 @@
 				<a class="form-link" onclick="document.getElementById('aendern').submit()">aendern</a>
 			</form>
 			</td>
+			<c:if test="${ende < heute}">
 			<td><form id="bewerten" action="../../bewertung/anlegen" method="POST">
 				<input type="hidden" name="reservierung_id" value="${reservierung.id}" />
-				<c:if test="${ende < ende_heute}">
-					<a class="form-link" onclick="document.getElementById('bewerten').submit()">Zimmer bewerten</a>
-				</c:if>
-				<c:if test="${ende >= ende_heute}">				
-					<a class="form-link" onclick="document.getElementById('bewerten').submit()" contenteditable="false">Zimmer bewerten</a>
-				</c:if>
 				
-<%-- 				<td><fmt:formatDate value="${ende_heute}" pattern="dd.MM.yyyy" /></td> --%>
-				
+					<a class="form-link" onclick="document.getElementById('bewerten').submit()">Zimmer bewerten</a>						
 				</form>
 			</td>
+			</c:if>
 		</tr>
   </table>
   
