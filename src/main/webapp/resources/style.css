@@ -34,16 +34,16 @@ object {vertical-align:top;outline:none}
 #registration-form input {width:200px;text-align:left;border:1px solid #5d3825;background:#1d110b;color:#bca695}
 #registration-form .button {font-size:1em}
 /*login*/
-#login-form
-#login-form {font-size:1em;font-weight:bold}
-#login-form fieldset {border:none}
-#login-form .field {font-family:Arial,Helvetica,sans-serif;color:#bca695;font-size:12px;line-height:.81em;font-weight:normal;margin-bottom:16px}
-#login-form label{display:block;padding-bottom:4px}
-#login-form select {border:1px solid #5d3825;background:#1d110b;color:#bca695}
+#loginform
+#loginform {font-size:1em;font-weight:bold}
+#loginform fieldset {border:none}
+#loginform .field {font-family:Arial,Helvetica,sans-serif;color:#bca695;font-size:12px;line-height:.81em;font-weight:normal;margin-bottom:16px}
+#loginform label{display:block;padding-bottom:4px}
+#loginform select {border:1px solid #5d3825;background:#1d110b;color:#bca695}
  input {width:200px;text-align:left;border:1px solid #5d3825;background:#1d110b;color:#bca695}
  select {border:1px solid #5d3825;background:#1d110b;color:#bca695; width:200px}
 #registrieren form {margin:3px} 
-#login-form .button {font-size:1em}
+#loginform .button {font-size:1em}
 /* list */
 ul {list-style:none}
 /* other */

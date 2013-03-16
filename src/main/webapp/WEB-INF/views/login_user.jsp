@@ -7,7 +7,7 @@ function Event_Key(event)
 {  
   if(event.keyCode == 13)
   {
-	document.getElementById('login-form').submit();
+	document.getElementById('loginform').submit();
   }  
 }</script>
 
@@ -20,10 +20,10 @@ function Event_Key(event)
 						Your login attempt was not successful, try again.<br /> Caused :
 						${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
 					</c:if>
-					<form id="login-form" method="post" action="j_spring_security_check" onkeydown="Event_Key(event);">			
+					<form id="loginform" method="post" action="j_spring_security_check" onkeydown="Event_Key(event);">			
 						<fieldset style="padding:10px">
 						<div class="field">
-							Benutzername<br/><br/><input type="text"  name="j_username" />
+							Benutzername<br/><br/><input type="text" id="j_username"  name="j_username" />
 						</div>
 						<div class="field">
 							<br/>Password <br/><br/><input type="password" name="j_password"  /><br/>
@@ -31,7 +31,7 @@ function Event_Key(event)
 						</div>
 						<div style="float:left;">
 							<div class="button">
-								<span><span><a style="cursor:pointer;" onclick="document.getElementById('login-form').submit()">Einloggen</a></span></span>
+								<span><span><a style="cursor:pointer;" onclick="document.getElementById('loginform').submit()">Einloggen</a></span></span>
 							</div>
 						</div><br/><br/><br/>
 						<div class="field">New to E-HotelY?</div>
@@ -49,6 +49,14 @@ function Event_Key(event)
 			</div>
 		</div>
 	</div>
+	
+<script>
+
+document.body.onload = function(){
+	new ElementMaxHeight();
+	document.getElementById('j_username').focus();
+    };
+</script>
 
 <jsp:include page="footer.jsp"/>
 

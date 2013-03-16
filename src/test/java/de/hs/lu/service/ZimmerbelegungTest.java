@@ -78,6 +78,8 @@ public class ZimmerbelegungTest {
 		//es gibt 6 möglichkeiten wir versuchen alle abzudecken
 		//bei 2 fällen ist noch ein zimmer frei, ansonsten nicht!
 		
+		z_temp.getId();
+		
 		assertEquals(z_temp.getId(), zimmerbelegung.freieZimmerSuche(zk.getZimmertyp(), 50l, 70l).getId());
 		assertEquals(z_temp.getId(), zimmerbelegung.freieZimmerSuche(zk.getZimmertyp(), 201l, 250l).getId());
 				

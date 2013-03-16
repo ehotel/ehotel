@@ -33,13 +33,13 @@
 					<a class="form-link" onclick="document.getElementById('stornieren${reservierung.id}').submit()">stornieren</a>
 				</c:if></form>
 			</td>
-			<td><form id="details" action="../reservierung/details/${reservierung.id}" method="POST">
-			<a class="form-link" onclick="document.getElementById('details').submit()">Details</a>
+			<td><form id="details${reservierung.id}" action="../reservierung/details/${reservierung.id}" method="POST">
+			<a class="form-link" onclick="document.getElementById('details${reservierung.id}').submit()">Details</a>
 			</form></td>
-			<td><form id="extra_service" action="../freie_services_suche_extra" method="POST">
+			<td><form id="extra_service${reservierung.id}" action="../freie_services_suche_extra" method="POST">
 				<c:if test="${reservierung.status=='Aktiv'}">
 					<input type="hidden" name="reservierung_id" value="${reservierung.id}" />
-					<a class="form-link" onclick="document.getElementById('extra_service').submit()">Service buchen</a>
+					<a class="form-link" onclick="document.getElementById('extra_service${reservierung.id}').submit()">Service buchen</a>
 				</c:if>
 				</form>
 			</td>
