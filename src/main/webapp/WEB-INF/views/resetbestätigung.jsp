@@ -2,7 +2,7 @@
 
 			<div class="content">
 				<div class="indent">
-					<h2>Password successfully reseted</h2>
+					<h2>Password successfully reseted!</h2>
 					<div class="h31"> You have received a new Password!<br>
 									Please check your e-mail (the one given in the registration)</div>
 										

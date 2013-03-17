@@ -2,11 +2,8 @@
 
 <div class="indent">
 			<h2>Impressum</h2>
-			<p class="alt-top">E-Hotely <br/>
-								neuestraße 1 <br/>
-								77788 Hüftstadt 
-			</p>
-			<p class="alt-top"> Inhaber: <br>
+			
+			<p class="alt-top"> Inhaber: E. Yletoh<br>
 USt-IdNr: DE1234567890 </p>
 			
 			<p class="alt-top"><strong>Datenschutzerklärung: </strong></p>
