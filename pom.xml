@@ -6,7 +6,7 @@
 	<artifactId>ehotel</artifactId>
 	<name>ehotel</name>
 	<packaging>war</packaging>
-	<version>1.0.0-BUILD-SNAPSHOT</version>
+	<version>1.0.0-RELEASE</version>
 	<properties>
 		<java-version>1.6</java-version>
 		<spring.version>3.1.0.RELEASE</spring.version>
