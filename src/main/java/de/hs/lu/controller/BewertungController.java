@@ -78,8 +78,7 @@ public class BewertungController {
 		bwDao.persist(bw);
 		bw = bwDao.merge(bw);
 		logger.info("Reservierungs ID:" + r_id + "BewertungsID: " + bw.getId() + bw.getText());
-		model.addAttribute("meldung", "Bewertung wurde erflogreich entgegengenommen.");
-		return "meldung";
+		return "redirect:../testimonials";
 	}
 
 	

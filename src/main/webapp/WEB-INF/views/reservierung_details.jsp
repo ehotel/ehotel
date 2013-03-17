@@ -46,9 +46,12 @@
 			<a class="form-link" onclick="document.getElementById('stornieren').submit()">stornieren</a>				
 			</form>
 			</td>
-			<td><form id="aendern" action="../../reservierung/aendern/${reservierung.id}" method="POST">
-				<a class="form-link" onclick="document.getElementById('aendern').submit()">aendern</a>
-			</form>
+			<td>
+			<c:if test="${reservierung.status=='Aktiv'}">
+				<form id="aendern" action="../../reservierung/aendern/${reservierung.id}" method="POST">
+					<a class="form-link" onclick="document.getElementById('aendern').submit()">aendern</a>
+				</form>
+			</c:if>
 			</td>
 			<c:if test="${ende < heute}">
 			<td><form id="bewerten" action="../../bewertung/anlegen" method="POST">

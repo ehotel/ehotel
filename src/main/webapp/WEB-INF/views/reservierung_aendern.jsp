@@ -62,7 +62,6 @@
   <c:if test="${not empty reservierungserviceliste}">  
   <table border="1">
    <tr>
-   <td>ZusatzServiceId</td>
    <td>Name</td>
    <td>Preis</td>
    <td>Startdatum</td>
@@ -76,7 +75,6 @@
 		<jsp:useBean id="ende_service" class="java.util.Date" />
 		<jsp:setProperty name="ende_service" property="time" value="${service.enddatum}" />
 	  	<tr>
-			<td>${service.id}</td>
 			<td>${service.zusatzService.name}</td>
 			<td>${service.zusatzService.preis}</td>
 			<td><fmt:formatDate value="${start_service}" pattern="dd.MM.yyyy" /></td>
@@ -86,12 +84,6 @@
 			<a class="form-link" onclick="document.getElementById('loeschen').submit()">loeschen</a>
 			</form>
 			</td>
-<%-- 			<td><form id="aendern" action="../reservierungservice/aendern" method="POST">
-			<input type="hidden" name="service_id" value="${service.id}" />
-			<input type="hidden" value="ändern"/>
-			<a class="form-link" onclick="document.getElementById('aendern').submit()">aendern</a>
-			</form>
-			</td> --%>
 		</tr>
 	</c:forEach>  
   </table>

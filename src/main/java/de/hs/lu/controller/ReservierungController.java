@@ -231,7 +231,7 @@ public class ReservierungController {
 		model.addAttribute("username", r.getGast().getBenutzername());
 		
 		
-		DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
+		DateFormat formatter = new SimpleDateFormat("yyyy,MM,dd");
 		
 		Date min = new Date(r.getStartdatum());
 		Date max = new Date(r.getEnddatum());

@@ -1,10 +1,7 @@
 package de.hs.lu.service;
 
-import static org.junit.Assert.*;
-
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
 
 public class MailSenderTest {
 
@@ -16,9 +13,9 @@ public class MailSenderTest {
 	public void tearDown() throws Exception {
 	}
 
-	@Test
+//	@Test
 	public void test() {
-		//MailSender.sendMail("emailadresse" , "emailadresse");
+		MailSender.sendMail("emailadresse" , "emailadresse", "text");
 	}
 
 }
