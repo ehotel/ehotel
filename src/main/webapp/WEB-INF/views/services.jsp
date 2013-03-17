@@ -31,8 +31,8 @@
 						<div class="col-1">
 				 			<img alt="" src="resources/images/2page-img11.png" class="extra-img png"/>
 							<dl class="list1">
-								<dt>Discounted Rooms</dt>
-								<dd>Omnis iste natus error sit volupta- tem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi.</dd>
+								<dt>Single Rooms</dt>
+								<dd>Our Single Rooms are the best choice for your stay in town when you travel alone. The bed comfortably wide and soft. Television, Bathtube and shower included.</dd>
 								<dd><span>6-10</span>Floor</dd>
 								<dd><span>1</span>Rooms</dd>
 								<dd><span>1</span>Beds</dd>
@@ -43,8 +43,8 @@
 						<div class="col-2">
 					 		<img alt="" src="resources/images/2page-img12.png" class="extra-img png"/>
 							<dl class="list1">
-								<dt>Business Class Rooms</dt>
-								<dd>Omnis iste natus error sit volupta- tem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi.</dd>
+								<dt>Double Rooms</dt>
+								<dd>Our Double Rooms are nice to have for couples. The canopy bed commands enough space for your nightly activities. Also enjoy a welcome present from our Room Service. Television, Bathtube and shower included.</dd>
 								<dd><span>3-5</span>Floor</dd>
 								<dd><span>2</span>Rooms</dd>
 								<dd><span>2</span>Beds</dd>
@@ -55,8 +55,8 @@
 						<div class="col-3">
 					 		<img alt="" src="resources/images/2page-img13.png" class="extra-img png"/>
 							<dl class="list1">
-								<dt>Premium Rooms</dt>
-								<dd>Omnis iste natus error sit volupta- tem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi.</dd>
+								<dt>Suite</dt>
+								<dd>The Suite is for everyone with high standards. High and open rooms make you feel comfortable, while wide panoramic windows offer the most awesome view over the town. Also enjoy a bottle of champagne from local origins. Widescreen HDTV with paid-tv, minibar, jacuzzi, 2-Person-shower and dinnertable included. </dd>
 								<dd><span>1-2</span>Floor</dd>
 								<dd><span>3</span>Rooms</dd>
 								<dd><span>3</span>Beds</dd>
