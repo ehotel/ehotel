@@ -32,9 +32,9 @@
 				 			<img alt="" src="resources/images/2page-img11.png" class="extra-img png"/>
 							<dl class="list1">
 								<dt>Single Rooms</dt>
-								<dd>Our Single Rooms are the best choice for your stay in town when you travel alone. The bed comfortably wide and soft. Television, Bathtube and shower included.</dd>
-								<dd><span>6-10</span>Floor</dd>
-								<dd><span>1</span>Rooms</dd>
+								<dd>Our Single Rooms are the best choice of budget for stay in town when you travel alone. Give it a try! The bed is comfortably wide and soft. Television, Bathtube and shower included.</dd>
+								<dd><span>1-2</span>Floor</dd>
+								<dd><span>3</span>Rooms</dd>
 								<dd><span>1</span>Beds</dd>
 								<dd class="alt"><span>1</span>Baths</dd>
 								<dd class="last"><span>$49</span>Price:</dd>
@@ -45,7 +45,7 @@
 							<dl class="list1">
 								<dt>Double Rooms</dt>
 								<dd>Our Double Rooms are nice to have for couples. The canopy bed commands enough space for your nightly activities. Also enjoy a welcome present from our Room Service. Television, Bathtube and shower included.</dd>
-								<dd><span>3-5</span>Floor</dd>
+								<dd><span>3</span>Floor</dd>
 								<dd><span>2</span>Rooms</dd>
 								<dd><span>2</span>Beds</dd>
 								<dd class="alt"><span>1</span>Baths</dd>
@@ -57,9 +57,9 @@
 							<dl class="list1">
 								<dt>Suite</dt>
 								<dd>The Suite is for everyone with high standards. High and open rooms make you feel comfortable, while wide panoramic windows offer the most awesome view over the town. Also enjoy a bottle of champagne from local origins. Widescreen HDTV with paid-tv, minibar, jacuzzi, 2-Person-shower and dinnertable included. </dd>
-								<dd><span>1-2</span>Floor</dd>
-								<dd><span>3</span>Rooms</dd>
-								<dd><span>3</span>Beds</dd>
+								<dd><span>4</span>Floor</dd>
+								<dd><span>1</span>Room</dd>
+								<dd><span>2</span>Beds</dd>
 								<dd class="alt"><span>2</span>Baths</dd>
 								<dd class="last"><span>$199</span>Price:</dd>
 							</dl>
