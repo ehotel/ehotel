@@ -130,28 +130,24 @@ public class GastController {
         	gast.getBenutzername().isEmpty()||
         	gast.getPassword().isEmpty())
         {
-        	fillForm(uiModel, gast);
         	uiModel.addAttribute("felderError", "Sie müssen alle Felder ausfüllen!<br/>");
         	return "registrieren";        	
         }
         
         if(gastDao.findGastByBenutzername(gast.getBenutzername()) != null)
         {
-        	fillForm(uiModel, gast);
         	uiModel.addAttribute("benutzernameError", "Benutzername ist schon vergeben <br/>");
         	return "registrieren";
         }
         
         if(!gast.getEmail().matches("[a-z0-9A-Z_\\.]+@[a-z0-9A-Z\\-]+\\.[a-zA-Z]+"))
         {
-        	fillForm(uiModel, gast);
         	uiModel.addAttribute("emailError", "E-Mail Syntax ist falsch <br/>");
         	return "registrieren";
         }        
         
         if(gastDao.findGastByEMail(gast.getEmail()) != null)
         {
-        	fillForm(uiModel, gast);
         	uiModel.addAttribute("emailError", "E-Mail ist schon vergeben <br/>");
         	return "registrieren";
         }
@@ -161,7 +157,6 @@ public class GastController {
         
         if(!p1.equalsIgnoreCase(p2) || p1.isEmpty())
         {
-        	fillForm(uiModel, gast);
         	uiModel.addAttribute("passwordError", "Passwörter müssen übereinstimmen <br/>");
         	return "registrieren";
         }
@@ -173,22 +168,13 @@ public class GastController {
         gastDao.persist(gast);
         gastDao.flush();
         
-        //String bestaetigung = "Bitte hier klicken localhost:8080/ehotel-spring-mvc/aktivierung/" + gast.getAktivierungsHash();        
-        //MailSender.sendMail(gast.getEmail(), "no-reply@ehotel-arno.com", bestaetigung);
+        String bestaetigung = "Bitte hier klicken localhost:8080/ehotel-spring-mvc/aktivierung/" + gast.getAktivierungsHash();        
+        MailSender.sendMail(gast.getEmail(), "no-reply@ehotel-ehotel.com", bestaetigung);
         
         uiModel.addAttribute("meldung" , "Ihr Benutzer wurde erfolgreich registriert, checken sie ihre E-Mails");
         return "meldung";
 	}
-	
-	public void fillForm(Model uiModel, Gast g)
-	{
-//		uiModel.asMap().clear();
-//    	uiModel.addAttribute("vorname", g.getVorname());
-//    	uiModel.addAttribute("nachname", g.getNachname());
-//    	uiModel.addAttribute("benutzername", g.getBenutzername());
-//    	uiModel.addAttribute("email", g.getEmail());
-	}
-	
+		
 	@RequestMapping(value = "/aktivierung/{hash}", method = RequestMethod.GET)
 	public String gastAktivieren(@PathVariable("hash") String hash, Model uiModel)
 	{
@@ -206,12 +192,7 @@ public class GastController {
 		
 		return "meldung";
 	}
-	
-//	@RequestMapping(value = "/login", method = RequestMethod.GET)
-//    public String login() {
-//        return "login";
-//	}
-	
+		
 	@RequestMapping(value = "/einloggen", method = RequestMethod.POST)
     public String checklogin(Model model, HttpServletRequest request) {
 		
@@ -258,7 +239,7 @@ public class GastController {
 		gastDao.merge(gast);
 		
         String bestaetigung = "Ihr neues Password lautet: " + temp_pwd;        
-        MailSender.sendMail(gast.getEmail(), "no-reply@ehotel-arno.com", bestaetigung);
+        MailSender.sendMail(gast.getEmail(), "no-reply@ehotel-ehotel.com", bestaetigung);
         logger.info("Neues Password ist: "  + temp_pwd);
 		
 		model.addAttribute("meldung", "Ihr neues Password wurde per Mail an Sie geschickt");

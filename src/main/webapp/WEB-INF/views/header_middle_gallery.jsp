@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-<title>Photos Gallery</title>
+<title>Homepage</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta name="description" content="gallery"/>
@@ -30,10 +30,17 @@
 					<strong>True Comfort</strong>
 				</div>
 				<div class="othermenu">
-				<div class="fright"><a href="/ehotel/menu">My E-Hotel<i>Y</i></a> | <a href="/ehotel/arrival">Location</a> | <a href="/ehotel/kontakt">Contact</a> | <a href="/ehotel/impressum">About Us</a></div>
-					<div class="fright"><sec:authorize ifAnyGranted="ROLE_USER">
-    	 			<sec:authentication property="principal.username"/>(<a href="<c:url value="/j_spring_security_logout"/>" >Logout</a>)
-    </sec:authorize></div>
+				<div class="fright"><a href="/ehotel/menu">My E-Hotel<i>Y</i></a> | <a href="/ehotel/arrival">Location</a> | <a href="/ehotel/kontakt">Contact</a> | <a href="/ehotel/impressum">About Us</a></div><br/>
+					<div class="fright">
+						<sec:authorize ifAnyGranted="ROLE_USER">
+					    	<a href="/ehotel/profil"><sec:authentication property="principal.username"/></a>
+						    (<a href="<c:url value="/j_spring_security_logout"/>"> Logout</a>)
+					    </sec:authorize>
+						<sec:authorize ifAnyGranted="ROLE_ADMIN">
+					    	<a href="/ehotel/admin"><sec:authentication property="principal.username"/></a>
+						    (<a href="<c:url value="/j_spring_security_logout"/>"> Logout</a>)
+					    </sec:authorize>
+					</div>
 				</div>
 			</div>
 		</div>
