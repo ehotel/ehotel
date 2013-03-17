@@ -30,7 +30,7 @@
 					<strong>True Comfort</strong>
 				</div>
 				<div class="othermenu">
-				<div class="fright"><a href="/ehotel/menu">My E-Hotel<i>Y</i></a> | <!-- <a href="/ehotel/arrival">Anfahrt</a> | --> <a href="/ehotel/kontakt">Kontakt</a> | <a href="/ehotel/impressum">Impressum </a></div>
+				<div class="fright"><a href="/ehotel/menu">My E-Hotel<i>Y</i></a> | <a href="/ehotel/arrival">Location</a> | <a href="/ehotel/kontakt">Contact</a> | <a href="/ehotel/impressum">About Us</a></div>
 					<div class="fright"><sec:authorize ifAnyGranted="ROLE_USER">
     	 			<sec:authentication property="principal.username"/>(<a href="<c:url value="/j_spring_security_logout"/>" >Logout</a>)
     </sec:authorize></div>
@@ -48,7 +48,7 @@
 							<li><a href="services" >Services</a></li>
 							<li><a href="restaurant">Restaurant</a></li>
 							<li><a href="testimonials">Testimonials</a></li>
-							<li><a href="booking" class="current">Gallery</a></li>
+							<li><a href="gallery" class="current">Gallery</a></li>
 						</ul>
 					</div>
 				</div>
