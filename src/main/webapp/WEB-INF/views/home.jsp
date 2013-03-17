@@ -39,11 +39,13 @@
 						<form method="POST" id="suche-form" action="zimmer_suche">
 								<div class="field"><label>Check In:</label><input type="text" name="anreise" id="anreise" size="14"/></div>
 								<div class="field"><label>Check Out:</label><input type="text" name="abreise" id="abreise" size="14"/></div>
-								<div class="field"> Room type:&nbsp; <select name="zk_typ">
-															<c:forEach var="zk" items="${zimmerkategorien}">
-															<option value="${zk.zimmertyp}">${zk.zimmertyp}</option>        
-      														</c:forEach>
-  																	</select>
+								<div class="field"> Room type: 
+									<select name="zk_typ">
+										<option value="egal">-- egal --</option>
+										<c:forEach var="zk" items="${zimmerkategorien}">
+											<option value="${zk.zimmertyp}">${zk.zimmertyp}</option>        
+      									</c:forEach>
+  									</select>
   								</div><br/>
 								<div class="button"><span><span><a style="cursor:pointer;" onclick="document.getElementById('suche-form').submit()">Suche Zimmer</a></span></span></div>
 						</form>
@@ -75,7 +77,6 @@
 								<li>FREE drinks and beverages in rooms</li>
 								<li>Exclusive souvenirs</li>
 							</ul>
-							<div class="button"><span><span><a href="#">Order Now!</a></span></span></div>
 						</div>
 						<div class="col-2">
 				 			<h3>News</h3>

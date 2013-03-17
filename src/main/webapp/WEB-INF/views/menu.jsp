@@ -1,6 +1,11 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <jsp:include page="header_big.jsp"/>
+
+<sec:authorize ifAnyGranted="ROLE_ADMIN">
+<c:redirect url="/admin" />
+</sec:authorize>
 
 <div style="font-size:12pt" id="content">
 <br/>

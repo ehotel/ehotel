@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import de.hs.lu.model.Bewertung;
 import de.hs.lu.model.Gast;
 import de.hs.lu.model.Reservierung;
 import de.hs.lu.model.ReservierungsService;
@@ -19,6 +20,9 @@ public class ReservierungDao extends AbstractDao<Reservierung>{
 	
 	@Autowired
 	private ReservierungsServiceDao rsDao;
+	
+	@Autowired
+	private BewertungDao bewertungDao;
 	
 	public ReservierungDao(){
     	super(Reservierung.class);
@@ -53,8 +57,15 @@ public class ReservierungDao extends AbstractDao<Reservierung>{
         	ReservierungsService rs = res.getReservierungsServices().iterator().next();
             rsDao.remove(rsDao.getReference(rs.getId()));
             res.getReservierungsServices().remove(rs);
+        }        
+        
+        if (res.getBewertungen() != null) {
+        	Bewertung bewertung  = res.getBewertungen();
+        	bewertung.setReservierung(null);        	
+        	bewertungDao.merge(bewertung);        	
         }
         super.remove(getReference(res.getId()));
+        
     }
 
 }

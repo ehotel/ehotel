@@ -3,7 +3,7 @@
 <div class="indent">
 			<h2>Contact:</h2>
 			<p class="alt-top">E-Hotely <br/>
-								neuestraße 1 <br/>
+								Neuestraße 1 <br/>
 								77788 Hotelstadt 
 								Germany
 			</p>
@@ -12,9 +12,7 @@
 			
 
 </div>
-		
-
-
+</div>
 
 
 <jsp:include page="footer.jsp"/>

@@ -16,9 +16,7 @@ USt-IdNr: DE1234567890 </p>
 			</p>
 
 		</div>
-		
-
-
+	</div>
 
 
 <jsp:include page="footer.jsp"/>

@@ -30,7 +30,7 @@
 					<strong>True Comfort</strong>
 				</div>
 				<div class="othermenu">
-				<div class="fright"><a href="/ehotel/menu">My E-Hotel<i>Y</i></a> | <a href="/ehotel/arrival">Anfahrt</a> | <a href="/ehotel/Kontakt">Kontakt</a> | <a href="/ehotel/Impressum">Impressum </a></div>
+				<div class="fright"><a href="/ehotel/menu">My E-Hotel<i>Y</i></a> | <!-- <a href="/ehotel/arrival">Anfahrt</a> | --> <a href="/ehotel/kontakt">Kontakt</a> | <a href="/ehotel/impressum">Impressum </a></div>
 					<div class="fright"><sec:authorize ifAnyGranted="ROLE_USER">
     	 			<sec:authentication property="principal.username"/>(<a href="<c:url value="/j_spring_security_logout"/>" >Logout</a>)
     </sec:authorize></div>
@@ -60,11 +60,11 @@
 	<div id="content">
   		<div class="gallery">
 			<ul>
-				<li><a href="#"><img alt="" src="resources/images/2page-img1.jpg" /></a></li>
-				<li><a href="#"><img alt="" src="resources/images/2page-img2.jpg" /></a></li>
-				<li><a href="#"><img alt="" src="resources/images/2page-img3.jpg" /></a></li>
-				<li><a href="#"><img alt="" src="resources/images/2page-img4.jpg" /></a></li>
-				<li><a href="#"><img alt="" src="resources/images/2page-img5.jpg" /></a></li>
-				<li><a href="#"><img alt="" src="resources/images/2page-img6.jpg" /></a></li>
+				<li><img alt="" src="resources/images/2page-img1.jpg" /></li>
+				<li><img alt="" src="resources/images/2page-img2.jpg" /></li>
+				<li><img alt="" src="resources/images/2page-img3.jpg" /></li>
+				<li><img alt="" src="resources/images/2page-img4.jpg" /></li>
+				<li><img alt="" src="resources/images/2page-img5.jpg" /></li>
+				<li><img alt="" src="resources/images/2page-img6.jpg" /></li>
 			</ul>
 		</div>

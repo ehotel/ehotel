@@ -19,6 +19,8 @@
 	<view-controller path="/gallery" view-name="gallery"/>
 	<view-controller path="/services" view-name="services"/>
 	<view-controller path="/restaurant" view-name="restaurant"/>
+	<view-controller path="/impressum" view-name="impressum"/>
+	<view-controller path="/kontakt" view-name="kontakt"/>
 	<view-controller path="/menu" view-name="menu"/>
 	<view-controller path="/404" view-name="404"/>
 	<view-controller path="/405" view-name="405"/>

@@ -1,5 +1,4 @@
 
 ehotel
 ======
-
-student project for fh lu
+student project for hs lu

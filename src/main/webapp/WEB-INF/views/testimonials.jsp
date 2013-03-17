@@ -7,7 +7,7 @@
 
 <div id="content">
 <div class="indent">
-			<h2>Customers' testimonials</h2>
+			<h2>Kundenbewertungen</h2>
 			<ul class="list4">
 			
 				<c:forEach var="bewertung" items="${bewertungsliste}">

@@ -33,15 +33,6 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public String neueMethode(Locale locale, Model model) {
-		logger.info("Welcome home! the client locale is "+ locale.toString());
-				
-		model.addAttribute("serverTime", "hier steht was");
-		
-		return "home";
-	}
-	
 	@RequestMapping(value = "/loginfailed", method = RequestMethod.GET)
 	public String loginfailed(Model model) {
 				

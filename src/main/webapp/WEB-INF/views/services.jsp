@@ -39,7 +39,6 @@
 								<dd class="alt"><span>1</span>Baths</dd>
 								<dd class="last"><span>$49</span>Price:</dd>
 							</dl>
-							<div class="button"><span><span><a href="#">Order Now!</a></span></span></div>
 						</div>
 						<div class="col-2">
 					 		<img alt="" src="resources/images/2page-img12.png" class="extra-img png"/>
@@ -52,7 +51,6 @@
 								<dd class="alt"><span>1</span>Baths</dd>
 								<dd class="last"><span>$99</span>Price:</dd>
 							</dl>
-							<div class="button"><span><span><a href="#">Order Now!</a></span></span></div>
 						</div>
 						<div class="col-3">
 					 		<img alt="" src="resources/images/2page-img13.png" class="extra-img png"/>
@@ -65,7 +63,6 @@
 								<dd class="alt"><span>2</span>Baths</dd>
 								<dd class="last"><span>$199</span>Price:</dd>
 							</dl>
-							<div class="button"><span><span><a href="#">Order Now!</a></span></span></div>
 						</div>
 						<div class="clear"></div>
 					</div>

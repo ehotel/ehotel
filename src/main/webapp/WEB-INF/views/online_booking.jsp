@@ -38,6 +38,7 @@
 								<div class="field"><label>Check Out:</label><input type="text" name="abreise" id="abreise" size="14"/></div>
 								<div class="field"> Room type: 
 									<select name="zk_typ">
+										<option value="egal">-- egal --</option>
 										<c:forEach var="zk" items="${zimmerkategorien}">
 											<option value="${zk.zimmertyp}">${zk.zimmertyp}</option>        
 	      								</c:forEach>

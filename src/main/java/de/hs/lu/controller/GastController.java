@@ -142,7 +142,7 @@ public class GastController {
         	return "registrieren";
         }
         
-        if(!gast.getEmail().matches("[a-z0-9A-Z_\\.]+@[a-z0-9A-Z]+\\.[a-zA-Z]+"))
+        if(!gast.getEmail().matches("[a-z0-9A-Z_\\.]+@[a-z0-9A-Z\\-]+\\.[a-zA-Z]+"))
         {
         	fillForm(uiModel, gast);
         	uiModel.addAttribute("emailError", "E-Mail Syntax ist falsch <br/>");

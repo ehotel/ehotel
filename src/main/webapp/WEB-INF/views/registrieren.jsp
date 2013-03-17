@@ -25,14 +25,14 @@ function Event_Key(event)
 				<label>Vorname:</label>
 				<input type="text" name="vorname" value="${gast.vorname}" /><br/><br/>
 				<label>Nachname:</label>
-				<input type="text" name="nachname" value="${gast.vorname}" /><br/><br/>
+				<input type="text" name="nachname" value="${gast.nachname}" /><br/><br/>
 				<font color="#FF0000">${emailError}</font>
 				<label>E-Mail:</label><input type="text" name="email" value="${gast.email}" /><br/><br/>
 				<font color="#FF0000">${benutzernameError}</font>
 				<label>Benutzername:</label>
 				<input <c:if test="${modus=='edit'}">readonly</c:if> type="text" name="benutzername" value="${gast.benutzername}" /><br/><br/>
 				<font color="#FF0000">${passwordError}</font>
-				<label>Passoword:</label>
+				<label>Password:</label>
 				<input type="password" name="password" /><br/><br/>
 				<label>Password best.:</label>
 				<input type="password" name="password2" /><br/>
