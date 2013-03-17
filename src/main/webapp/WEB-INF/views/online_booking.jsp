@@ -58,9 +58,9 @@
 						<p class="alt-top">Our hotel is located in the most spectacular part of Prague - surrounded by boutiques, restaurants and luxurious shops.</p>
 						<p>Please feel free to come visit us at the following adress:</p>
 						<dl class="contacts-list">
-							<dt>Gazek st., 210</dt>
-							<dd>1-800-412-4556</dd>
-							<dd>1-800-542-6448</dd>
+							<dt>E-Hotely</dt>
+							<dt>Neuestraﬂe 1</dt>
+							<dt>77788 Hotelstadt Germany </dt>
 						</dl>
 					</div>
 					<div class="clear"></div>

@@ -30,7 +30,7 @@
 					<strong>True Comfort</strong>
 				</div>
 				<div class="othermenu">
-					<div class="fright"><a href="/ehotel/menu">My E-Hotel<i>Y</i></a> | <!-- <a href="/ehotel/arrival">Anfahrt</a> | --> <a href="/ehotel/kontakt">Kontakt</a> | <a href="/ehotel/impressum">Impressum</a></div><br/>
+					<div class="fright"><a href="/ehotel/menu">My E-Hotel<i>Y</i></a> | <a href="/ehotel/arrival">Location</a> | <a href="/ehotel/kontakt">Contact</a> | <a href="/ehotel/impressum">About Us</a></div><br/>
 					<div class="fright">
 						<sec:authorize ifAnyGranted="ROLE_USER">
 					    	<a href="/ehotel/profil"><sec:authentication property="principal.username"/></a>
