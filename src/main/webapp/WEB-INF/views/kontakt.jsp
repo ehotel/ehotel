@@ -3,12 +3,12 @@
 <div class="indent">
 			<h2>Contact:</h2>
 			<p class="alt-top">E-Hotely <br/>
-								Neuestraﬂe 1 <br/>
-								77788 Hotelstadt 
+								Ernst-Boehe Straﬂe 4 <br/>
+								67059 Ludwigshafen am Rhein<br>
 								Germany
 			</p>
-			<p class="alt-top"> Phone: 0786 5673445 <br>
-								Fax: 0786 4356457 </p>
+			<p class="alt-top"> Phone:  0621-5203-0 <br>
+								Fax:  0621-5203-1 </p>
 			
 
 </div>
